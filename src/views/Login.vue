@@ -1,5 +1,5 @@
 <template>
-  <div>刘志彦大帅逼</div>
+  <div>刘志彦大帅逼1</div>
 </template>
 
 <script>

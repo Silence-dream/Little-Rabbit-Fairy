@@ -1,5 +1,5 @@
 <template>
-  <div>刘志彦大帅逼</div>
+  <div></div>
 </template>
 
 <script>

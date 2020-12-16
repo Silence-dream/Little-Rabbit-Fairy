@@ -1,14 +1,20 @@
 <template>
-<<<<<<< HEAD
-  <div>刘志彦大帅逼</div>
-  <p>123123</p>
-=======
+  <div>{{ name }}</div>
+  <p>{{ useName }}</p>
   <router-view />
->>>>>>> upstream/main
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    useName() {
+      return this.$store.state.login.useName;
+    },
+    name() {
+      return this.$store.state.Liu.useName;
+    },
+  },
+};
 </script>
 
 <style>

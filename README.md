@@ -1,4 +1,4 @@
-# vue-rabbit
+# little
 
 ## Project setup
 ```

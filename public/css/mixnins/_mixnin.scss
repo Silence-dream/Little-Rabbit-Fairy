@@ -1,7 +1,7 @@
 /* 清除浮动 */
 @mixin clearfix() {
   &:after,
-  :before {
+  &:before {
     display: block;
     clear: both;
     content: "";

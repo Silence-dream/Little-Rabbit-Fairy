@@ -1,7 +1,7 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
 
 // 引入样式清除
 import "../public/css/common.scss";

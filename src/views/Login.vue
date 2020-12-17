@@ -1,0 +1,11 @@
+<template>
+  这里是登录和注册页面
+</template>
+
+<script>
+export default {
+  name: "Login"
+};
+</script>
+
+<style></style>

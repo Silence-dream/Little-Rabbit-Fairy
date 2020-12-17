@@ -1,6 +1,5 @@
 <template>
   <router-view />
-  <span class="iconfont">&#xe7e6;</span>
 </template>
 
 <style lang="scss">

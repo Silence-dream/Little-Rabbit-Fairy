@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <h1>jhhhh</h1>
-  </div>
+  这里是首页
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Home"
+};
 </script>
 
 <style lang="scss" scoped></style>

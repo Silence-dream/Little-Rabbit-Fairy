@@ -10,19 +10,19 @@ let serverURL = "";
  * @param {String} type [请求 地址环境类型]
  */
 const getURL = type => {
-    switch (env) {
-        case "production":
-            serverURL = baseHost[type].pro_host;
-            break;
-        case "development":
-            serverURL = baseHost[type].dev_host;
-            break;
-        case "testing":
-            serverURL = baseHost[type].test_host;
-            break;
-    }
+  switch (env) {
+    case "production":
+      serverURL = baseHost[type].pro_host;
+      break;
+    case "development":
+      serverURL = baseHost[type].dev_host;
+      break;
+    case "testing":
+      serverURL = baseHost[type].test_host;
+      break;
+  }
 
-    return serverURL;
+  return serverURL;
 };
 
 /**
@@ -37,18 +37,18 @@ const getURL = type => {
  * @param {*} type [ 设置 baseURL ]
  */
 export const httpGet = async (url, payload, type = "API1") => {
-    try {
-        serverURL = getURL(type);
-        featch.defaults.baseURL = serverURL;
-        const response = await featch.get(`${url}`, {
-            params: payload
-        });
-        // console.log(response)
-        const result = response.data;
-        return result;
-    } catch (err) {
-        throw new Error(err);
-    }
+  try {
+    serverURL = getURL(type);
+    featch.defaults.baseURL = serverURL;
+    const response = await featch.get(`${url}`, {
+      params: payload
+    });
+    // console.log(response)
+    const result = response.data;
+    return result;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 /**
@@ -62,18 +62,18 @@ export const httpGet = async (url, payload, type = "API1") => {
  * @param { Object } payload  [ 请求参数 ]
  */
 export const httpPost = async (url, payload, type = "API1") => {
-    try {
-        serverURL = getURL(type);
+  try {
+    serverURL = getURL(type);
 
-        featch.defaults.baseURL = serverURL;
+    featch.defaults.baseURL = serverURL;
 
-        const response = await featch.post(`${url}`, payload);
+    const response = await featch.post(`${url}`, payload);
 
-        const result = response.data;
-        return result;
-    } catch (err) {
-        throw new Error(err);
-    }
+    const result = response.data;
+    return result;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 /**
@@ -89,16 +89,16 @@ export const httpPost = async (url, payload, type = "API1") => {
  * @param {*} type [ 设置 baseURL ]
  */
 export const httpPut = async (url, payload, type = "API1") => {
-    try {
-        serverURL = getURL(type);
-        featch.defaults.baseURL = serverURL;
-        const response = await featch.put(`${url}`, payload);
+  try {
+    serverURL = getURL(type);
+    featch.defaults.baseURL = serverURL;
+    const response = await featch.put(`${url}`, payload);
 
-        const result = response.data;
-        return result;
-    } catch (err) {
-        throw new Error(err);
-    }
+    const result = response.data;
+    return result;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 /**
@@ -113,16 +113,16 @@ export const httpPut = async (url, payload, type = "API1") => {
  * @param {*} type [ 设置 baseURL ]
  */
 export const httpDelete = async (url, payload, type = "API1") => {
-    try {
-        serverURL = getURL(type);
-        featch.defaults.baseURL = serverURL;
-        const response = await featch.delete(`${url}`, {
-            data: payload
-        });
+  try {
+    serverURL = getURL(type);
+    featch.defaults.baseURL = serverURL;
+    const response = await featch.delete(`${url}`, {
+      data: payload
+    });
 
-        const result = response.data;
-        return result;
-    } catch (err) {
-        throw new Error(err);
-    }
+    const result = response.data;
+    return result;
+  } catch (err) {
+    throw new Error(err);
+  }
 };

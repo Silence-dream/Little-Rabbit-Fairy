@@ -1,5 +1,5 @@
 {
-  "name": "vue-rabbit",
+  "name": "littlerabbitfairy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "element3": "0.0.34",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -26,8 +27,10 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^7.0.0-0",
-    "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
-    "sass-loader": "^8.0.2"
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "style-resources-loader": "^1.3.2",
+    "vue-cli-plugin-style-resources-loader": "~0.1.4"
   }
 }

@@ -1,14 +1,16 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
+import Element3 from "element3";
+import "element3/lib/theme-chalk/index.css";
 
-// 公共样式
-import "../public/css/common.scss";
-
-const app = createApp(App)
-
-app
+// 引入样式清除
+import "@/styles/common.scss";
+// 引入字体图标
+import "@/fonts/iconfont.css";
+createApp(App)
   .use(store)
   .use(router)
+  .use(Element3)
   .mount("#app");

@@ -1,21 +1,18 @@
 <template>
-  <div>{{ name }}</div>
-  <p>{{ useName }}</p>
   <router-view />
+  <span class="iconfont">&#xe7e6;</span>
 </template>
 
-<script>
-export default {
-  computed: {
-    useName() {
-      return this.$store.state.login.useName;
-    },
-    name() {
-      return this.$store.state.Liu.useName;
-    },
-  },
-};
-</script>
-
-<style>
+<style lang="scss">
+#app {
+  height: 100%;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  // color: $warning;
+  // 请查看 styles 文件夹里面的 _mixnin.scss
+  // 定义的方法 现在里面有 清除浮动 多行省略号 单行省略号 可以在全局引用
+  @include clearfix();
+}
 </style>

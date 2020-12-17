@@ -1,10 +1,12 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
+  state() {
+    return {};
+  },
   mutations: {},
   actions: {},
-  getters: {}
+  modules: {}
 });
 
 // 在store文件夹下的index.js文件中导入

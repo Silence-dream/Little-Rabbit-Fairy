@@ -6,7 +6,9 @@ import Element3 from "element3";
 import "element3/lib/theme-chalk/index.css";
 
 // 引入样式清除
-import "../public/css/common.scss";
+import "@/styles/mixnins/_mixnin.scss";
+// 引入字体图标
+import "@/fonts/iconfont.css";
 createApp(App)
   .use(store)
   .use(router)

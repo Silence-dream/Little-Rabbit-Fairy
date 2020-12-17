@@ -1,5 +1,6 @@
 <template>
   <router-view />
+  <span class="iconfont">&#xe7e6;</span>
 </template>
 
 <style lang="scss">
@@ -10,7 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   // color: $warning;
-  // 请查看public文件夹里面的public/css/mixnins/_mixnin.scss
+  // 请查看 styles 文件夹里面的 _mixnin.scss
   // 定义的方法 现在里面有 清除浮动 多行省略号 单行省略号 可以在全局引用
   @include clearfix();
 }

@@ -1,6 +1,5 @@
 <template>
   <router-view />
-  <a href="/login.html">去login</a>
 </template>
 
 <style lang="scss">

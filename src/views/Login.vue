@@ -1,5 +1,5 @@
 <template>
-  这里是登录和注册页面
+  这里是登录和注册
 </template>
 
 <script>
@@ -8,4 +8,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

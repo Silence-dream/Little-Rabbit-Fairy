@@ -4,12 +4,16 @@
 
 <script>
 import { useStore } from "vuex";
+import { httpGet } from "@/utils/http";
 export default {
   name: "Demo",
   setup() {
     const Store = useStore();
     /* 获取Demo自己的专用数据 */
     console.log(Store.state.Demo.useName);
+    httpGet("https://mock.boxuegu.com/mock/1175/topic").then(r =>
+      console.log(r)
+    );
   }
 };
 </script>

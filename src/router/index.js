@@ -22,7 +22,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "Login" */ "@/views/Login.vue")
   },
   {
-    path: "OnlineServer",
+    path: "/OnlineServer",
     name: "OnlineServer",
     component: () =>
       import(/* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer.vue")

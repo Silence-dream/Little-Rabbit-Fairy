@@ -17,7 +17,6 @@
 }
 /* 单行省略号 */
 @mixin Singleellipse {
-  width:100px;
   overflow: hidden;  /*超出部分隐藏*/
   white-space: nowrap;  /*禁止换行*/
   text-overflow: ellipsis; /*省略号*/
@@ -47,11 +46,3 @@ $background:#f5f5f5;
 $basicsW:#fff;
 // 次要文字
 $minor:#999;
-// 主标题
-h1{
-  font-size: 16px;
-}
-// 子标题,正文摘要
-h2{
-  font-size: 14px;
-}

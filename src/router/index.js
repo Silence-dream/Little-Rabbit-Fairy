@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/Home/Home.vue";
 
 // 非主页引入都是使用这种方法引入  记得修改 webpackChunkName 名称
 // import(/* webpackChunkName: "about" */ "../views/About.vue");
@@ -19,13 +19,16 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import(/* webpackChunkName: "Login" */ "@/views/Login.vue")
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "@/views/Login/Login.vue")
   },
   {
     path: "/OnlineServer",
     name: "OnlineServer",
     component: () =>
-      import(/* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer.vue")
+      import(
+        /* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer/OnlineServer.vue"
+      )
   }
 ];
 

@@ -3,8 +3,14 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 export default {
-  name: "Demo"
+  name: "Demo",
+  setup() {
+    const Store = useStore();
+    /* 获取Demo自己的专用数据 */
+    console.log(Store.state.Demo.useName);
+  }
 };
 </script>
 

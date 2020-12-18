@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import Demo from "@/components/Demo/DemoStore";
 
 export default createStore({
   state() {
@@ -6,7 +7,9 @@ export default createStore({
   },
   mutations: {},
   actions: {},
-  modules: {}
+  modules: {
+    Demo: Demo
+  }
 });
 
 // 在store文件夹下的index.js文件中导入

@@ -1,5 +1,5 @@
 <template>
-  demo 这里自己开发组件的时候用
+  <div class="container">demo 这里自己开发组件的时候用</div>
 </template>
 
 <script>
@@ -14,4 +14,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

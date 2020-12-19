@@ -12,13 +12,13 @@ let serverURL = "";
 const getURL = type => {
   switch (env) {
     case "production":
-      serverURL = baseHost[type].pro_host;
+      serverURL = baseHost[type].proHost;
       break;
     case "development":
-      serverURL = baseHost[type].dev_host;
+      serverURL = baseHost[type].devHost;
       break;
     case "testing":
-      serverURL = baseHost[type].test_host;
+      serverURL = baseHost[type].testHost;
       break;
   }
 

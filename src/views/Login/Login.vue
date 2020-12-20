@@ -1,10 +1,15 @@
 <template>
-  这里是登录和注册
+  <LoginHeader></LoginHeader>
 </template>
 
 <script>
+import LoginHeader from "@/components/LoginHeader/LoginHeader";
 export default {
-  name: "Login"
+  name: "Login",
+  setup() {},
+  components: {
+    LoginHeader
+  }
 };
 </script>
 

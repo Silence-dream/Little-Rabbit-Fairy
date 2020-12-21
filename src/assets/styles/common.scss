@@ -1,6 +1,10 @@
 /* 样式初始化 */
 @import"./reset";
 
+/* 使用怪异盒子 */
+* {
+  box-sizing: border-box;
+}
 
 html,body{
   width: 100%;
@@ -11,6 +15,7 @@ html,body{
 .container{
   position: relative;
   width: 1240px;
+  height: 100%;
   margin: auto;
   @include clearfix();
 }

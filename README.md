@@ -1,5 +1,5 @@
 # little
-# 重要!!!!必须使用yarn!!!!!!!
+# 重要!!!!必须使用yarn!!!!!!
 ## Project setup
 
 ```

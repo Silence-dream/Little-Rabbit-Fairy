@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
-import Demo from "@/components/Demo/DemoStore";
+import Demo from "@/components/Demo/DemoStore.js";
+// import HomeHeader from "@/components/HomeHeader/HomeHeaderStore.js";
+import HomeLogo from "@/components/HomeLogo/HomeLogoStore.js";
 
 export default createStore({
   state() {
@@ -8,19 +10,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    Demo: Demo
+    Demo: Demo,
+    HomeHearer: HomeLogo
   }
 });
-
-// 在store文件夹下的index.js文件中导入
-
-// import { createStore } from "vuex";
-// import login from './loginStore'
-// import Liu from './liuzhiyan'
-
-// export default createStore({
-//   modules: {
-//     login: login,
-//     Liu: Liu
-//   }
-// });

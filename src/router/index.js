@@ -29,6 +29,15 @@ const routes = [
       import(
         /* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer/OnlineServer.vue"
       )
+  },
+  // 商品一级分类路由
+  {
+    path: "/PrimaryGoods",
+    name: "PrimaryGoods",
+    component: () =>
+      import(
+        /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryGoods/PrimaryGoods.vue"
+      )
   }
 ];
 

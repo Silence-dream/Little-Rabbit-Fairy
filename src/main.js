@@ -9,6 +9,7 @@ import "element3/lib/theme-chalk/index.css";
 import "@/assets/styles/common.scss";
 // 引入字体图标
 import "@/assets/styles/fonts/iconfont.css";
+
 createApp(App)
   .use(store)
   .use(router)

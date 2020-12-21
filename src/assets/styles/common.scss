@@ -15,6 +15,7 @@ html,body{
 .container{
   position: relative;
   width: 1240px;
+  height: 100%;
   margin: auto;
   @include clearfix();
 }

@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import LoginHeader from "@/components/LoginHeader/LoginHeader";
-import { httpGet } from "@/utils/http";
+import LoginHeader from "@/components/LoginHeader/LoginHeader.vue";
+import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
 // 轮播图使用
 // import style (>= Swiper 6.x)

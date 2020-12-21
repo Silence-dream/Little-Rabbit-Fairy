@@ -57,6 +57,36 @@
       <el-row></el-row>
     </el-row>
     <!-- 分类内容 end -->
+
+    <!-- 相关分类 start -->
+    <el-row class="related-categories">
+      <div class="container">
+        <!-- 相关分类的标题 -->
+        <el-row class="related-categories-title"><h1>相关分类</h1></el-row>
+        <!-- 相关分类的内容 -->
+        <el-row class="related-categories-content">
+          <ul>
+            <li class="related-categories-single" v-for="item in 6" :key="item">
+              <img
+                src="./img/related-categories.png"
+                alt=""
+                class="related-categories-img"
+              />
+              <h4 class="related-categories-title">5个给春天的生活新提案</h4>
+              <p class="related-categories-slogan">餐厨器具洗护好物</p>
+              <div class="related-categories-about">
+                <div style="flaot:left">
+                  <span class="iconfont icon-huifu"> </span>
+                  <span class="number">1000+</span>
+                </div>
+                <span></span>
+              </div>
+            </li>
+          </ul>
+        </el-row>
+      </div>
+    </el-row>
+    <!-- 相关分类 end -->
   </el-main>
 </template>
 
@@ -89,11 +119,14 @@ export default {
           classifyGoodsData.value.push(element);
         });
         // console.log(goodsData);
-        console.log(classifyGoodsData.value);
+        // console.log(classifyGoodsData.value);
       })
       .catch(error => {
         console.log(error);
       });
+    //#endregion
+
+    //#region 2.获取相关分类数据 未找到相关数据分类
     //#endregion
 
     // 轮播图方法
@@ -261,6 +294,102 @@ export default {
       line-height: 25px;
       color: #9a2e1f;
     }
+  }
+}
+
+// 相关分类样式设置
+.related-categories {
+  margin-top: 37px;
+  height: auto;
+
+  // 头部标题样式设置
+  .related-categories-title {
+    height: 120px;
+    background-color: #eeeff3;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 32px;
+      line-height: 120px;
+      font-weight: 600;
+      padding-left: 53px;
+    }
+  }
+
+  // 相关分类的内容样式设置
+  .related-categories-content {
+    height: auto;
+
+    // 每个li的框的样式设置
+    .related-categories-single {
+      width: 400px;
+      height: 320px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      float: left;
+      background-color: #fff;
+
+      &:nth-child(3),
+      &:last-child {
+        margin: 0px;
+      }
+      &:nth-child(4),
+      &:nth-child(5),
+      &:last-child {
+        margin-bottom: 80px;
+      }
+    }
+
+    // 图片
+    .related-categories-img {
+      display: block;
+      height: 189px;
+      width: 400px;
+    }
+
+    // 标题
+    .related-categories-title {
+      height: auto;
+      padding: 21px 0px 0px 18px;
+      font-size: 16px;
+      line-height: 22px;
+      margin: 0px;
+      background-color: #fff;
+    }
+
+    // 标语
+    .related-categories-slogan {
+      font-size: 14px;
+      line-height: 20px;
+      color: #999999;
+      padding: 7px 0px 0px 18px;
+    }
+
+    .related-categories-about {
+      padding-top: 12px;
+      margin: 9px 18px;
+      border-top: 2px solid #ccc;
+    }
+
+    // 消息
+    .icon-huifu {
+      float: left;
+      font-size: 20px;
+      color: #999999;
+    }
+    .number {
+      float: left;
+      font-size: 14px;
+      // margin-bottom: 5px;
+      color: #999999;
+      line-height: 20px;
+    }
+
+    // 爱心
+
+    // 总数
+
+    // 价格
   }
 }
 </style>

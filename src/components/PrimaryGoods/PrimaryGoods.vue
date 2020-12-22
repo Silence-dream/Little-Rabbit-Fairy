@@ -149,6 +149,23 @@ export default {
           // 将获取到的数据直接push到设置好的空数组中
           classifyGoodsData.value.push(element);
         });
+        // 用于接收随机数值
+        let randomNum = ref("");
+        // 进行判断数组长度是否大于3
+        if (classifyGoodsData.value.length > 3) {
+          // 随机数0-7
+          // 循环5次从中选出5个随机数
+          for (var i = 1; i <= 5; i++) {
+            // 赋值
+            randomNum.value = parseInt(
+              Math.random() * classifyGoodsData.value.length
+            );
+            // console.log(randomNum.value);
+            // 删除
+            classifyGoodsData.value.splice(randomNum.value, 1);
+          }
+          // classifyGoodsData.value.splice(1, 5);
+        }
         // console.log(goodsData);
         // console.log(classifyGoodsData.value);
       })

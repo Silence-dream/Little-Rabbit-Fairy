@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <el-row>
+  <el-row>
+    <div class="container">
       <el-col :span="24">
         <!-- 顶部logo行 -->
         <div class="logo-nav">
@@ -66,8 +66,8 @@
           </div>
         </div>
       </el-col>
-    </el-row>
-  </div>
+    </div>
+  </el-row>
 </template>
 
 <script>

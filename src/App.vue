@@ -14,9 +14,4 @@
   // 定义的方法 现在里面有 清除浮动 多行省略号 单行省略号 可以在全局引用
   @include clearfix();
 }
-
-// 首页弹出框
-.el-popover {
-  padding: 0 !important;
-}
 </style>

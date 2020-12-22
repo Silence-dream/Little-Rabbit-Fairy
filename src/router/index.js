@@ -29,7 +29,7 @@ const routes = [
             /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
           )
       },
-      // 商品一级分类路由
+      // 商品二级分类路由
       {
         path: "SecondaryCategories",
         name: "SecondaryCategories",

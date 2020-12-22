@@ -16,7 +16,8 @@ const routes = [
         name: "PrimaryCategories",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryCategories/PrimaryCategories.vue"
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/PrimaryCategories/PrimaryCategories.vue"
           )
       }
     ]
@@ -38,7 +39,28 @@ const routes = [
     name: "OnlineServer",
     component: () =>
       import(
-        /* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer/OnlineServer.vue"
+        /* webpackChunkName: "OnlineServer" */
+        "@/views/OnlineServer/OnlineServer.vue"
+      )
+  },
+  // 问题反馈
+  {
+    path: "/FeedBack",
+    name: "FeedBack",
+    component: () =>
+      import(
+        /* webpackChunkName: "FeedBack" */
+        "@/views/FeedBack/FeedBack.vue"
+      )
+  },
+  // 问题反馈成功
+  {
+    path: "/FeedBackSuc",
+    name: "FeedBackSuc",
+    component: () =>
+      import(
+        /* webpackChunkName: "FeedBackSuc" */
+        "@/views/FeedBackSuc/FeedBackSuc.vue"
       )
   }
 ];

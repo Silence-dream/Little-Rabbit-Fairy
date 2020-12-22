@@ -2,7 +2,7 @@
   <div id="Home">
     <el-container>
       <!-- 首页头部 -->
-      <el-header>
+      <el-header height="182px">
         <!-- 顶部小链接 -->
         <HomeHeader />
 
@@ -11,18 +11,12 @@
       </el-header>
 
       <!-- 首页主要内容 -->
-      <el-main>
-        <div class="container">
-          <el-row>
-            <el-col :span="24">
-              <div class="grid-content bg-purple-dark">这是首页主要内容</div>
-            </el-col>
-          </el-row>
-        </div>
-      </el-main>
+      <router-view />
 
       <!-- 首页底部 -->
-      <el-footer>这是首页底部</el-footer>
+      <el-footer height="0">
+        <HomeFoot />
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -32,10 +26,12 @@
 import HomeHeader from "@/components/HomeHeader/HomeHeader.vue";
 // 顶部导航下拉
 import HomeLogo from "@/components/HomeLogo/HomeLogo.vue";
+// 底部链接美化
+import HomeFoot from "@/components/HomeFoot/HomeFoot.vue";
 
 export default {
   name: "Home",
-  components: { HomeHeader, HomeLogo }
+  components: { HomeHeader, HomeLogo, HomeFoot }
 };
 </script>
 
@@ -49,7 +45,6 @@ export default {
 
     .el-header {
       width: 100%;
-      height: 182px !important;
       padding: 0;
 
       .el-row,
@@ -58,29 +53,29 @@ export default {
       }
     }
 
+    .el-footer {
+      width: 100%;
+      padding: 0;
+    }
+
     .el-header,
     .el-footer {
       text-align: center;
     }
 
     .el-main {
+      width: 100%;
       text-align: center;
-      line-height: 160px;
+      // line-height: 160px;
+      overflow: visible;
 
       .el-row {
         height: 100%;
         margin-bottom: 20px;
-        &:last-child {
-          margin-bottom: 0;
+
+        .el-col {
+          height: 100%;
         }
-      }
-      .el-col {
-        height: 100%;
-        border-radius: 4px;
-      }
-      .grid-content {
-        border-radius: 4px;
-        min-height: 36px;
       }
     }
   }

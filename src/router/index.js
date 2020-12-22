@@ -8,7 +8,19 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    children: [
+      // 商品一级分类路由
+      {
+        path: "PrimaryCategories",
+        name: "PrimaryCategories",
+        component: () =>
+          import(
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/PrimaryCategories/PrimaryCategories.vue"
+          )
+      }
+    ]
   },
   {
     path: "/demo",
@@ -31,24 +43,17 @@ const routes = [
         "@/views/OnlineServer/OnlineServer.vue"
       )
   },
-  // 商品一级分类路由
-  {
-    path: "/PrimaryGoods",
-    name: "PrimaryGoods",
-    component: () =>
-      import(
-        /* webpackChunkName: "PrimaryGoods" */
-        "@/components/PrimaryGoods/PrimaryGoods.vue"
-      )
-  },
   // 问题反馈
   {
     path: "/FeedBack",
     name: "FeedBack",
     component: () =>
-      import(/* webpackChunkName: "FeedBack" */ "@/views/FeedBack/FeedBack.vue")
+      import(
+        /* webpackChunkName: "FeedBack" */
+        "@/views/FeedBack/FeedBack.vue"
+      )
   },
-  // 问题反馈提交成功
+  // 问题反馈成功
   {
     path: "/FeedBackSuc",
     name: "FeedBackSuc",

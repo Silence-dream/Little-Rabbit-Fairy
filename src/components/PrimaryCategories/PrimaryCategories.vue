@@ -1,96 +1,94 @@
 <template>
-  <el-main style="background-color: #f5f5f5">
-    <!-- 轮播图 start -->
-    <Carousel></Carousel>
-    <!-- 轮播图 end -->
+  <!-- 轮播图 start -->
+  <Carousel></Carousel>
+  <!-- 轮播图 end -->
 
-    <!-- 全部分类 start -->
-    <el-row class="all-classify">
-      <div class="container bgc">
-        <!-- 分类设置--标题 -->
-        <el-row class="all-classify-title"> <h4>全部分类</h4> </el-row>
-        <!-- 分类设置--所有分类 -->
-        <el-row class="all-calssif-list">
+  <!-- 全部分类 start -->
+  <el-row class="all-classify">
+    <div class="container bgc">
+      <!-- 分类设置--标题 -->
+      <el-row class="all-classify-title"> <h4>全部分类</h4> </el-row>
+      <!-- 分类设置--所有分类 -->
+      <el-row class="all-calssif-list">
+        <ul>
+          <li
+            class="all-calssif-single"
+            v-for="item in classifyData"
+            :key="item.id"
+          >
+            <router-link to="/SecondaryCategories" style="display: block">
+              <div><img class="border-img" :src="item.picture" alt="" /></div>
+              <p>{{ item.name }}</p></router-link
+            >
+          </li>
+        </ul>
+      </el-row>
+    </div>
+  </el-row>
+  <!-- 全部分类 end -->
+
+  <!-- 分类内容 start -->
+  <el-row class="classify-content">
+    <div class="container content-text">
+      <el-row v-for="item1 in classifyGoodsData" :key="item1.id">
+        <!-- 标题 -->
+        <h1 class="classify-content-title">— {{ item1.name }} —</h1>
+        <!-- 标语 -->
+        <p class="classify-content-slogan">温暖柔软，品质之选</p>
+        <!-- 商品 -->
+        <div class="classify-content-list">
           <ul>
             <li
-              class="all-calssif-single"
-              v-for="item in classifyData"
-              :key="item.id"
+              class="classify-content-list-single"
+              v-for="item2 in item1.goods"
+              :key="item2.id"
             >
               <a href="#" style="display: block">
-                <div><img class="border-img" :src="item.picture" alt="" /></div>
-                <p>{{ item.name }}</p></a
-              >
+                <img :src="item2.picture" alt="" />
+                <h1>{{ item2.name }}</h1>
+                <p>{{ item2.desc }}</p>
+                <span>￥{{ Math.round(item2.price) }}</span>
+              </a>
             </li>
           </ul>
-        </el-row>
-      </div>
-    </el-row>
-    <!-- 全部分类 end -->
+        </div>
+      </el-row>
+    </div>
+  </el-row>
+  <!-- 分类内容 end -->
 
-    <!-- 分类内容 start -->
-    <el-row class="classify-content">
-      <div class="container content-text">
-        <el-row v-for="item1 in classifyGoodsData" :key="item1.id">
-          <!-- 标题 -->
-          <h1 class="classify-content-title">— {{ item1.name }} —</h1>
-          <!-- 标语 -->
-          <p class="classify-content-slogan">温暖柔软，品质之选</p>
-          <!-- 商品 -->
-          <div class="classify-content-list">
-            <ul>
-              <li
-                class="classify-content-list-single"
-                v-for="item2 in item1.goods"
-                :key="item2.id"
-              >
-                <a href="#" style="display: block">
-                  <img :src="item2.picture" alt="" />
-                  <h1>{{ item2.name }}</h1>
-                  <p>{{ item2.desc }}</p>
-                  <span>￥{{ Math.round(item2.price) }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </el-row>
-      </div>
-    </el-row>
-    <!-- 分类内容 end -->
-
-    <!-- 相关分类 start -->
-    <el-row class="related-categories">
-      <div class="container">
-        <!-- 相关分类的标题 -->
-        <el-row class="related-categories-title"><h1>相关分类</h1></el-row>
-        <!-- 相关分类的内容 -->
-        <el-row class="related-categories-content">
-          <ul>
-            <li class="related-categories-single" v-for="item in 6" :key="item">
-              <img
-                src="./img/related-categories.png"
-                alt=""
-                class="related-categories-img"
-              />
-              <div class="related-box">
-                <div class="box-top">
-                  <h1>5个给春天的生活新提案</h1>
-                  <p>餐厨起居洗护好物</p>
-                  <span>￥19起</span>
-                </div>
-                <div class="box-bottom">
-                  <span> <span class="iconfont icon-huifu"></span> 1000+ </span>
-                  <span> <span class="iconfont icon-xin"></span> 98% </span>
-                  <div class="total">共 <i>100</i> 见商品</div>
-                </div>
+  <!-- 相关分类 start -->
+  <el-row class="related-categories">
+    <div class="container">
+      <!-- 相关分类的标题 -->
+      <el-row class="related-categories-title"><h1>相关分类</h1></el-row>
+      <!-- 相关分类的内容 -->
+      <el-row class="related-categories-content">
+        <ul>
+          <li class="related-categories-single" v-for="item in 6" :key="item">
+            <img
+              src="./img/related-categories.png"
+              alt=""
+              class="related-categories-img"
+            />
+            <div class="related-box">
+              <div class="box-top">
+                <h1>5个给春天的生活新提案</h1>
+                <p>餐厨起居洗护好物</p>
+                <span>￥19起</span>
               </div>
-            </li>
-          </ul>
-        </el-row>
-      </div>
-    </el-row>
-    <!-- 相关分类 end -->
-  </el-main>
+              <div class="box-bottom">
+                <span> <span class="iconfont icon-huifu"></span> 1000+ </span>
+                <span> <span class="iconfont icon-xin"></span> 98% </span>
+                <div class="total">共 <i>100</i> 见商品</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </el-row>
+    </div>
+  </el-row>
+  <!-- 相关分类 end -->
 </template>
 
 <script>

@@ -20,6 +20,15 @@ const routes = [
             "@/components/PrimaryCategories/PrimaryCategories.vue"
           )
       },
+      //  注册功能
+      {
+        path: "register",
+        name: "Register",
+        component: () =>
+          import(
+            /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
+          )
+      },
       // 商品一级分类路由
       {
         path: "SecondaryCategories",

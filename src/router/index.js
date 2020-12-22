@@ -19,6 +19,16 @@ const routes = [
             /* webpackChunkName: "PrimaryGoods" */
             "@/components/PrimaryCategories/PrimaryCategories.vue"
           )
+      },
+      // 商品一级分类路由
+      {
+        path: "SecondaryCategories",
+        name: "SecondaryCategories",
+        component: () =>
+          import(
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/SecondaryCategories/SecondaryCategories.vue"
+          )
       }
     ]
   },

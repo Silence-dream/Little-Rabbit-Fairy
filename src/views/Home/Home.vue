@@ -11,15 +11,7 @@
       </el-header>
 
       <!-- 首页主要内容 -->
-      <el-main>
-        <el-row>
-          <div class="container">
-            <el-col :span="24">
-              <!-- <router-view / > -->
-            </el-col>
-          </div>
-        </el-row>
-      </el-main>
+      <router-view />
 
       <!-- 首页底部 -->
       <el-footer height="0">
@@ -74,7 +66,7 @@ export default {
     .el-main {
       width: 100%;
       text-align: center;
-      line-height: 160px;
+      // line-height: 160px;
       overflow: visible;
 
       .el-row {

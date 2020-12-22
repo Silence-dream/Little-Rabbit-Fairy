@@ -1,10 +1,7 @@
 <template>
-  <LoginHeader></LoginHeader>
   <el-main style="background-color: #f5f5f5">
     <!-- 轮播图 start -->
-    <el-row class="carousel">
-      <div class="container carousel-bgc">轮播图部分</div>
-    </el-row>
+    <Carousel></Carousel>
     <!-- 轮播图 end -->
 
     <!-- 全部分类 start -->
@@ -20,8 +17,10 @@
               v-for="item in classifyData"
               :key="item.id"
             >
-              <div><img class="border-img" :src="item.picture" alt="" /></div>
-              <p>{{ item.name }}</p>
+              <a href="#" style="display: block">
+                <div><img class="border-img" :src="item.picture" alt="" /></div>
+                <p>{{ item.name }}</p></a
+              >
             </li>
           </ul>
         </el-row>
@@ -45,16 +44,17 @@
                 v-for="item2 in item1.goods"
                 :key="item2.id"
               >
-                <img :src="item2.picture" alt="" />
-                <h1>{{ item2.name }}</h1>
-                <p>{{ item2.desc }}</p>
-                <span>￥{{ Math.round(item2.price) }}</span>
+                <a href="#" style="display: block">
+                  <img :src="item2.picture" alt="" />
+                  <h1>{{ item2.name }}</h1>
+                  <p>{{ item2.desc }}</p>
+                  <span>￥{{ Math.round(item2.price) }}</span>
+                </a>
               </li>
             </ul>
           </div>
         </el-row>
       </div>
-      <el-row></el-row>
     </el-row>
     <!-- 分类内容 end -->
 
@@ -72,14 +72,17 @@
                 alt=""
                 class="related-categories-img"
               />
-              <h4 class="related-categories-title">5个给春天的生活新提案</h4>
-              <p class="related-categories-slogan">餐厨器具洗护好物</p>
-              <div class="related-categories-about">
-                <div style="flaot:left">
-                  <span class="iconfont icon-huifu"> </span>
-                  <span class="number">1000+</span>
+              <div class="related-box">
+                <div class="box-top">
+                  <h1>5个给春天的生活新提案</h1>
+                  <p>餐厨起居洗护好物</p>
+                  <span>￥19起</span>
                 </div>
-                <span></span>
+                <div class="box-bottom">
+                  <span> <span class="iconfont icon-huifu"></span> 1000+ </span>
+                  <span> <span class="iconfont icon-xin"></span> 98% </span>
+                  <div class="total">共 <i>100</i> 见商品</div>
+                </div>
               </div>
             </li>
           </ul>
@@ -91,12 +94,9 @@
 </template>
 
 <script>
-import LoginHeader from "@/components/LoginHeader/LoginHeader.vue";
+import Carousel from "@/components/Carousel/Carousel.vue";
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
-// 轮播图使用
-// import style (>= Swiper 6.x)
-// import "swiper/swiper-bundle.css";
 export default {
   setup() {
     //#region 1.获取分类数据
@@ -118,6 +118,23 @@ export default {
           // 将获取到的数据直接push到设置好的空数组中
           classifyGoodsData.value.push(element);
         });
+        // 用于接收随机数值
+        let randomNum = ref("");
+        // 进行判断数组长度是否大于3
+        if (classifyGoodsData.value.length > 3) {
+          // 随机数0-7
+          // 循环5次从中选出5个随机数
+          for (var i = 1; i <= 5; i++) {
+            // 赋值
+            randomNum.value = parseInt(
+              Math.random() * classifyGoodsData.value.length
+            );
+            // console.log(randomNum.value);
+            // 删除
+            classifyGoodsData.value.splice(randomNum.value, 1);
+          }
+          // classifyGoodsData.value.splice(1, 5);
+        }
         // console.log(goodsData);
         // console.log(classifyGoodsData.value);
       })
@@ -126,29 +143,40 @@ export default {
       });
     //#endregion
 
-    //#region 2.获取相关分类数据 未找到相关数据分类
+    //#region 2.轮播图方法
+    const getCarouselImg = ref([]);
+    let getCarouselData = httpGet("/home/banner")
+      .then(res => {
+        // console.log(res);
+        let { result } = res;
+        getCarouselImg.value = result;
+      })
+      .catch(error => {
+        console.log(error);
+      });
     //#endregion
-
-    // 轮播图方法
 
     onMounted(() => {
       getPrimaryGoods;
+      getCarouselData;
     });
 
     return {
       classifyData,
-      classifyGoodsData
+      classifyGoodsData,
+      getCarouselImg
     };
   },
+  // 组件
   components: {
-    LoginHeader
+    Carousel
   }
 };
 </script>
 
 <style lang="scss" scoped>
 // 中间内容样式设置
-.el-main {
+::v-deep(.el-main) {
   padding: 0px;
   overflow: hidden;
 }
@@ -161,8 +189,37 @@ export default {
   .carousel-bgc {
     height: 500px;
     background-color: #fff;
-    text-align: center;
-    line-height: 500px;
+  }
+
+  ::v-deep(.swiper-container) {
+    position: relative;
+    height: 500px;
+  }
+
+  ::v-deep(.swiper-pagination-bullets) {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  ::v-deep(.swiper-pagination-bullet-active),
+  ::v-deep(.swiper-pagination-bullet) {
+    width: 10px;
+    height: 10px;
+  }
+  ::v-deep(.swiper-pagination-bullet-active) {
+    background-color: #fff;
+  }
+  ::v-deep(.swiper-button-prev),
+  ::v-deep(.swiper-button-next) {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  ::v-deep(.swiper-button-prev)::after,
+  ::v-deep(.swiper-button-next)::after {
+    font-size: 18px;
+    color: #fff;
   }
 }
 
@@ -343,53 +400,76 @@ export default {
     // 图片
     .related-categories-img {
       display: block;
-      height: 189px;
+      height: 190px;
       width: 400px;
     }
+  }
 
-    // 标题
-    .related-categories-title {
-      height: auto;
-      padding: 21px 0px 0px 18px;
+  .related-box {
+    height: 130px;
+    padding-top: 21px;
+    margin: 0px 18px;
+  }
+  .box-top {
+    padding-bottom: 9px;
+    border-bottom: 2px solid #e6e6e6;
+    @include clearfix();
+
+    h1 {
       font-size: 16px;
       line-height: 22px;
-      margin: 0px;
-      background-color: #fff;
+      font-family: PingFangSC;
     }
-
-    // 标语
-    .related-categories-slogan {
+    p {
+      float: left;
+      margin-top: 7px;
       font-size: 14px;
       line-height: 20px;
       color: #999999;
-      padding: 7px 0px 0px 18px;
     }
+    span {
+      float: right;
+      font-size: 18px;
+      line-height: 24px;
+      color: #9a2e1f;
+    }
+  }
+  .box-bottom {
+    margin-top: 10px;
 
-    .related-categories-about {
-      padding-top: 12px;
-      margin: 9px 18px;
-      border-top: 2px solid #ccc;
-    }
-
-    // 消息
-    .icon-huifu {
-      float: left;
-      font-size: 20px;
-      color: #999999;
-    }
-    .number {
+    span {
       float: left;
       font-size: 14px;
-      // margin-bottom: 5px;
-      color: #999999;
-      line-height: 20px;
+      line-height: 18px;
+
+      &:first-child {
+        color: #999999;
+      }
+      &:nth-child(2) {
+        color: #9a2e1f;
+        margin-left: 18px;
+      }
+
+      .icon-huifu {
+        font-size: 16px;
+        padding-right: 3px;
+      }
+      .icon-xin {
+        color: #9a2e1f;
+        padding-right: 5px;
+      }
     }
 
-    // 爱心
+    .total {
+      float: right;
+      font-size: 14px;
+      line-height: 20px;
+      color: #999999;
 
-    // 总数
-
-    // 价格
+      i {
+        color: #9a2e1f;
+      }
+    }
   }
 }
 </style>

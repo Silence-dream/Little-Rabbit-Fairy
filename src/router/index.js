@@ -12,11 +12,11 @@ const routes = [
     children: [
       // 商品一级分类路由
       {
-        path: "PrimaryGoods",
-        name: "PrimaryGoods",
+        path: "PrimaryCategories",
+        name: "PrimaryCategories",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryGoods/PrimaryGoods.vue"
+            /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryCategories/PrimaryCategories.vue"
           )
       }
     ]

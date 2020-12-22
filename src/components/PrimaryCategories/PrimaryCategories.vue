@@ -3,21 +3,7 @@
   <HomeLogo></HomeLogo>
   <el-main style="background-color: #f5f5f5">
     <!-- 轮播图 start -->
-    <el-row class="carousel">
-      <div class="container carousel-bgc">
-        <swiper
-          :slides-per-view="1"
-          :space-between="0"
-          navigation
-          :pagination="{ clickable: true }"
-          :loop="true"
-        >
-          <swiper-slide v-for="item in getCarouselImg" :key="item.id">
-            <img :src="item.imgUrl" alt="" />
-          </swiper-slide>
-        </swiper>
-      </div>
-    </el-row>
+    <Carousel></Carousel>
     <!-- 轮播图 end -->
 
     <!-- 全部分类 start -->
@@ -33,7 +19,7 @@
               v-for="item in classifyData"
               :key="item.id"
             >
-              <a href="#" style="display:block;">
+              <a href="#" style="display: block">
                 <div><img class="border-img" :src="item.picture" alt="" /></div>
                 <p>{{ item.name }}</p></a
               >
@@ -60,7 +46,7 @@
                 v-for="item2 in item1.goods"
                 :key="item2.id"
               >
-                <a href="#" style="display:block;">
+                <a href="#" style="display: block">
                   <img :src="item2.picture" alt="" />
                   <h1>{{ item2.name }}</h1>
                   <p>{{ item2.desc }}</p>
@@ -112,22 +98,9 @@
 <script>
 import HomeHeader from "@/components/HomeHeader/HomeHeader.vue";
 import HomeLogo from "@/components/HomeLogo/HomeLogo.vue";
+import Carousel from "@/components/Carousel/Carousel.vue";
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
-
-// 轮播图使用
-import { Swiper, SwiperSlide } from "swiper/vue";
-
-// import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
-
-// Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-
-// install Swiper components
-SwiperCore.use([Navigation, Pagination, A11y]);
 export default {
   setup() {
     //#region 1.获取分类数据
@@ -202,8 +175,7 @@ export default {
   components: {
     HomeHeader,
     HomeLogo,
-    Swiper,
-    SwiperSlide
+    Carousel
   }
 };
 </script>

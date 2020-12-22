@@ -58,7 +58,7 @@
             <!-- 同意款项 -->
             <el-form-item class="terms" prop="isTerms">
               <el-checkbox-group v-model="accountForm.isTerms">
-                <el-checkbox name="type" label="true"
+                <el-checkbox name="type" label="true" checked
                   >我已同意 <a href="javascript:;">《隐私条款》</a>和
                   <a href="javascript:;">《服务条款》</a>
                 </el-checkbox>
@@ -104,20 +104,18 @@
                 v-model="mobileForm.code"
                 class="input-code"
               >
-                <template v-slot:append>
-                  <el-button
-                    class="getQRcode"
-                    :disabled="isQRcodeDisable"
-                    @click="getQRcode"
-                    >{{ QRcodeText }}</el-button
-                  >
-                </template>
               </el-input>
+              <el-button
+                class="getQRcode"
+                :disabled="isCode"
+                @click="getCode"
+                >{{ getCodeText }}</el-button
+              >
             </el-form-item>
             <!-- 同意款项 -->
             <el-form-item class="terms" prop="isTerms">
               <el-checkbox-group v-model="mobileForm.isTerms">
-                <el-checkbox name="type" label="true"
+                <el-checkbox name="type" label="true" checked
                   >我已同意 <a href="javascript:;">《隐私条款》</a>和
                   <a href="javascript:;">《服务条款》</a>
                 </el-checkbox>
@@ -138,7 +136,9 @@
         </div>
 
         <!-- 二维码登录 -->
-        <div class="choose-QRcode" v-if="isLoginChooseFlag">二维码登陆123</div>
+        <div class="choose-QRcode" v-if="isLoginChooseFlag">
+          <el-image :src="QRcodeUrl"></el-image>
+        </div>
       </div>
     </div>
   </div>
@@ -253,7 +253,25 @@ export default {
       code: "",
       isTerms: []
     });
-
+    let getCodeText = ref(`发送验证码`);
+    // 是否禁用按钮
+    let isCode = ref(false);
+    /* 发送验证码 重发验证码 60秒后重发 */
+    function getCode() {
+      clearInterval(timer);
+      isCode.value = true;
+      let reset = 60;
+      let timer = setInterval(() => {
+        reset -= 1;
+        getCodeText.value = `${reset}秒后重发`;
+        if (reset <= 0) {
+          console.log(1);
+          getCodeText.value = `重发验证码`;
+          clearInterval(timer);
+          isCode.value = false;
+        }
+      }, 1000);
+    }
     /**
      * 校验 验证码登录
      * @param {string} formName
@@ -271,16 +289,15 @@ export default {
     //#endregion
 
     //#region 发送验证码按钮
-    let isQRcodeDisable = ref(false);
-    let QRcodeText = ref(`发送验证码`);
-    function getQRcode() {
-      // 倒计时
-      // let countDown = 60;
-      QRcodeText.value = "11";
-      isQRcodeDisable.value = false;
-      setTimeout(() => {}, 1000);
-    }
+
     //#endregion
+
+    //#region 二维码登录
+    let QRcodeUrl = ref(
+      `data:image/gif;base64,R0lGODdhjACMAIAAAAAAAP///ywAAAAAjACMAAAC/4yPqcvtD6OctNqLs968+w+G4kiWB4Cm6sq2UAsDSEzLj8rU+prv/uuzGYK8W6pHpCGTMODvxBQ2cItobGmlOoizqFPazRYV2ko5LC03q0c2Cg2Hvi9nOXhSH7b1c/44kRegtidIGPi1hBE42FfIkuiWZjjZSLFIaIlpF+d3WbkJ6sdppilqt2baSSn5qfpEVurIehUKuIoqi8Y4ixUECduoMzoqXIu72/tq25p76lJLXBP9aBxr9bs8e2x9+5wqi4t96KwUqevdDKyNvhtuDh1ZrH5O/T1N+y0/tfqlf7/NrB27bvX2BYtFD1+2hMjeufoj8CCzf9wC8iMHseK6gv8ReRmR+GdYNZAA7+STNjLjxJSeTKZ7qa8lw4sPRc7DiO3eTJA58dBc+FGhzqCKNBbl6dCg0JSI6Bh1ivTmFpRSX/aUIBOqx6rJQjIlqrXrta8no8L82XGsOjFmG5bderYt25Zzh761GxfuXLps8brN65dgFhNccRouXBMe4RF8ST5d+3MxicYbXVK2KRnE5cNAIZtdnJZqNn8Yx1UNXQ6rYNIP3bVGmBT10qmOle30+nrl6dWim+aeDa53adi7a+/IpEy26+C6mau0PLBgP9HK0SWczlFjR+THWfqKR9z53+ucsSusLr08+OwW2eNWSj6xfOddMZum7z392+2cl5f/vDoaWsLtJ1h8+HkGF2YGyiZOdM/xh6B94f03XHsuGUiRhfdxQZZ4kSkWoIUYqocghQS6B+CIJ0KnX4jnCZiaVSCqmNdmtHV3V4UJzrgeizsidmCNAwopok8tjpfUgrwdWWCSQWVlj5PzoecjjfdZ+SGQJnrIpHH18RjlbxzeqKCUXPqIpJZ7NZcmfD3aKKOaa/oWp5slapdlZy6qZWedALJG5GBPWgeWmEMCmqGgNy7XoBhiTbhkEuZdmZ+kb0JqHJ+PNpfomHtiimOdntJZl44pXooiqu81quiZp96ZKqyrxtaXqWZu+hyulK7oKaC7iuogoma22et3YQLrnrBy//54JpUSahjpr1AiG2qxRUaoo7SPURuTsdSaR6euXgwbLKFA0limoUz8WW6L6Qb5arPjLstgoUptCOqa17p4G6nzfvoZuXJBGzCZ2ZrrKpjfdqgkp5X6Sh2orD6bq5GVQRwjvvsS62BmiyJM2a+sjuoxxmgizN1tjBJmMq4cUCnyBy2r+nK0KHc483zs2mZvzDn+NrLEqmpbcAR/5QyvwKH663BxF2+78rEkG3ws0xfSrDSWBJ+8L16Tbpvozu/5B3V4/WZNIrd4ds3woF1WmTacWsP9c5D6Aoc02WzCWJnKtcoaNNtOh32wo1g7Pe3ElfptOOC0vm11zcnd/HHRc/8rroG1s1bO7OWPX63a5O663XncZTd9b8Sjc/6u3nSr7aXCbQZebZ4cJ5un1z3/ezuzJc3eNtXyxrqw1O2WXrfVmr+rGeUJcw5hnz6HEPXzqeO+t+UlO6+s9dUDn9n3Q56t8+fclbrsl8bHXrfJ6OtJce8N63WovmKrX7zdfLv+PsX4T7ulep1rd1vbkrhW5z2wWSx+qgPd8DaXQMEZzXbe0piloEdB1OlOXch7oAUN+LD95Uto9OIdyCJFONbZi4HrMl2mRJg9CCaucC+CnK1WBK4Vguh9riNfoDrFvb/pSXwvHFjFOPg1nuGQgDXsWwgR2L/FMTGAHaNhEpcmReGMdYt9fcph+bD1Rek1EF0Km98HmxS6pxnRgudD4/WcmEYfRi9eZhwhF8O1wM8dzWbYO6KfbqXDJbbPhBnLHSCFl0LA0FCAioxjWPTIN8Y9qIpVG1oFTxgjSc6NkQes3dv410A4de9um8SkJ8d2vDM2LmlAs+Qd+zM+j8lylrSspS1victc6nKXvOxAAQAAOw==`
+    );
+    //#endregion
+
     return {
       isLoginChooseFlag,
       selectLogin,
@@ -291,9 +308,10 @@ export default {
       selectMobile,
       mobileForm,
       mobileSubmitForm,
-      isQRcodeDisable,
-      getQRcode,
-      QRcodeText
+      QRcodeUrl,
+      getCode,
+      getCodeText,
+      isCode
     };
   }
 };
@@ -301,7 +319,9 @@ export default {
 
 <style lang="scss" scoped>
 .banner {
+  width: 1920px;
   height: 488px;
+  margin: 0 auto;
   background: {
     image: url("./img/banner.png");
     repeat: no-repeat;
@@ -355,6 +375,18 @@ export default {
     }
   }
 }
+/* 二维码登录样式 */
+.choose-QRcode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  .el-image {
+    width: 256px;
+    height: 252px;
+  }
+}
 
 #login-form,
 #mobile-form {
@@ -375,6 +407,9 @@ export default {
   .el-input__inner {
     padding-left: 50px;
     border-radius: 0;
+    &:focus {
+      border-color: #17bb9b;
+    }
   }
   /* input前置图标修改 */
   .el-input__prefix {
@@ -397,6 +432,7 @@ export default {
     background-color: #17bb9b;
   }
 }
+/* 验证码登录 */
 /* 继承样式 */
 ::v-deep #mobile-form {
   @extend #login-form;
@@ -404,19 +440,30 @@ export default {
     position: relative;
 
     .el-input-group__append {
-      position: absolute;
-      top: 0;
-      right: 75px;
-      transform: translateY(50%);
-      background: transparent;
+      width: 86px;
       border-radius: 0;
       border-left: none;
+      background-color: #f7f9fa;
+    }
+    .el-input__suffix {
+      right: 90px;
     }
   }
 
   .getQRcode {
-    color: #17bb9b;
-    background-color: transparent;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 86px;
+    padding: {
+      top: 11px;
+      bottom: 11px;
+      left: 0;
+      right: 0;
+    }
+    color: #333333;
+    background-color: #f7f9fa;
+    border-radius: 0;
   }
 }
 </style>

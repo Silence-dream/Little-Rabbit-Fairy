@@ -40,6 +40,11 @@ export default {};
   font-size: 14px;
 }
 
+.task-title,
+.task-desc {
+  text-align: left;
+}
+
 .task-title {
   font-size: 16px;
   color: #666;

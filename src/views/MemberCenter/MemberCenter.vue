@@ -156,6 +156,7 @@ export default {
   height: 50px;
   line-height: 50px;
   font-size: 16px;
+  text-align: left;
 }
 
 .chunk-title a {
@@ -186,6 +187,11 @@ export default {
   float: left;
   width: 370px;
   overflow: hidden;
+}
+
+.right-title,
+.right-desc {
+  text-align: left;
 }
 
 .right-title {

@@ -136,7 +136,9 @@ export default {
 
 /* -- 题头 -- */
 .chunk-title {
+  font-size: 16px;
   height: 50px;
   line-height: 50px;
+  text-align: left;
 }
 </style>

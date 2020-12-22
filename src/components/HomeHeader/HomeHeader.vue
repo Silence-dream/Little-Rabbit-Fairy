@@ -1,7 +1,7 @@
 <template>
   <div style="background-color: #333">
-    <div class="container">
-      <el-row>
+    <el-row>
+      <div class="container">
         <el-col :span="24">
           <!-- 首页头部 -->
           <div id="Top">
@@ -10,52 +10,45 @@
               <div class="link">
                 <div>
                   <p>
-                    <a href="javascript:;" title="请先登录" class="sign">
-                      请先登录
-                    </a>
-                    <!-- <router-link to="/login">请先登录</router-link> -->
+                    <router-link to="/login" class="sign">请先登录</router-link>
                     <span>|</span>
-                    <a href="javascript:;" title="免费注册">免费注册</a>
+                    <router-link to="#" title="免费注册">免费注册</router-link>
                     <span>|</span>
-                    <a href="javascript:;" title="我的订单">我的订单</a>
+                    <router-link to="#" title="我的订单">我的订单</router-link>
                     <span>|</span>
-                    <a href="javascript:;" title="会员中心">会员中心</a>
+                    <router-link to="#" title="会员中心">会员中心</router-link>
                     <span>|</span>
-                    <a href="javascript:;" title="帮助中心">帮助中心</a>
+                    <router-link to="#" title="帮助中心">帮助中心</router-link>
                     <span>|</span>
-                    <a href="javascript:;" title="在线客服">在线客服</a>
+                    <router-link to="#" title="在线客服">在线客服</router-link>
                     <span>|</span>
-                    <el-popover
-                      placement="top-start"
-                      trigger="hover"
-                      style="padding: 0"
-                    >
-                      <div class="popover-content" style="text-align:center">
-                        <img
-                          src="./img/downloadApp.png"
-                          style="width:180px;height:180px"
-                        />
-                        <p
-                          style="font-size:12px; margin-top: -12px; margin-bottom: 24px;"
-                        >
-                          扫描二维码 立马下载App
-                        </p>
-                      </div>
-                      <template #reference>
-                        <a href="javascript:;" title="手机版">
-                          <i class="iconfont icon-shouji"></i>
-                          手机版
-                        </a>
-                      </template>
-                    </el-popover>
+                    <el-dropdown>
+                      <a href="javascript:;" title="手机版">
+                        <i class="iconfont icon-shouji"></i>
+                        手机版
+                      </a>
+                      <el-dropdown-menu>
+                        <div style="text-align:center">
+                          <img
+                            src="./img/downloadApp.png"
+                            style="width:180px; height:180px; margin-bottom:6px"
+                          />
+                          <p
+                            style="font-size:12px; margin-top: -12px; margin-bottom: 24px;"
+                          >
+                            扫描二维码 立马下载App
+                          </p>
+                        </div>
+                      </el-dropdown-menu>
+                    </el-dropdown>
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </el-col>
-      </el-row>
-    </div>
+      </div>
+    </el-row>
   </div>
 </template>
 

@@ -1,6 +1,4 @@
 <template>
-  <HomeHeader></HomeHeader>
-  <HomeLogo></HomeLogo>
   <el-main style="background-color: #f5f5f5">
     <!-- 轮播图 start -->
     <Carousel></Carousel>
@@ -96,8 +94,6 @@
 </template>
 
 <script>
-import HomeHeader from "@/components/HomeHeader/HomeHeader.vue";
-import HomeLogo from "@/components/HomeLogo/HomeLogo.vue";
 import Carousel from "@/components/Carousel/Carousel.vue";
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
@@ -173,8 +169,6 @@ export default {
   },
   // 组件
   components: {
-    HomeHeader,
-    HomeLogo,
     Carousel
   }
 };

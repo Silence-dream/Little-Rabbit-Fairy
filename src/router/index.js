@@ -8,7 +8,18 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    children: [
+      // 商品一级分类路由
+      {
+        path: "PrimaryCategories",
+        name: "PrimaryCategories",
+        component: () =>
+          import(
+            /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryCategories/PrimaryCategories.vue"
+          )
+      }
+    ]
   },
   {
     path: "/demo",
@@ -28,15 +39,6 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer/OnlineServer.vue"
-      )
-  },
-  // 商品一级分类路由
-  {
-    path: "/PrimaryCategories",
-    name: "PrimaryCategories",
-    component: () =>
-      import(
-        /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryCategories/PrimaryCategories.vue"
       )
   }
 ];

@@ -1,10 +1,10 @@
 <template>
-  <div id="footer">
+  <div id="footer" style="height: 645px;">
     <!-- 白色服务栏 -->
     <el-row>
       <div class="container">
-        <el-col :span="24" class="foot-service">
-          <div class="all-service">
+        <el-col :span="24" class="foot-service" style="height: 302px;">
+          <div id="all-service">
             <!-- 客户服务 -->
             <div>
               <div class="customer-service">
@@ -67,18 +67,22 @@
     </el-row>
 
     <!-- 黑色底部优点栏目 -->
-    <el-row class="foot-merit">
+    <el-row
+      class="foot-merit"
+      style="height: 343px;
+      background-color: #333;"
+    >
       <div class="container">
         <!-- 上栏目 -->
         <el-col :span="24">
-          <div class="all-merit">
+          <div id="all-merit">
             <!-- 价格亲民 -->
-            <div>
+            <div class="merit">
               <p>
                 <span class="price">
                   <img src="./img/price.png" />
                 </span>
-                <b>
+                <b class="merit-b">
                   <span>
                     <i>价格亲民</i>
                   </span>
@@ -87,13 +91,13 @@
             </div>
 
             <!-- 物流快捷 -->
-            <div>
+            <div class="merit">
               <p>
                 <span class="price">
                   <img src="./img/logistics-quan.svg" />
                   <img src="./img/logistics.svg" class="logistics" />
                 </span>
-                <b>
+                <b class="merit-b">
                   <span>
                     <i>物流快捷</i>
                   </span>
@@ -102,12 +106,12 @@
             </div>
 
             <!-- 品质新鲜 -->
-            <div>
+            <div class="merit">
               <p>
                 <span class="price">
                   <img src="./img/quality.png" />
                 </span>
-                <b>
+                <b class="merit-b">
                   <span>
                     <i>品质新鲜</i>
                   </span>
@@ -136,206 +140,207 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#footer {
-  height: 645px;
+// 白色服务栏
+#all-service {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
-  // 白色服务栏
-  .foot-service {
-    height: 302px;
+  div {
+    float: left;
+    display: flex;
+    width: 300px;
+    height: 100%;
+    align-items: center;
 
-    .all-service {
+    .customer-service {
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      height: 164px;
+      color: #666666;
+      border-right: 1px solid #f2f2f2;
+      flex-direction: column;
+    }
 
-      div {
-        float: left;
-        display: flex;
-        width: 300px;
-        height: 100%;
-        align-items: center;
-
-        .customer-service {
-          width: 100%;
-          height: 164px;
-          color: #666666;
-          border-right: 1px solid #f2f2f2;
-          flex-direction: column;
-
-          // 标题
-          h2 {
-            color: #999999;
-            font-size: 16px;
-            font-weight: 400;
-          }
-
-          span {
-            display: inline-block;
-            width: 80px;
-            height: 80px;
-            border: 1px solid #ededed;
-            margin: 0 5px;
-            margin-top: 35px;
-            cursor: pointer;
-
-            &:hover {
-              i,
-              b {
-                color: #1abc9c;
-              }
-            }
-
-            i {
-              display: block;
-              color: #666666;
-              font-size: 30px;
-              margin: 0 auto;
-              margin-top: 14px;
-            }
-
-            b {
-              display: inline-block;
-              color: #999999;
-              font-weight: 400;
-              margin-top: 8px;
-            }
-          }
-
-          // 下载APP
-          .download-app {
-            width: 100%;
-            margin-top: 26px;
-            overflow: hidden;
-
-            .QRcode {
-              float: left;
-              width: 100px;
-              height: 100px;
-              cursor: default;
-              margin-top: 0;
-              margin-left: 36px;
-
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-
-            .download {
-              float: left;
-              width: 80px;
-              height: 80px;
-              color: #999999;
-              font-weight: 400;
-              border: none;
-              text-align: left;
-              line-height: 1.7;
-              margin: 10px 20px;
-            }
-
-            .el-button {
-              font-size: 12px;
-              padding: 8px 18px;
-              margin-top: 10px;
-
-              &:hover {
-                border-color: #1abc9c;
-                color: #1abc9c;
-              }
-            }
-          }
-
-          // 服务热线电话
-          .hot-number {
-            font-size: 20px;
-            margin-top: 46px;
-          }
-
-          // 服务热线时间
-          .hot-time {
-            font-weight: 400;
-            font-size: 14px;
-            color: #999999;
-            margin-top: 12px;
-          }
-        }
-
-        &:last-child {
-          .customer-service {
-            border: none;
-          }
-        }
+    &:last-child {
+      .customer-service {
+        border: none;
       }
     }
   }
+}
 
-  // 黑色底部优点栏目
-  .foot-merit {
-    height: 343px;
-    background-color: #333;
+.customer-service {
+  // 标题
+  h2 {
+    color: #999999;
+    font-size: 16px;
+    font-weight: 400;
+  }
 
-    .all-merit {
-      display: flex;
-      width: 100%;
-      height: 150px;
-      color: #fff;
-      border-bottom: 1px solid #434343;
+  span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ededed;
+    margin: 0 5px;
+    margin-top: 35px;
+    cursor: pointer;
 
-      div {
-        float: left;
-        display: flex;
-        flex: 1;
-        height: 100%;
-        align-items: center;
-
-        p {
-          width: 100%;
-          height: 58px;
-
-          .price {
-            position: relative;
-            display: inline-block;
-            width: 58px;
-            height: 58px;
-            vertical-align: middle;
-
-            img {
-              width: 100%;
-              height: 100%;
-            }
-
-            .logistics {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              width: 30px;
-              height: 22px;
-              margin-top: calc(-22px / 2);
-              margin-left: calc(-30px / 2);
-            }
-          }
-
-          b {
-            display: inline-block;
-            height: 100%;
-            font-size: 24px;
-            font-weight: 400;
-            vertical-align: middle;
-            margin-left: 14px;
-
-            span {
-              display: flex;
-              width: 100%;
-              height: 100%;
-              align-items: center;
-
-              i {
-                width: 100%;
-              }
-            }
-          }
-        }
+    &:hover {
+      i,
+      b {
+        color: #1abc9c;
       }
+    }
+
+    i {
+      display: block;
+      color: #666666;
+      font-size: 30px;
+      margin: 0 auto;
+      margin-top: 14px;
+    }
+
+    b {
+      display: inline-block;
+      color: #999999;
+      font-weight: 400;
+      margin-top: 8px;
+    }
+  }
+
+  // 下载APP
+  .download-app {
+    width: 100%;
+    margin-top: 26px;
+    overflow: hidden;
+  }
+
+  // 服务热线电话
+  .hot-number {
+    font-size: 20px;
+    margin-top: 46px;
+  }
+
+  // 服务热线时间
+  .hot-time {
+    font-weight: 400;
+    font-size: 14px;
+    color: #999999;
+    margin-top: 12px;
+  }
+}
+
+// 下载APP分化样式
+.download-app {
+  .QRcode {
+    float: left;
+    width: 100px;
+    height: 100px;
+    cursor: default;
+    margin-top: 0;
+    margin-left: 36px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .download {
+    float: left;
+    width: 80px;
+    height: 80px;
+    color: #999999;
+    font-weight: 400;
+    border: none;
+    text-align: left;
+    line-height: 1.7;
+    margin: 10px 20px;
+  }
+
+  .el-button {
+    font-size: 12px;
+    padding: 8px 18px;
+    margin-top: 10px;
+
+    &:hover {
+      border-color: #1abc9c;
+      color: #1abc9c;
+    }
+  }
+}
+
+// 黑色底部优点栏目
+#all-merit {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  color: #fff;
+  border-bottom: 1px solid #434343;
+
+  .merit {
+    float: left;
+    display: flex;
+    flex: 1;
+    height: 100%;
+    align-items: center;
+  }
+}
+
+// 黑色底部优点栏目——三大优点
+.merit {
+  p {
+    width: 100%;
+    height: 58px;
+
+    .price {
+      position: relative;
+      display: inline-block;
+      width: 58px;
+      height: 58px;
+      vertical-align: middle;
+    }
+
+    .merit-b {
+      display: inline-block;
+      height: 100%;
+      font-size: 24px;
+      font-weight: 400;
+      vertical-align: middle;
+      margin-left: 14px;
+    }
+  }
+}
+
+// 黑色底部优点栏目——价格亲民
+.price {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logistics {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 22px;
+    margin-top: calc(-22px / 2);
+    margin-left: calc(-30px / 2);
+  }
+}
+
+// 黑色底部优点栏目——三大优点文字
+.merit-b {
+  span {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+
+    i {
+      width: 100%;
     }
   }
 }

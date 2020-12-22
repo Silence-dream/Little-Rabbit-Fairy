@@ -12,7 +12,7 @@ const routes = [
     children: [
       // 商品一级分类路由
       {
-        path: "/PrimaryGoods",
+        path: "PrimaryGoods",
         name: "PrimaryGoods",
         component: () =>
           import(

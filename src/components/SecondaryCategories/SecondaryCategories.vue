@@ -45,7 +45,11 @@
 
   <!-- 分类筛选商品展示 start -->
   <div class="commodity">
-    <div class="container"></div>
+    <div class="container commodity-bgc">
+      <!-- tab栏切换部分 start -->
+
+      <!-- tab栏切换部分 end -->
+    </div>
   </div>
   <!-- 分类筛选商品展示 end -->
 </template>
@@ -152,5 +156,8 @@ export default {
 // 分类筛选商品展示
 .commodity {
   height: auto;
+}
+.commodity-bgc {
+  background-color: #fff;
 }
 </style>

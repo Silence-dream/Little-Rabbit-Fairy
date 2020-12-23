@@ -104,7 +104,7 @@ export default {
 
 .home-main {
   width: 100%;
-  text-align: center;
+  // text-align: center;
   overflow: visible;
 
   .el-row {

@@ -34,6 +34,7 @@ import "swiper/components/pagination/pagination.scss";
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 export default {
+  name: "Carousel",
   setup() {
     //#region 2.轮播图方法
     const getCarouselImg = ref([]);

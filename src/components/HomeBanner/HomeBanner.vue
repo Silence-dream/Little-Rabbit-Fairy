@@ -94,6 +94,7 @@
 import Carousel from "@/components/Carousel/Carousel.vue";
 
 export default {
+  name: "HomeBanner",
   components: {
     Carousel
   }

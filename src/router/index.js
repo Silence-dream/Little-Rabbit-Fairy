@@ -58,7 +58,26 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
-          )
+          ),
+        /* 注册功能二级路由 */
+        children: [
+          {
+            path: "",
+            name: "RegisterForm",
+            component: () =>
+              import(
+                /* webpackChunkName: "RegisterForm" */ "@/components/RegisterForm/RegisterForm.vue"
+              )
+          },
+          {
+            path: "Success",
+            name: "RegisterSuccess",
+            component: () =>
+              import(
+                /* webpackChunkName: "RegisterSuccess" */ "@/components/RegisterSuccess/RegisterSuccess.vue"
+              )
+          }
+        ]
       },
       // 任务中心路由
       {

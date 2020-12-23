@@ -8,7 +8,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "TaskList"
+};
 </script>
 
 <style lang="scss" scoped>

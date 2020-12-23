@@ -58,6 +58,7 @@
 // import { ref } from "vue";
 
 export default {
+  name: "HomeHeader",
   setup() {}
 };
 </script>

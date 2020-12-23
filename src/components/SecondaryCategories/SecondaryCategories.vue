@@ -58,6 +58,7 @@
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
 export default {
+  name: "SecondaryCategories",
   setup() {
     //#region  1. 获取二级商品分类总数据
     // 用于获取数据

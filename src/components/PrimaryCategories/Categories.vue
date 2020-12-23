@@ -96,6 +96,7 @@ import Carousel from "@/components/Carousel/Carousel.vue";
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
 export default {
+  name: "Categories",
   setup() {
     //#region 1.获取分类数据
     // classifyData 用于获取分类的名称和图片

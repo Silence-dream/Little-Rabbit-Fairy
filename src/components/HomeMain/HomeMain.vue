@@ -1,18 +1,22 @@
 <template>
-  <el-main>
-    <el-row>
-      <div class="container"></div>
-    </el-row>
-  </el-main>
+  <el-row>
+    <!-- 轮播图 -->
+    <HomeBanner />
+  </el-row>
 </template>
 
 <script>
-export default {};
+import HomeBanner from "@/components/HomeBanner/HomeBanner.vue";
+
+export default {
+  components: {
+    HomeBanner
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .el-main {
-  height: 500px;
   background-color: #f5f5f5;
 }
 </style>

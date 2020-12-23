@@ -16,7 +16,7 @@ const routes = [
         name: "HomeMain",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */ "@/components/HomeMain/HomeMain.vue"
+            /* webpackChunkName: "HomeMain" */ "@/components/HomeMain/HomeMain.vue"
           )
       },
       // 商品一级分类路由
@@ -25,7 +25,7 @@ const routes = [
         name: "PrimaryCategories",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */
+            /* webpackChunkName: "PrimaryCategories" */
             "@/components/PrimaryCategories/PrimaryCategories.vue"
           )
       },
@@ -44,7 +44,7 @@ const routes = [
         name: "SecondaryCategories",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */
+            /* webpackChunkName: "SecondaryCategories" */
             "@/components/SecondaryCategories/SecondaryCategories.vue"
           )
       }

@@ -53,6 +53,7 @@ import { ref, onMounted } from "vue";
 import { homeheader } from "@/api";
 
 export default {
+  name: "HomeLogo",
   setup() {
     const Store = useStore();
     // 搜索框文本

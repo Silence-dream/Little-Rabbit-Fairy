@@ -11,6 +11,18 @@
 import LoginHeader from "@/components/LoginHeader/LoginHeader";
 import LoginBanner from "@/components/LoginBanner/LoginBanner.vue";
 import LoginFooter from "@/components/LoginFooter/LoginFooter.vue";
+/* 手机号正则表达式 */
+export let patternRegular = /0?(13|14|15|17|18|19)[0-9]{9}/;
+/* 自定义校验手机号 */
+export const validateMobile = (rule, value, callback) => {
+  if (value.trim() === "") {
+    callback(new Error("请输入手机号"));
+  } else if (!patternRegular.test(value)) {
+    callback(new Error("请输入正确的手机号"));
+  } else {
+    callback();
+  }
+};
 export default {
   name: "Login",
   setup() {},

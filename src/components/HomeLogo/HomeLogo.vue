@@ -50,6 +50,7 @@
 import { httpGet } from "@/utils/http";
 import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
+import { homeheader } from "@/api";
 
 export default {
   setup() {
@@ -61,7 +62,7 @@ export default {
     // 头部导航栏数据
     let oulData = ref([]);
 
-    let getoLiData = httpGet("home/category/head")
+    let getoLiData = httpGet(homeheader.LogoNav + "/head")
       .then(res => {
         // console.log(res);
         const oLiData = res.result;

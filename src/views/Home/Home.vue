@@ -20,6 +20,9 @@
         <HomeFoot />
       </el-footer>
     </el-container>
+
+    <!-- 返回顶部控件 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 

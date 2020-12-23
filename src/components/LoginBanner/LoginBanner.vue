@@ -146,6 +146,8 @@
 
 <script>
 import { ref, reactive, getCurrentInstance } from "vue";
+// 引入正则表达式
+import { validateMobile } from "@/views/Login/Login.vue";
 export default {
   name: "LoginBanner",
   setup() {
@@ -187,17 +189,7 @@ export default {
       isTerms: []
     });
     /* 自定义校验规则 */
-    // 校验手机号
-    let pattern = /0?(13|14|15|17|18|19)[0-9]{9}/;
-    let validateMobile = (rule, value, callback) => {
-      if (value.trim() === "") {
-        callback(new Error("请输入手机号"));
-      } else if (!pattern.test(value)) {
-        callback(new Error("请输入正确的手机号"));
-      } else {
-        callback();
-      }
-    };
+
     /* 校验规则 */
     let rules = reactive({
       account: [
@@ -206,7 +198,7 @@ export default {
       ],
       password: [
         { required: true, message: "请输入密码", trigger: "blur" },
-        { min: 3, max: 16, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        { min: 6, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
       ],
       isTerms: [
         {

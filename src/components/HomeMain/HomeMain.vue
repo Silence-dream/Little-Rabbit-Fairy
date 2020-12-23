@@ -6,13 +6,9 @@
 </template>
 
 <script>
-import HomeBanner from "@/components/HomeBanner/HomeBanner.vue";
-
 export default {
   name: "HomeMain",
-  components: {
-    HomeBanner
-  }
+  components: {}
 };
 </script>
 

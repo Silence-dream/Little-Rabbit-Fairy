@@ -12,13 +12,35 @@ const routes = [
     children: [
       // 商品一级分类路由
       {
-        path: "PrimaryCategories",
-        name: "PrimaryCategories",
+        path: "Primary",
+        name: "Primary",
         component: () =>
           import(
             /* webpackChunkName: "PrimaryGoods" */
-            "@/components/PrimaryCategories/PrimaryCategories.vue"
-          )
+            "@/components/PrimaryCategories/Primary.vue"
+          ),
+        children: [
+          // 重定向到一级分类
+          {
+            path: "",
+            name: "PrimaryCategories",
+            component: () =>
+              import(
+                /* webpackChunkName: "PrimaryGoods" */
+                "@/components/PrimaryCategories/Categories.vue"
+              )
+          },
+          // 商品二级分类路由
+          {
+            path: "Secondary",
+            name: "Secondary",
+            component: () =>
+              import(
+                /* webpackChunkName: "Secondary" */
+                "@/components/SecondaryCategories/SecondaryCategories.vue"
+              )
+          }
+        ]
       },
       //  注册功能
       {
@@ -27,16 +49,6 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
-          )
-      },
-      // 商品二级分类路由
-      {
-        path: "SecondaryCategories",
-        name: "SecondaryCategories",
-        component: () =>
-          import(
-            /* webpackChunkName: "PrimaryGoods" */
-            "@/components/SecondaryCategories/SecondaryCategories.vue"
           )
       }
     ]

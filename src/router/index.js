@@ -10,6 +10,15 @@ const routes = [
     name: "Home",
     component: Home,
     children: [
+      // 首页主要内容
+      {
+        path: "/",
+        name: "HomeMain",
+        component: () =>
+          import(
+            /* webpackChunkName: "PrimaryGoods" */ "@/components/HomeMain/HomeMain.vue"
+          )
+      },
       // 商品一级分类路由
       {
         path: "PrimaryCategories",

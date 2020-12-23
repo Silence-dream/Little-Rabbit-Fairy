@@ -7,6 +7,7 @@
         navigation
         :pagination="{ clickable: true }"
         :loop="true"
+        :autoplay="{ delay: 3000 }"
       >
         <swiper-slide v-for="item in getCarouselImg" :key="item.id">
           <img :src="item.imgUrl" alt="" />
@@ -23,7 +24,7 @@ import { onMounted, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 
 // import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
+import SwiperCore, { Navigation, Pagination, A11y, Autoplay } from "swiper";
 
 // Import Swiper styles
 import "swiper/swiper.scss";
@@ -31,7 +32,7 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 
 // install Swiper components
-SwiperCore.use([Navigation, Pagination, A11y]);
+SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 export default {
   setup() {
     //#region 2.轮播图方法

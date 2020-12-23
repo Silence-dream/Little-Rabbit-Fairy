@@ -25,7 +25,27 @@ const routes = [
         name: "PrimaryCategories",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */ "@/components/PrimaryCategories/PrimaryCategories.vue"
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/PrimaryCategories/PrimaryCategories.vue"
+          )
+      },
+      //  注册功能
+      {
+        path: "register",
+        name: "Register",
+        component: () =>
+          import(
+            /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
+          )
+      },
+      // 商品一级分类路由
+      {
+        path: "SecondaryCategories",
+        name: "SecondaryCategories",
+        component: () =>
+          import(
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/SecondaryCategories/SecondaryCategories.vue"
           )
       }
     ]
@@ -47,7 +67,28 @@ const routes = [
     name: "OnlineServer",
     component: () =>
       import(
-        /* webpackChunkName: "OnlineServer" */ "@/views/OnlineServer/OnlineServer.vue"
+        /* webpackChunkName: "OnlineServer" */
+        "@/views/OnlineServer/OnlineServer.vue"
+      )
+  },
+  // 问题反馈
+  {
+    path: "/FeedBack",
+    name: "FeedBack",
+    component: () =>
+      import(
+        /* webpackChunkName: "FeedBack" */
+        "@/views/FeedBack/FeedBack.vue"
+      )
+  },
+  // 问题反馈成功
+  {
+    path: "/FeedBackSuc",
+    name: "FeedBackSuc",
+    component: () =>
+      import(
+        /* webpackChunkName: "FeedBackSuc" */
+        "@/views/FeedBackSuc/FeedBackSuc.vue"
       )
   }
 ];

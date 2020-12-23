@@ -11,12 +11,12 @@
       </el-header>
 
       <!-- 首页主要内容 -->
-      <el-main style="padding: 0; background-color:#f5f5f5">
+      <el-main style="padding: 0px; background-color: #f5f5f5">
         <router-view />
       </el-main>
 
       <!-- 首页底部 -->
-      <el-footer height="645px">
+      <el-footer height="645">
         <HomeFoot />
       </el-footer>
     </el-container>

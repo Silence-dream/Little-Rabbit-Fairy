@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-main {
   padding: 0;
 }
@@ -98,6 +98,11 @@ export default {
 .member-base {
   width: 100%;
   background-color: #e4e4e4;
+
+  .el-row,
+  .el-col {
+    height: 500px;
+  }
 }
 
 .main-base {
@@ -106,11 +111,6 @@ export default {
 }
 
 /* -- 头像 会员 栏位 -- */
-.member-base .el-row,
-.member-base .el-col {
-  height: 500px;
-}
-
 .member-frame {
   position: relative;
   width: 100%;
@@ -127,11 +127,12 @@ export default {
   font-weight: 400;
   line-height: 24px;
   /* -- */
-}
 
-.member-frame > .el-avatar {
-  margin-top: -45px;
-  background-color: #ffffff;
+  // --- 头像样式
+  .el-avatar {
+    margin-top: -45px;
+    background-color: #ffffff;
+  }
 }
 
 .checkin-btn {
@@ -157,11 +158,11 @@ export default {
   line-height: 50px;
   font-size: 16px;
   text-align: left;
-}
 
-.chunk-title a {
-  float: right;
-  font-size: 12px;
+  a {
+    float: right;
+    font-size: 12px;
+  }
 }
 
 /* -- 权益详情 -- */
@@ -173,36 +174,36 @@ export default {
   background-color: #ffffff;
   /* -- */
   color: #999999;
-}
 
-.right-item img {
-  float: left;
-  width: 80px;
-  height: 80px;
-  margin: 15px 0;
-  margin-right: 40px;
-}
+  img {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 15px 0;
+    margin-right: 40px;
+  }
 
-.right-item div {
-  float: left;
-  width: 370px;
-  overflow: hidden;
-}
+  .right-item div {
+    float: left;
+    width: 370px;
+    overflow: hidden;
+  }
 
-.right-title,
-.right-desc {
-  text-align: left;
-}
+  .right-title,
+  .right-desc {
+    text-align: left;
+  }
 
-.right-title {
-  padding: 15px 0;
-  font-size: 20px;
-  font-weight: 700;
-  font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
-}
+  .right-title {
+    padding: 15px 0;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
+  }
 
-.right-desc {
-  font-size: 14px;
-  line-height: 24px;
+  .right-desc {
+    font-size: 14px;
+    line-height: 24px;
+  }
 }
 </style>

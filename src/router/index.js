@@ -41,7 +41,7 @@ const routes = [
       },
       // 任务中心路由
       {
-        path: "/TaskCenter",
+        path: "TaskCenter",
         name: "TaskCenter",
         component: () =>
           import(
@@ -51,7 +51,7 @@ const routes = [
       },
       // 会员中心路由
       {
-        path: "/MemberCenter",
+        path: "MemberCenter",
         name: "MemberCenter",
         component: () =>
           import(

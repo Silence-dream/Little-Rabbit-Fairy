@@ -69,8 +69,11 @@ export default {
 };
 </script>
 
-<style scoped>
-/* -- 背景板 颜色 -- */
+<style lang="scss" scoped>
+// ---
+$main-color: #1abc9c;
+
+// --- 背景色
 .base {
   background-color: #f5f5f5;
   height: 100%;
@@ -85,53 +88,59 @@ export default {
   margin: 15px 0;
   margin-bottom: 20px;
   /* 字体样式 */
-  color: #1abc9c;
+  color: $main-color;
   font-size: 20px;
-  font-family: "微软雅黑", "微软雅黑"-400;
+  font-family: "微软雅黑", "微软雅黑";
   font-weight: 400;
   line-height: 24px;
   text-align: center;
-}
 
-.score-container > .el-row,
-.score-container .el-col {
-  height: 100%;
-}
+  // --- 行列宽高
+  .el-row,
+  .el-col {
+    height: 100%;
+  }
 
-.score-container img {
-  margin-top: 75px;
-}
+  // --- 图标样式
+  img {
+    margin-top: 75px;
+  }
 
-.score-container .left-tip {
-  padding: 12px 0 80px;
+  // --- 文字样式
+  .left-tip {
+    padding: 12px 0 80px;
+  }
 }
 
 .score-display-container {
   width: 100%;
   height: 100%;
   padding: 50px 150px;
-}
 
-.score-display-container > div {
-  float: left;
-  width: 200px;
-  height: 100%;
-  padding: 25px 0;
-}
+  // --- 积分栏容器
+  div {
+    float: left;
+    width: 200px;
+    height: 100%;
+    padding: 25px 0;
+  }
 
-.score-display-container p {
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  font-size: 14px;
-  color: #999999;
-}
+  // --- 积分栏 文字基础样式
+  p {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    color: #999999;
+  }
 
-.score-display-container p.score-count {
-  color: #1abc9c;
-  font-size: 36px;
-  font-weight: 700;
-  font-family: "Arial Negreta", "Arial Normal", "Arial";
+  // --- 积分栏 积分样式
+  p.score-count {
+    color: $main-color;
+    font-size: 36px;
+    font-weight: 700;
+    font-family: "Arial Negreta", "Arial Normal", "Arial";
+  }
 }
 
 /* -- 题头 -- */

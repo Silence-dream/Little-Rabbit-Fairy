@@ -11,10 +11,12 @@
       </el-header>
 
       <!-- 首页主要内容 -->
-      <router-view />
+      <el-main style="padding: 0; background-color:#f5f5f5">
+        <router-view />
+      </el-main>
 
       <!-- 首页底部 -->
-      <el-footer height="0">
+      <el-footer height="645px">
         <HomeFoot />
       </el-footer>
     </el-container>
@@ -66,7 +68,6 @@ export default {
     .el-main {
       width: 100%;
       text-align: center;
-      // line-height: 160px;
       overflow: visible;
 
       .el-row {

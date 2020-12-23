@@ -4,7 +4,6 @@ const state = {
 const mutations = {
   liveCategory(state, val) {
     state.homeCategory = val;
-    // console.log(state.homeCategory);
   }
 };
 const actions = {};

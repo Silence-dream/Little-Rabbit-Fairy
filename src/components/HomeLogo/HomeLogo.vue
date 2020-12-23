@@ -1,7 +1,7 @@
 <template>
-  <el-row>
+  <el-row style="height: 130px;">
     <div class="container">
-      <el-col :span="24">
+      <el-col :span="24" style="height: 100%;">
         <!-- 顶部logo行 -->
         <div class="logo-nav">
           <!-- logo -->
@@ -12,34 +12,10 @@
           <!-- 头部导航栏 -->
           <ul>
             <li>
-              <a href="javascript:;" class="active">首页</a>
+              <router-link to="/" class="active">首页</router-link>
             </li>
-            <li>
-              <a href="javascript:;">美食</a>
-            </li>
-            <li>
-              <a href="javascript:;">餐厨</a>
-            </li>
-            <li>
-              <a href="javascript:;">艺术</a>
-            </li>
-            <li>
-              <a href="javascript:;">电器</a>
-            </li>
-            <li>
-              <a href="javascript:;">居家</a>
-            </li>
-            <li>
-              <a href="javascript:;">洗护</a>
-            </li>
-            <li>
-              <a href="javascript:;">孕婴</a>
-            </li>
-            <li>
-              <a href="javascript:;">服装</a>
-            </li>
-            <li>
-              <a href="javascript:;">杂货</a>
+            <li v-for="item in oulData" :key="item.id">
+              <router-link to="#">{{ item.name }}</router-link>
             </li>
           </ul>
 
@@ -73,7 +49,7 @@
 <script>
 import { httpGet } from "@/utils/http";
 import { useStore } from "vuex";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 export default {
   setup() {
@@ -82,28 +58,35 @@ export default {
     const searchInput = ref("");
     // 搜索框样式
     let active = ref(false);
+    // 头部导航栏数据
+    let oulData = ref([]);
 
-    httpGet("home/category/head")
+    let getoLiData = httpGet("home/category/head")
       .then(res => {
         // console.log(res);
         const oLiData = res.result;
         // 存入vuex中
         Store.commit("liveCategory", oLiData);
+        oulData.value = oLiData;
       })
       .catch(err => {
         console.log(err);
       });
 
+    onMounted(() => {
+      getoLiData;
+    });
+
     // 点击搜索框边框效果
     const focusSearchBorder = function() {
       active.value = !active.value;
-      // console.log(active.value);
     };
 
     return {
       active,
       searchInput,
-      focusSearchBorder
+      focusSearchBorder,
+      oulData
     };
   }
 };
@@ -112,8 +95,7 @@ export default {
 <style lang="scss" scoped>
 // 顶部logo行
 .logo-nav {
-  height: 130px;
-  // background-color: pink;
+  height: 100%;
   overflow: hidden;
 
   // logo

@@ -67,8 +67,6 @@ export default {
 
     .el-main {
       width: 100%;
-      text-align: center;
-      // line-height: 160px;
       overflow: visible;
 
       .el-row {

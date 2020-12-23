@@ -131,7 +131,7 @@
           <!-- 忘记密码 免费注册 -->
           <div class="user-other">
             <a href="javascript:;">忘记密码?</a>
-            <a href="javascript:;">免费注册</a>
+            <router-link to="/register">免费注册</router-link>
           </div>
         </div>
 

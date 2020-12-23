@@ -196,7 +196,12 @@ export default {
   }
 
   .second-nav {
-    margin: 0 3px;
+    margin: {
+      top: 0px;
+      right: 3px;
+      bottom: 0px;
+      left: 3px;
+    }
 
     &:hover {
       color: #e4e4e4;

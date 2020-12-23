@@ -1,15 +1,18 @@
 <template>
-  <el-main>
-    <el-row>
-      <div class="container"></div>
-    </el-row>
-  </el-main>
+  <el-row>
+    <div class="container">
+      <HomeBanner />
+    </div>
+  </el-row>
 </template>
 
 <script>
+import HomeBanner from "@/components/HomeBanner/HomeBanner.vue";
 export default {
   name: "HomeMain",
-  components: {}
+  components: {
+    HomeBanner
+  }
 };
 </script>
 

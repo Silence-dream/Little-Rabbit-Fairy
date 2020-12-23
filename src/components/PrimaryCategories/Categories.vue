@@ -16,7 +16,7 @@
             v-for="item in classifyData"
             :key="item.id"
           >
-            <router-link to="/SecondaryCategories" style="display: block">
+            <router-link to="/Primary/Secondary" style="display: block">
               <div><img class="border-img" :src="item.picture" alt="" /></div>
               <p>{{ item.name }}</p></router-link
             >

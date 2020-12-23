@@ -104,7 +104,7 @@ export default {
 
 .home-main {
   width: 100%;
-  text-align: center;
+  // text-align: center;
   overflow: visible;
 
   .el-row {
@@ -117,6 +117,10 @@ export default {
   }
 }
 
+.el-main {
+  width: 100%;
+  overflow: visible;
+}
 // 返回顶部控件
 .rightBottom {
   position: fixed;

@@ -16,18 +16,40 @@ const routes = [
         name: "HomeMain",
         component: () =>
           import(
-            /* webpackChunkName: "HomeMain" */ "@/components/HomeMain/HomeMain.vue"
+            /* webpackChunkName: "PrimaryGoods" */ "@/components/HomeMain/HomeMain.vue"
           )
       },
       // 商品一级分类路由
       {
-        path: "PrimaryCategories",
-        name: "PrimaryCategories",
+        path: "Primary",
+        name: "Primary",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryCategories" */
-            "@/components/PrimaryCategories/PrimaryCategories.vue"
-          )
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/PrimaryCategories/Primary.vue"
+          ),
+        children: [
+          // 重定向到一级分类
+          {
+            path: "",
+            name: "PrimaryCategories",
+            component: () =>
+              import(
+                /* webpackChunkName: "PrimaryGoods" */
+                "@/components/PrimaryCategories/Categories.vue"
+              )
+          },
+          // 商品二级分类路由
+          {
+            path: "Secondary",
+            name: "Secondary",
+            component: () =>
+              import(
+                /* webpackChunkName: "Secondary" */
+                "@/components/SecondaryCategories/SecondaryCategories.vue"
+              )
+          }
+        ]
       },
       //  注册功能
       {
@@ -56,16 +78,6 @@ const routes = [
               )
           }
         ]
-      },
-      // 商品一级分类路由
-      {
-        path: "SecondaryCategories",
-        name: "SecondaryCategories",
-        component: () =>
-          import(
-            /* webpackChunkName: "SecondaryCategories" */
-            "@/components/SecondaryCategories/SecondaryCategories.vue"
-          )
       },
       // 任务中心路由
       {

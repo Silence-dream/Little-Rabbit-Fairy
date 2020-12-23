@@ -135,7 +135,6 @@
 import LoginFoot from "@/components/LoginFooter/LoginFooter.vue";
 
 export default {
-  name: "HomeFoot",
   components: { LoginFoot }
 };
 </script>

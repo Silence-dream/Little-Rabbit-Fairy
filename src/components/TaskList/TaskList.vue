@@ -12,6 +12,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+// --- 任务组件样式
 .task-item {
   width: 100%;
   height: 100px;
@@ -19,6 +20,7 @@ export default {};
   margin: 10px 0;
   background-color: #ffffff;
 
+  // 文字基本样式
   p {
     float: left;
     width: 100%;
@@ -26,6 +28,7 @@ export default {};
     line-height: 23px;
   }
 
+  // 图标样式
   .task-item-btn {
     position: absolute;
     right: 64px;
@@ -38,20 +41,21 @@ export default {};
     color: #ffffff;
     font-size: 14px;
   }
-}
 
-.task-title,
-.task-desc {
-  text-align: left;
-}
+  // --- 文字描述样式
+  .task-title,
+  .task-desc {
+    text-align: left;
+  }
 
-.task-title {
-  font-size: 16px;
-  color: #666;
-  padding-bottom: 10px;
-}
+  .task-title {
+    font-size: 16px;
+    color: #666;
+    padding-bottom: 10px;
+  }
 
-.task-desc {
-  color: #999;
+  .task-desc {
+    color: #999;
+  }
 }
 </style>

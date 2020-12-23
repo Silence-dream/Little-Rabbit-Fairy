@@ -159,6 +159,7 @@ export default {
   font-size: 16px;
   text-align: left;
 
+  // 右侧链接
   a {
     float: right;
     font-size: 12px;
@@ -175,6 +176,7 @@ export default {
   /* -- */
   color: #999999;
 
+  // 图表样式
   img {
     float: left;
     width: 80px;
@@ -183,12 +185,14 @@ export default {
     margin-right: 40px;
   }
 
+  // 文字容器样式
   .right-item div {
     float: left;
     width: 370px;
     overflow: hidden;
   }
 
+  // 文字样式
   .right-title,
   .right-desc {
     text-align: left;

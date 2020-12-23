@@ -47,6 +47,26 @@ const routes = [
             /* webpackChunkName: "SecondaryCategories" */
             "@/components/SecondaryCategories/SecondaryCategories.vue"
           )
+      },
+      // 任务中心路由
+      {
+        path: "TaskCenter",
+        name: "TaskCenter",
+        component: () =>
+          import(
+            /* webpackChunkName: "TaskCenter" */
+            "@/views/TaskCenter/TaskCenter.vue"
+          )
+      },
+      // 会员中心路由
+      {
+        path: "MemberCenter",
+        name: "MemberCenter",
+        component: () =>
+          import(
+            /* webpackChunkName: "MemberCenter" */
+            "@/views/MemberCenter/MemberCenter.vue"
+          )
       }
     ]
   },

@@ -62,7 +62,8 @@ export default {
     // 头部导航栏数据
     let oulData = ref([]);
 
-    let getoLiData = httpGet(homeheader.LogoNav + "/head")
+    // 获取logo导航栏数据
+    let getoLiData = httpGet(homeheader.GetLogoNav + "/head")
       .then(res => {
         // console.log(res);
         const oLiData = res.result;

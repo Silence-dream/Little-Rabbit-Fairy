@@ -2,6 +2,7 @@ const state = {
   homeCategory: []
 };
 const mutations = {
+  // 将首页logo导航栏分类存写
   liveCategory(state, val) {
     state.homeCategory = val;
   }

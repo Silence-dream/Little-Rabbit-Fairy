@@ -1,12 +1,5 @@
-const state = {
-  homeCategory: []
-};
-const mutations = {
-  liveCategory(state, val) {
-    state.homeCategory = val;
-    console.log(state.homeCategory);
-  }
-};
+const state = {};
+const mutations = {};
 const actions = {};
 const getters = {};
 

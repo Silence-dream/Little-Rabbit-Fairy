@@ -44,7 +44,9 @@
   <!-- 分类筛选框 end -->
 
   <!-- 分类筛选商品展示 start -->
-  <div class="commodity"></div>
+  <div class="commodity">
+    <div class="container"></div>
+  </div>
   <!-- 分类筛选商品展示 end -->
 </template>
 

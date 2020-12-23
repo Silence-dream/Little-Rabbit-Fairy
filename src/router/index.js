@@ -59,6 +59,26 @@ const routes = [
           import(
             /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
           )
+      },
+      // 任务中心路由
+      {
+        path: "TaskCenter",
+        name: "TaskCenter",
+        component: () =>
+          import(
+            /* webpackChunkName: "TaskCenter" */
+            "@/views/TaskCenter/TaskCenter.vue"
+          )
+      },
+      // 会员中心路由
+      {
+        path: "MemberCenter",
+        name: "MemberCenter",
+        component: () =>
+          import(
+            /* webpackChunkName: "MemberCenter" */
+            "@/views/MemberCenter/MemberCenter.vue"
+          )
       }
     ]
   },

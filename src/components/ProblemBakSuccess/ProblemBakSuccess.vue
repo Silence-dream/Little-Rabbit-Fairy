@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "FeedBackSuc"
+  name: "ProblemBakSuccess"
 };
 </script>
 

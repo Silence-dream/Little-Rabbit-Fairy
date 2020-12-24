@@ -133,7 +133,7 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "FeedBack" */
-        "@/components/FeedBack/FeedBack.vue"
+        "@/views/FeedBack/FeedBack.vue"
       ),
     children: [
       // 问题反馈》提交反馈
@@ -143,7 +143,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "ProblemBack" */
-            "@/views/ProblemBack/ProblemBack.vue"
+            "@/components/ProblemBack/ProblemBack.vue"
           )
       },
       // 问题反馈》提交成功
@@ -153,7 +153,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "ProblemBackSuccess" */
-            "@/views/ProblemBakSuccess/ProblemBakSuccess.vue"
+            "@/components/ProblemBakSuccess/ProblemBakSuccess.vue"
           )
       }
     ]

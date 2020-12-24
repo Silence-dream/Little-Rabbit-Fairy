@@ -16,7 +16,8 @@ const routes = [
         name: "HomeMain",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */ "@/components/HomeMain/HomeMain.vue"
+            /* webpackChunkName: "PrimaryGoods" */
+            "@/components/HomeMain/HomeMain.vue"
           )
       },
       // 商品一级分类路由
@@ -57,7 +58,8 @@ const routes = [
         name: "Register",
         component: () =>
           import(
-            /* webpackChunkName: "Register" */ "@/components/Register/Register.vue"
+            /* webpackChunkName: "Register" */
+            "@/components/Register/Register.vue"
           ),
         /* 注册功能二级路由 */
         children: [
@@ -66,7 +68,8 @@ const routes = [
             name: "RegisterForm",
             component: () =>
               import(
-                /* webpackChunkName: "RegisterForm" */ "@/components/RegisterForm/RegisterForm.vue"
+                /* webpackChunkName: "RegisterForm" */
+                "@/components/RegisterForm/RegisterForm.vue"
               )
           },
           {
@@ -74,7 +77,8 @@ const routes = [
             name: "RegisterSuccess",
             component: () =>
               import(
-                /* webpackChunkName: "RegisterSuccess" */ "@/components/RegisterSuccess/RegisterSuccess.vue"
+                /* webpackChunkName: "RegisterSuccess" */
+                "@/components/RegisterSuccess/RegisterSuccess.vue"
               )
           }
         ]
@@ -129,18 +133,30 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "FeedBack" */
-        "@/views/FeedBack/FeedBack.vue"
-      )
-  },
-  // 问题反馈成功
-  {
-    path: "/FeedBackSuc",
-    name: "FeedBackSuc",
-    component: () =>
-      import(
-        /* webpackChunkName: "FeedBackSuc" */
-        "@/views/FeedBackSuc/FeedBackSuc.vue"
-      )
+        "@/components/FeedBack/FeedBack.vue"
+      ),
+    children: [
+      // 问题反馈》提交反馈
+      {
+        path: "",
+        name: "ProblemBack",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProblemBack" */
+            "@/views/ProblemBack/ProblemBack.vue"
+          )
+      },
+      // 问题反馈》提交成功
+      {
+        path: "Success",
+        name: "ProblemBackSuccess",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProblemBackSuccess" */
+            "@/views/ProblemBakSuccess/ProblemBakSuccess.vue"
+          )
+      }
+    ]
   }
 ];
 

@@ -5,3 +5,9 @@ export const home = {
   GetPopularityRecommend: "home/hot", // 人气推荐
   GetHotBrands: "home/brand" // 热门品牌
 };
+
+// 公共分类
+export const common = {
+  Login: "login", // 账号登录
+  LoginCode: "login/code" // 手机验证码登录
+};

@@ -414,16 +414,16 @@ export default {
   a {
     color: #0673b1;
   }
-  :deep .terms {
+  :deep(.terms) {
     margin-bottom: 20px;
   }
-  :deep .user-login-btn {
+  :deep(.user-login-btn) {
     margin-bottom: 18px;
   }
 }
 
 /* 覆盖element ui 默认样式 */
-:deep #login-form {
+:deep(#login-form) {
   /* input修改 */
   .el-input__inner {
     padding-left: 50px;
@@ -455,7 +455,7 @@ export default {
 }
 /* 验证码登录 */
 /* 继承样式 */
-:deep #mobile-form {
+:deep(#mobile-form) {
   @extend #login-form;
   .input-code {
     position: relative;

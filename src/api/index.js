@@ -10,5 +10,5 @@ export const home = {
 export const common = {
   Login: "login", // 账号登录
   LoginCode: "login/code", // 手机验证码登录
-  Regiser: "regiser"
+  Regiser: "regiser" // 注册功能
 };

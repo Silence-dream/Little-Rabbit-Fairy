@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { httpGet } from "@/utils/http";
+import { httpGet } from "@/utils/http.js";
 import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
 import { home } from "@/api";

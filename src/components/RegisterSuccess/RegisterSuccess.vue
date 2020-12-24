@@ -44,7 +44,7 @@ export default {
   }
 }
 /* 覆盖element样式 */
-::v-deep .btn {
+:deep .btn {
   .el-button {
     width: 180px;
     height: 50px;

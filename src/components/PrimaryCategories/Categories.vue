@@ -188,6 +188,7 @@ export default {
   .carousel-bgc {
     height: 500px;
     background-color: #fff;
+    @include clearfix();
   }
 
   ::v-deep(.swiper-container) {
@@ -210,10 +211,16 @@ export default {
   }
   ::v-deep(.swiper-button-prev),
   ::v-deep(.swiper-button-next) {
+    position: absolute;
+    top: 50%;
     width: 40px;
     height: 40px;
     border-radius: 40px;
     background-color: rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   ::v-deep(.swiper-button-prev)::after,
   ::v-deep(.swiper-button-next)::after {

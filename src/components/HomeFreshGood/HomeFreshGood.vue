@@ -15,7 +15,7 @@
       <router-link
         to="#"
         class="fresh-good-content-one"
-        v-for="item in getFreshGood"
+        v-for="item in GetFreshGood"
         :key="item.id"
       >
         <!-- 图片 -->
@@ -42,14 +42,14 @@ import { home } from "@/api";
 export default {
   name: "HomeFreshGood",
   setup() {
-    const getFreshGood = ref([]);
+    const GetFreshGood = ref([]);
 
     // 获取新鲜好物数据
     let getGoods = httpGet(home.GetFreshGood)
       .then(res => {
         let { result } = res;
 
-        getFreshGood.value = result;
+        GetFreshGood.value = result;
       })
       .catch(err => {
         console.log(err);
@@ -60,7 +60,7 @@ export default {
     });
 
     return {
-      getFreshGood
+      GetFreshGood
     };
   }
 };

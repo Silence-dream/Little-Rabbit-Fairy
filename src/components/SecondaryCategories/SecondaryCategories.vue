@@ -12,42 +12,7 @@
   <!-- 面包屑导航栏 end -->
 
   <!-- 分类筛选框 start -->
-  <div class="filter">
-    <div class="container filter-bgc">
-      <div class="filter-cover">
-        <!-- 分类 -->
-        <ul>
-          <li>分类:</li>
-          <li :class="Number(isCheck) !== getIndex ? 'active' : ''">全部</li>
-          <li
-            v-for="(item, index) in getBrandsData"
-            :key="item.id"
-            :class="{ active: index == Number(isCheck) }"
-            @click="bindColor(index)"
-          >
-            {{ item.name }}
-          </li>
-          <!-- <li>二手手机</li> -->
-        </ul>
-        <!-- 品牌 -->
-        <ul>
-          <li>品牌:</li>
-          <li class="active">全部</li>
-          <li v-for="item in getCategories" :key="item.id">{{ item.name }}</li>
-          <!-- <li>二手手机</li> -->
-        </ul>
-        <!-- 销售属性 -->
-        <ul v-for="item1 in getSalePropertiesData" :key="item1.id">
-          <li>{{ item1.name }}:</li>
-          <li class="active">全部</li>
-          <li v-for="item2 in item1.properties" :key="item2.id">
-            {{ item2.name }}
-          </li>
-          <!-- <li>二手手机</li> -->
-        </ul>
-      </div>
-    </div>
-  </div>
+  <SecondaryFilter></SecondaryFilter>
   <!-- 分类筛选框 end -->
 
   <!-- 分类筛选商品展示 start -->
@@ -70,39 +35,14 @@
       </div>
       <!-- 内容部分 -->
       <div class="commodidy-content">
-        <ul v-for="item in 4" :key="item">
-          <li>
-            <img src="./img/1.webp" alt="" />
-            <div class="discount">享 9折</div>
+        <ul>
+          <li v-for="item in getSecondaryData" :key="item.id">
+            <img :src="item.picture" alt="" />
+            <!-- <div class="discount">享 9折</div> -->
             <router-link to="#">
-              <h1>红米Note 5A 高配版</h1>
-              <p>1600万像素柔和光自拍</p>
-              <span>￥1899</span>
-            </router-link>
-          </li>
-          <li>
-            <img src="./img/2.webp" alt="" />
-            <router-link to="#">
-              <h1>红米Note 5A 高配版</h1>
-              <p>1600万像素柔和光自拍</p>
-              <span>￥1899</span>
-            </router-link>
-          </li>
-          <li>
-            <img src="./img/1.webp" alt="" />
-            <div class="discount">享 9折</div>
-            <router-link to="#">
-              <h1>红米Note 5A 高配版</h1>
-              <p>1600万像素柔和光自拍</p>
-              <span>￥1899</span>
-            </router-link>
-          </li>
-          <li>
-            <img src="./img/2.webp" alt="" />
-            <router-link to="#">
-              <h1>红米Note 5A 高配版</h1>
-              <p>1600万像素柔和光自拍</p>
-              <span>￥1899</span>
+              <h1>{{ item.name }}</h1>
+              <p>{{ item.tag }}</p>
+              <span>￥{{ Math.round(item.price) }}</span>
             </router-link>
           </li>
         </ul>
@@ -114,59 +54,40 @@
 </template>
 
 <script>
-import { httpGet } from "@/utils/http.js";
+import SecondaryFilter from "@/components/SecondayFilter/SecondayFilter.vue";
+import { httpPost } from "@/utils/http.js";
 import { onMounted, ref } from "vue";
+
 export default {
   name: "SecondaryCategories",
   setup() {
-    //#region  1. 获取二级商品分类总数据
-    // 用于获取数据
-    // 1. 获取品牌数据
-    const getBrandsData = ref([]);
-    // 2.获取分类数据
-    const getCategories = ref([]);
-    // 3.获取商品其他销售属性数据
-    const getSalePropertiesData = ref([]);
-
-    // 请求发起
-    let getTotalData = httpGet("/category/sub/filter")
+    //#region 1.获取商品列表
+    const getSecondaryData = ref([]);
+    let getSecondaryGoods = httpPost(`/category/goods`, { onlyDiscount: true })
       .then(res => {
-        // console.log(res);
-        let { result } = res;
-        // 品牌数据
-        getBrandsData.value = result.brands;
-        // 分类数据
-        getCategories.value = result.categories;
-        // 销售属性数据
-        getSalePropertiesData.value = result.saleProperties;
-        // console.log(getSalePropertiesData.value);
+        console.log(res);
+        let { items } = res;
+        getSecondaryData.value = items;
       })
       .catch(error => {
         console.log(error);
       });
     //#endregion
 
-    //#region 2.点击后进行颜色变化
-    const isCheck = ref("");
-    const getIndex = ref();
-    let bindColor = function(index) {
-      isCheck.value = index;
-      getIndex.value = index;
-    };
+    //#region 2.筛选功能
+
     //#endregion
 
     onMounted(() => {
-      getTotalData;
+      getSecondaryGoods;
     });
 
     return {
-      getBrandsData,
-      getCategories,
-      getSalePropertiesData,
-      isCheck,
-      bindColor,
-      getIndex
+      getSecondaryData
     };
+  },
+  components: {
+    SecondaryFilter
   }
 };
 </script>
@@ -182,46 +103,6 @@ export default {
 }
 ::v-deep(.el-breadcrumb__inner) {
   color: #999999;
-}
-
-// 分类筛样式设置
-.filter {
-  margin-bottom: 20px;
-}
-.filter-bgc {
-  background-color: #fff;
-  height: auto;
-}
-.filter-cover {
-  padding: 32px 0px 0px 23px;
-  font-size: 14px;
-
-  ul {
-    float: left;
-    width: 100%;
-    padding-bottom: 20px;
-  }
-
-  li {
-    float: left;
-    padding-right: 32px;
-    color: #333333;
-    cursor: pointer;
-
-    &:first-child {
-      padding-right: 20px;
-      color: #999999;
-    }
-
-    &:last-child {
-      padding-right: 0px;
-    }
-  }
-
-  .active {
-    color: #5eb69c;
-    opacity: 0.6;
-  }
 }
 
 // 分类筛选商品展示
@@ -258,7 +139,6 @@ export default {
 .top-right {
   float: right;
 }
-
 .commodidy-content {
   float: left;
   height: auto;
@@ -281,6 +161,10 @@ export default {
       box-shadow: 10px 10px 5px #f5f5f5;
       // transform: scale(1.1);
     }
+
+    &:nth-child(4),
+    &:nth-child(8),
+    &:nth-child(12),
     &:last-child {
       margin-right: 0px;
     }

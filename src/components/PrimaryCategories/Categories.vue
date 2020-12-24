@@ -215,7 +215,7 @@ export default {
     top: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 40px;
+    border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.3);
     z-index: 10;
     cursor: pointer;

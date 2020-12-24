@@ -87,6 +87,13 @@ export default {
 
     //#endregion
 
+    //#region 3.筛选功能
+    // 1.最新商品
+    // 2.最高人气
+    // 3.评论最多
+    // 4.价格顺序
+    //#endregion
+
     onMounted(() => {
       getSecondaryGoods;
     });

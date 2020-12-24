@@ -1,30 +1,24 @@
 <template>
   <div class="container">
-    <!-- 人气推荐标题 -->
-    <div class="popularity-recommend-title">
-      <b>人气推荐</b>
-      <span>人气爆款 不容错过</span>
+    <!-- 热门品牌标题 -->
+    <div class="hot-brands-title">
+      <b>热门品牌</b>
+      <span>国际经典 品质保证</span>
     </div>
 
-    <!-- 人气推荐内容 -->
-    <div class="popularity-recommend-content">
-      <router-link
-        to="#"
-        class="popularity-recommend-content-one"
-        v-for="item in getPopularityRecommend"
-        :key="item.id"
-      >
-        <!-- 图片 -->
-        <div class="div-picture">
-          <img :src="item.picture" />
-        </div>
-
-        <!-- 价格 -->
-        <div class="div-introduce">
-          <p>{{ item.title }}</p>
-          <span>{{ item.alt }}</span>
-        </div>
-      </router-link>
+    <!-- 热门品牌轮播图 -->
+    <div class="hot-brands-banner" v-if="getHotBrands.length > 0">
+      <el-carousel arrow="always" :autoplay="false" :loop="HotBrandsJudge">
+        <el-carousel-item v-for="item in HotBrandsNum" :key="item">
+          <div
+            class="banner-picture"
+            v-for="item in getHotBrands"
+            :key="item.id"
+          >
+            <img :src="item.picture" />
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
@@ -37,37 +31,50 @@ import { home } from "@/api";
 export default {
   name: "HomeFreshGood",
   setup() {
-    const getPopularityRecommend = ref([]);
+    // 存储热门品牌数据
+    const getHotBrands = ref([]);
+    // 计算热门品牌数据能放置多少页
+    const HotBrandsNum = ref("");
+    // 判断是否循环
+    const HotBrandsJudge = ref(true);
 
-    // 获取人气推荐数据
-    let getRecommend = httpGet(home.GetPopularityRecommend)
+    // 获取热门品牌数据
+    let getBrands = httpGet(home.GetHotBrands)
       .then(res => {
         // console.log(res);
         let { result } = res;
 
-        getPopularityRecommend.value = result;
+        getHotBrands.value = result;
+        HotBrandsNum.value = Math.ceil(getHotBrands.value.length / 5);
+
+        if (HotBrandsNum.value == 1) {
+          return HotBrandsJudge.value;
+        }
+        return (HotBrandsJudge.value = false);
       })
       .catch(err => {
         console.log(err);
       });
 
     onMounted(() => {
-      getRecommend;
+      getBrands;
     });
 
     return {
-      getPopularityRecommend
+      getHotBrands,
+      HotBrandsNum,
+      HotBrandsJudge
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-// 人气推荐标题
-.popularity-recommend-title {
+// 热门品牌标题
+.hot-brands-title {
   font-size: 16px;
-  padding: 40px 0;
-  margin-top: 7px;
+  padding-top: 42px;
+  margin-bottom: 9px;
   vertical-align: baseline;
 
   span {
@@ -82,53 +89,61 @@ export default {
   }
 }
 
-// 人气推荐内容
-.popularity-recommend-content {
-  @include clearfix();
-  .popularity-recommend-content-one {
-    float: left;
-    width: 304px;
-    height: 405px;
-    margin-right: 8px;
+// 热门品牌轮播图
+.hot-brands-banner {
+  width: 100%;
+  height: 342px;
+  margin-bottom: 45px;
 
-    &:last-child {
-      margin: 0;
-    }
-
-    .div-picture {
-      width: 100%;
-      height: 305px;
-    }
-
-    .div-introduce {
-      width: 100%;
-      height: 100px;
-      color: #333333;
-      font-size: 21px;
-      text-align: center;
-    }
-  }
-}
-
-// 人气推荐内容之图片
-.div-picture {
-  img {
-    width: 100%;
+  .el-carousel {
+    position: relative;
     height: 100%;
   }
-}
 
-// 人气推荐内容之介绍
-.div-introduce {
-  p {
-    margin-top: 22px;
+  ::v-deep(.el-carousel__container) {
+    height: 306px;
+    margin-top: 36px;
   }
 
-  span {
-    display: inline-block;
-    color: #999999;
-    font-size: 16px;
-    margin-top: 19px;
+  ::v-deep(.el-carousel__arrow) {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    border-radius: 0px;
+
+    &:hover {
+      background-color: #27ba9b;
+    }
+  }
+
+  ::v-deep(.el-carousel__arrow--left) {
+    top: -17px;
+    left: 1189px;
+  }
+
+  ::v-deep(.el-carousel__arrow--right) {
+    top: -17px;
+    right: 0;
+  }
+
+  ::v-deep(.el-carousel__indicators) {
+    display: none;
+  }
+
+  .banner-picture {
+    float: left;
+    width: 244px;
+    height: 306px;
+    margin-right: 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 </style>

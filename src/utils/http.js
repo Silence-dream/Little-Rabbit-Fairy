@@ -1,5 +1,5 @@
-import featch from "./featch";
-import { baseHost } from "../../config";
+import featch from "./featch.js";
+import { baseHost } from "../../config.js";
 
 const env = process.env.NODE_ENV;
 let serverURL = "";

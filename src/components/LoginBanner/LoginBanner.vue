@@ -146,6 +146,9 @@
 
 <script>
 import { ref, reactive, getCurrentInstance } from "vue";
+import { common } from "@/api/index.js";
+import { httpPost } from "@/utils/http.js";
+import { Message } from "element3";
 // 引入正则表达式
 import { validateMobile } from "@/views/Login/Login.vue";
 export default {
@@ -227,10 +230,22 @@ export default {
      * @param {string} formName
      */
     function accountSubmitForm(formName) {
-      console.log(accountForm);
       self.$refs[formName].validate(valid => {
         if (valid) {
-          alert("账号登录验证通过!");
+          /* 发送登录请求 */
+          httpPost(common.Login, {
+            account: accountForm.account,
+            password: accountForm.password
+          })
+            .then(result => {
+              // 获取返回值
+              let { result: returnData } = result;
+              sessionStorage.setItem("token", returnData.token);
+              console.log(returnData);
+              /* 登录成功弹框 */
+              Message({ type: "success", message: "登录成功" });
+            })
+            .catch(error => console.log(error));
         } else {
           console.log("error submit!!");
           return false;
@@ -272,6 +287,20 @@ export default {
       self.$refs[formName].validate(valid => {
         if (valid) {
           alert("验证码登录验证通过!");
+          /* 发送登录请求 */
+          httpPost(common.LoginCode, {
+            mobile: mobileForm.mobile,
+            code: mobileForm.code
+          })
+            .then(result => {
+              // 获取返回值
+              let { result: returnData } = result;
+              sessionStorage.setItem("token", returnData.token);
+              console.log(returnData);
+              /* 登录成功弹框 */
+              Message({ type: "success", message: "登录成功" });
+            })
+            .catch(error => console.log(error));
         } else {
           console.log("error submit!!");
           return false;

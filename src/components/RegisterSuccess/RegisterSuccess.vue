@@ -28,6 +28,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 600px;
+  text-align: center;
   h1 {
     color: #333333;
     font-size: 18px;

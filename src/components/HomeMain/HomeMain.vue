@@ -18,8 +18,8 @@
     </el-row>
 
     <!-- 首页热门品牌组件 -->
-    <el-row style="background-color: #fff;">
-      <HomePopularityRecommend />
+    <el-row>
+      <HomeHotBrands />
     </el-row>
   </div>
 </template>
@@ -28,13 +28,15 @@
 import HomeBanner from "@/components/HomeBanner/HomeBanner.vue";
 import HomeFreshGood from "@/components/HomeFreshGood/HomeFreshGood.vue";
 import HomePopularityRecommend from "@/components/HomePopularityRecommend/HomePopularityRecommend.vue";
+import HomeHotBrands from "@/components/HomeHotBrands/HomeHotBrands.vue";
 
 export default {
   name: "HomeMain",
   components: {
     HomeBanner,
     HomeFreshGood,
-    HomePopularityRecommend
+    HomePopularityRecommend,
+    HomeHotBrands
   }
 };
 </script>

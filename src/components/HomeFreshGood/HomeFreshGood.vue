@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { httpGet } from "@/utils/http";
+import { httpGet } from "@/utils/http.js";
 import { ref, onMounted } from "vue";
 import { home } from "@/api";
 
@@ -47,7 +47,7 @@ export default {
     // 获取新鲜好物数据
     let getGoods = httpGet(home.GetFreshGood)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         let { result } = res;
 
         getFreshGood.value = result;

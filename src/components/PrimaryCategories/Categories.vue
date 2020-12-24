@@ -335,6 +335,11 @@ export default {
       font-size: 16px;
       line-height: 22px;
       font-weight: normal;
+      // 直接使用省略号代替
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-break: break-all;
     }
 
     p {

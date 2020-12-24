@@ -3,7 +3,7 @@
   <el-breadcrumb separator=">">
     <div class="container">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/PrimaryCategories' }"
+      <el-breadcrumb-item :to="{ path: '/Primary' }"
         >电子产品</el-breadcrumb-item
       >
       <el-breadcrumb-item>手机</el-breadcrumb-item>

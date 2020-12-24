@@ -175,7 +175,7 @@ export default {
 
 <style lang="scss" scoped>
 // 中间内容样式设置
-::v-deep(.el-main) {
+:deep(.el-main) {
   padding: 0px;
   overflow: hidden;
 }
@@ -188,35 +188,42 @@ export default {
   .carousel-bgc {
     height: 500px;
     background-color: #fff;
+    @include clearfix();
   }
 
-  ::v-deep(.swiper-container) {
+  :deep(.swiper-container) {
     position: relative;
     height: 500px;
   }
 
-  ::v-deep(.swiper-pagination-bullets) {
+  :deep(.swiper-pagination-bullets) {
     position: absolute;
     bottom: 20px;
   }
 
-  ::v-deep(.swiper-pagination-bullet-active),
-  ::v-deep(.swiper-pagination-bullet) {
+  :deep(.swiper-pagination-bullet-active),
+  :deep(.swiper-pagination-bullet) {
     width: 10px;
     height: 10px;
   }
-  ::v-deep(.swiper-pagination-bullet-active) {
+  :deep(.swiper-pagination-bullet-active) {
     background-color: #fff;
   }
-  ::v-deep(.swiper-button-prev),
-  ::v-deep(.swiper-button-next) {
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
+    position: absolute;
+    top: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 40px;
+    border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
-  ::v-deep(.swiper-button-prev)::after,
-  ::v-deep(.swiper-button-next)::after {
+  :deep(.swiper-button-prev)::after,
+  :deep(.swiper-button-next)::after {
     font-size: 18px;
     color: #fff;
   }
@@ -335,6 +342,11 @@ export default {
       font-size: 16px;
       line-height: 22px;
       font-weight: normal;
+      // 直接使用省略号代替
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-break: break-all;
     }
 
     p {

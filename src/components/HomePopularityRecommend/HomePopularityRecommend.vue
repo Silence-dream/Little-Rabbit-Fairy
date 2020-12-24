@@ -11,7 +11,7 @@
       <router-link
         to="#"
         class="popularity-recommend-content-one"
-        v-for="item in getPopularityRecommend"
+        v-for="item in GetPopularityRecommend"
         :key="item.id"
       >
         <!-- 图片 -->
@@ -37,7 +37,7 @@ import { home } from "@/api";
 export default {
   name: "HomeFreshGood",
   setup() {
-    const getPopularityRecommend = ref([]);
+    const GetPopularityRecommend = ref([]);
 
     // 获取人气推荐数据
     let getRecommend = httpGet(home.GetPopularityRecommend)
@@ -45,7 +45,7 @@ export default {
         // console.log(res);
         let { result } = res;
 
-        getPopularityRecommend.value = result;
+        GetPopularityRecommend.value = result;
       })
       .catch(err => {
         console.log(err);
@@ -56,7 +56,7 @@ export default {
     });
 
     return {
-      getPopularityRecommend
+      GetPopularityRecommend
     };
   }
 };

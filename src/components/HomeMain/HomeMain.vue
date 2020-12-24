@@ -1,6 +1,7 @@
 <template>
   <el-row>
     <div class="container">
+      <!-- 首页轮播图组件 -->
       <HomeBanner />
     </div>
   </el-row>

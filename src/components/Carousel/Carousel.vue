@@ -26,11 +26,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // import Swiper core and required components
 import SwiperCore, { Navigation, Pagination, A11y, Autoplay } from "swiper";
 
-// Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 export default {
@@ -64,4 +59,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

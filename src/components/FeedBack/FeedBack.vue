@@ -9,7 +9,7 @@
     <!-- 中间内容 end -->
 
     <!-- 底部 starte -->
-    <LoginFooter class="footer" />
+    <LoginFooter class="footer" color="#999" />
     <!-- 底部 end -->
   </div>
 </template>

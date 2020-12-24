@@ -21,7 +21,7 @@
       <!-- tab栏切换部分 start -->
       <div class="commodity-top">
         <div class="top-left">
-          <span class="active">最新商品</span>
+          <span class="active" @click="change($event)">最新商品</span>
           <span>最高人气</span>
           <span>评论最多</span>
           <span>价格排序</span>
@@ -74,7 +74,16 @@ export default {
       });
     //#endregion
 
-    //#region 2.筛选功能
+    //#region 2.点击切换
+    let change = function(event) {
+      console.log(event);
+      let arr = Array.from(event.target.parentNode.children);
+      console.log(arr);
+      arr.forEach(element => {
+        element.classList.remove("active");
+      });
+      event.target.classList.add("active");
+    };
 
     //#endregion
 
@@ -83,7 +92,8 @@ export default {
     });
 
     return {
-      getSecondaryData
+      getSecondaryData,
+      change
     };
   },
   components: {

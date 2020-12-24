@@ -7,18 +7,10 @@
     </div>
 
     <!-- 热门品牌轮播图 -->
-    <div class="hot-brands-banner" v-if="getHotBrands.length > 0">
-      <el-carousel arrow="always" :autoplay="false" :loop="HotBrandsJudge">
-        <el-carousel-item v-for="item in HotBrandsNum" :key="item">
-          <div
-            class="banner-picture"
-            v-for="item in getHotBrands"
-            :key="item.id"
-          >
-            <img :src="item.picture" />
-          </div>
-        </el-carousel-item>
-      </el-carousel>
+    <div class="hot-brands-banner" v-if="GetHotBrands.length > 0">
+      <div class="banner-picture" v-for="item in GetHotBrands" :key="item.id">
+        <img :src="item.picture" />
+      </div>
     </div>
   </div>
 </template>
@@ -32,9 +24,9 @@ export default {
   name: "HomeFreshGood",
   setup() {
     // 存储热门品牌数据
-    const getHotBrands = ref([]);
+    const GetHotBrands = ref([]);
     // 计算热门品牌数据能放置多少页
-    const HotBrandsNum = ref("");
+    const HotBrandsNum = ref(0);
     // 判断是否循环
     const HotBrandsJudge = ref(true);
 
@@ -44,10 +36,10 @@ export default {
         // console.log(res);
         let { result } = res;
 
-        getHotBrands.value = result;
-        HotBrandsNum.value = Math.ceil(getHotBrands.value.length / 5);
+        GetHotBrands.value = result;
+        HotBrandsNum.value = Math.ceil(GetHotBrands.value.length / 5);
 
-        if (HotBrandsNum.value == 1) {
+        if (HotBrandsNum.value === 1) {
           return HotBrandsJudge.value;
         }
         return (HotBrandsJudge.value = false);
@@ -61,7 +53,7 @@ export default {
     });
 
     return {
-      getHotBrands,
+      GetHotBrands,
       HotBrandsNum,
       HotBrandsJudge
     };

@@ -1,25 +1,30 @@
 <template>
-  <el-row>
-    <div class="container">
-      <!-- 首页轮播图组件 -->
-      <HomeBanner />
-    </div>
-  </el-row>
+  <div>
+    <!-- 首页轮播图组件 -->
+    <el-row>
+      <div class="container">
+        <HomeBanner />
+      </div>
+    </el-row>
+
+    <!-- 首页新鲜好物组件 -->
+    <el-row style="background-color: #fff;">
+      <HomeFreshGood />
+    </el-row>
+  </div>
 </template>
 
 <script>
 import HomeBanner from "@/components/HomeBanner/HomeBanner.vue";
+import HomeFreshGood from "@/components/HomeFreshGood/HomeFreshGood.vue";
+
 export default {
   name: "HomeMain",
   components: {
-    HomeBanner
+    HomeBanner,
+    HomeFreshGood
   }
 };
 </script>
 
-<style lang="scss" scoped>
-.el-main {
-  height: 500px;
-  background-color: #f5f5f5;
-}
-</style>
+<style lang="scss" scoped></style>

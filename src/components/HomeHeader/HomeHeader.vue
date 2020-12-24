@@ -12,7 +12,9 @@
                   <p>
                     <router-link to="/login" class="sign">请先登录</router-link>
                     <span>|</span>
-                    <router-link to="#" title="免费注册">免费注册</router-link>
+                    <router-link to="/register" title="免费注册"
+                      >免费注册</router-link
+                    >
                     <span>|</span>
                     <router-link to="#" title="我的订单">我的订单</router-link>
                     <span>|</span>
@@ -53,10 +55,6 @@
 </template>
 
 <script>
-// import { httpGet } from "@/utils/http";
-// import { useStore } from "vuex";
-// import { ref } from "vue";
-
 export default {
   name: "HomeHeader",
   setup() {}

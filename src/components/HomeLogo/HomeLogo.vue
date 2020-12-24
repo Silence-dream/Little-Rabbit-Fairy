@@ -12,16 +12,20 @@
           <!-- 头部导航栏 -->
           <ul>
             <li>
-              <router-link to="/" class="active">首页</router-link>
+              <router-link to="/" class="active">
+                首页
+              </router-link>
             </li>
             <li v-for="item in oulData" :key="item.id">
-              <router-link to="#">{{ item.name }}</router-link>
+              <router-link to="/Primary">
+                {{ item.name }}
+              </router-link>
             </li>
           </ul>
 
           <!-- 搜索框 -->
           <div class="search">
-            <div class="search-in" :class="{ active: active }">
+            <div class="search-in" :class="{ active: searchActive }">
               <i class="iconfont icon-sousuo1 searchIcon"></i>
               <el-input
                 v-model="searchInput"
@@ -47,10 +51,10 @@
 </template>
 
 <script>
-import { httpGet } from "@/utils/http";
+import { httpGet } from "@/utils/http.js";
 import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
-import { homeheader } from "@/api";
+import { home } from "@/api";
 
 export default {
   name: "HomeLogo",
@@ -59,12 +63,13 @@ export default {
     // 搜索框文本
     const searchInput = ref("");
     // 搜索框样式
-    let active = ref(false);
+    let searchActive = ref(false);
+
     // 头部导航栏数据
     let oulData = ref([]);
 
     // 获取logo导航栏数据
-    let getoLiData = httpGet(homeheader.GetLogoNav + "/head")
+    let getoLiData = httpGet(home.GetLogoNav + "/head")
       .then(res => {
         // console.log(res);
         const oLiData = res.result;
@@ -82,11 +87,12 @@ export default {
 
     // 点击搜索框边框效果
     const focusSearchBorder = function() {
-      active.value = !active.value;
+      searchActive.value = !searchActive.value;
     };
 
     return {
-      active,
+      searchActive,
+
       searchInput,
       focusSearchBorder,
       oulData

@@ -18,8 +18,13 @@
         <!-- 分类 -->
         <ul>
           <li>分类:</li>
-          <li class="active">全部</li>
-          <li v-for="item in getBrandsData" :key="item.id">
+          <li :class="Number(isCheck) !== getIndex ? 'active' : ''">全部</li>
+          <li
+            v-for="(item, index) in getBrandsData"
+            :key="item.id"
+            :class="{ active: index == Number(isCheck) }"
+            @click="bindColor(index)"
+          >
             {{ item.name }}
           </li>
           <!-- <li>二手手机</li> -->
@@ -65,17 +70,41 @@
       </div>
       <!-- 内容部分 -->
       <div class="commodidy-content">
-        <ul>
+        <ul v-for="item in 4" :key="item">
           <li>
             <img src="./img/1.webp" alt="" />
             <div class="discount">享 9折</div>
-            <router-view to="#">
+            <router-link to="#">
               <h1>红米Note 5A 高配版</h1>
               <p>1600万像素柔和光自拍</p>
               <span>￥1899</span>
-            </router-view>
+            </router-link>
           </li>
-          <li></li>
+          <li>
+            <img src="./img/2.webp" alt="" />
+            <router-link to="#">
+              <h1>红米Note 5A 高配版</h1>
+              <p>1600万像素柔和光自拍</p>
+              <span>￥1899</span>
+            </router-link>
+          </li>
+          <li>
+            <img src="./img/1.webp" alt="" />
+            <div class="discount">享 9折</div>
+            <router-link to="#">
+              <h1>红米Note 5A 高配版</h1>
+              <p>1600万像素柔和光自拍</p>
+              <span>￥1899</span>
+            </router-link>
+          </li>
+          <li>
+            <img src="./img/2.webp" alt="" />
+            <router-link to="#">
+              <h1>红米Note 5A 高配版</h1>
+              <p>1600万像素柔和光自拍</p>
+              <span>￥1899</span>
+            </router-link>
+          </li>
         </ul>
       </div>
       <!-- tab栏切换部分 end -->
@@ -117,36 +146,26 @@ export default {
       });
     //#endregion
 
-    //#region 2. 点击文字进行样式修改
-
+    //#region 2.点击后进行颜色变化
+    const isCheck = ref("");
+    const getIndex = ref();
+    let bindColor = function(index) {
+      isCheck.value = index;
+      getIndex.value = index;
+    };
     //#endregion
 
-    //#region 3.获取商品数据
-    const classifyGoodsData = ref([]);
-    let getPrimaryGoods = httpGet("/category")
-      .then(res => {
-        console.log(res);
-        let { result } = res;
-        result.children.forEach(element => {
-          console.log(element);
-          classifyGoodsData.value.push(element);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    //#endregion
     onMounted(() => {
       getTotalData;
-      getPrimaryGoods;
     });
 
     return {
       getBrandsData,
       getCategories,
       getSalePropertiesData,
-      classifyGoodsData
+      isCheck,
+      bindColor,
+      getIndex
     };
   }
 };
@@ -241,11 +260,13 @@ export default {
 }
 
 .commodidy-content {
+  float: left;
   height: auto;
+  margin-bottom: 33px;
 
   ul {
     float: left;
-    margin: 0px 25px;
+    margin: 0px 25px 40px;
   }
 
   li {
@@ -253,6 +274,16 @@ export default {
     position: relative;
     width: 278px;
     height: 370px;
+    margin-right: 26px;
+    transition: all 0.5s;
+
+    &:hover {
+      box-shadow: 10px 10px 5px #f5f5f5;
+      // transform: scale(1.1);
+    }
+    &:last-child {
+      margin-right: 0px;
+    }
 
     img {
       width: 192px;
@@ -276,6 +307,31 @@ export default {
       border-radius: 5px;
       color: #5eb69c;
       word-wrap: break-word;
+    }
+
+    a {
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 32px;
+      color: #333333;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    p {
+      margin-top: 18px;
+      color: #999999;
+      font-size: 14px;
+    }
+
+    span {
+      display: inline-block;
+      margin-top: 24px;
+      width: 100%;
+      color: #9a2e1f;
+      font-size: 18px;
     }
   }
 }

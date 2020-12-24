@@ -47,7 +47,6 @@ export default {
     // 获取新鲜好物数据
     let getGoods = httpGet(home.GetFreshGood)
       .then(res => {
-        // console.log(res);
         let { result } = res;
 
         getFreshGood.value = result;

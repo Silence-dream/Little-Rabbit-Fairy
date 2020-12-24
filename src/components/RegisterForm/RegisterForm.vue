@@ -25,7 +25,7 @@
         v-model="RegisterForm.mobile"
       ></el-input>
     </el-form-item>
-    <el-form-item prop="code">
+    <el-form-item prop="code" class="register-code">
       <el-input
         type=""
         placeholder="短信验证码"
@@ -33,6 +33,9 @@
         prefix-icon="iconfont icon-xinxi"
         v-model="RegisterForm.code"
       ></el-input>
+      <el-button class="send-code" :disabled="isCode" @click="getCode()">{{
+        getCodeText
+      }}</el-button>
     </el-form-item>
     <el-form-item prop="password">
       <el-input
@@ -61,15 +64,17 @@
       </el-checkbox-group>
     </el-form-item>
     <el-form-item @click="submitRegisterForm('registerForm')">
-      <el-button>下一步</el-button>
+      <el-button class="next-to">下一步</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-import { reactive, getCurrentInstance } from "vue";
-
+import { reactive, getCurrentInstance, ref } from "vue";
 import { validateMobile } from "@/views/Login/Login.vue";
+import { httpPost } from "@/utils/http.js";
+import { common } from "@/api/index.js";
+import { Message } from "element3";
 
 export default {
   name: "RegisterForm",
@@ -77,7 +82,7 @@ export default {
     /* 获取当前当前组件的实例 */
     let self = getCurrentInstance().ctx;
 
-    //#region 定义数据验证
+    //#region 校验注册数据验证
 
     // 注册数据
     const RegisterForm = reactive({
@@ -143,7 +148,20 @@ export default {
       console.log(self.$refs[formName].model);
       self.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          /* 发送注册请求 */
+          httpPost(common.Regiser, {
+            account: RegisterForm.account,
+            mobile: RegisterForm.mobile,
+            code: RegisterForm.code,
+            password: RegisterForm.password
+          }).then(result => {
+            /* 判断是否注册成功 */
+
+            /* 注册成功 */
+            Message({ type: "success", message: result.msg });
+            /* 跳转路由 */
+            self.$router.push("/register/success");
+          });
         } else {
           console.log("error submit!!");
           return false;
@@ -151,10 +169,35 @@ export default {
       });
     }
     //#endregion
+
+    //#region 发送验证码按钮
+    let getCodeText = ref(`发送验证码`);
+    // 是否禁用按钮
+    let isCode = ref(false);
+    /* 发送验证码 重发验证码 60秒后重发 */
+    function getCode() {
+      clearInterval(timer);
+      isCode.value = true;
+      let reset = 60;
+      let timer = setInterval(() => {
+        reset -= 1;
+        getCodeText.value = `${reset}秒后重发`;
+        if (reset <= 0) {
+          console.log(1);
+          getCodeText.value = `重发验证码`;
+          clearInterval(timer);
+          isCode.value = false;
+        }
+      }, 1000);
+    }
+    //#endregion
     return {
       RegisterForm,
       registerRules,
-      submitRegisterForm
+      submitRegisterForm,
+      isCode,
+      getCodeText,
+      getCode
     };
   }
 };
@@ -168,12 +211,29 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* 选择协议 */
   .choose-protocol {
     a {
       color: #5eb69c;
     }
   }
-  .el-button {
+  /* 发送验证码 */
+  .register-code {
+    position: relative;
+    .el-button {
+      border: none;
+      background: transparent;
+    }
+    .send-code {
+      position: absolute;
+      top: 2px;
+      right: 18px;
+      color: #1abc9c;
+      font-size: 12px;
+    }
+  }
+
+  .next-to {
     width: 100%;
     color: #ffffff;
     background-color: #27ba9b;

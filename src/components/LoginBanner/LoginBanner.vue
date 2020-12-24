@@ -453,10 +453,11 @@ export default {
     background-color: #17bb9b;
   }
 }
+
 /* 验证码登录 */
 /* 继承样式 */
 :deep(#mobile-form) {
-  @extend #login-form;
+  @extend :deep(#login-form);
   .input-code {
     position: relative;
 

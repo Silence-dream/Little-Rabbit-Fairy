@@ -14,10 +14,12 @@
                     <i class="iconfont icon-zaixiankefu"></i>
                     <b>在线客服</b>
                   </span>
-                  <span>
-                    <i class="iconfont icon-wentifankui"></i>
-                    <b>问题反馈</b>
-                  </span>
+                  <router-link to="/FeedBack">
+                    <span>
+                      <i class="iconfont icon-wentifankui"></i>
+                      <b>问题反馈</b>
+                    </span>
+                  </router-link>
                 </p>
               </div>
             </div>

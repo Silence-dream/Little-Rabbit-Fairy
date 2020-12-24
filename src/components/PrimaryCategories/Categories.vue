@@ -175,7 +175,7 @@ export default {
 
 <style lang="scss" scoped>
 // 中间内容样式设置
-::v-deep(.el-main) {
+:deep(.el-main) {
   padding: 0px;
   overflow: hidden;
 }
@@ -191,26 +191,26 @@ export default {
     @include clearfix();
   }
 
-  ::v-deep(.swiper-container) {
+  :deep(.swiper-container) {
     position: relative;
     height: 500px;
   }
 
-  ::v-deep(.swiper-pagination-bullets) {
+  :deep(.swiper-pagination-bullets) {
     position: absolute;
     bottom: 20px;
   }
 
-  ::v-deep(.swiper-pagination-bullet-active),
-  ::v-deep(.swiper-pagination-bullet) {
+  :deep(.swiper-pagination-bullet-active),
+  :deep(.swiper-pagination-bullet) {
     width: 10px;
     height: 10px;
   }
-  ::v-deep(.swiper-pagination-bullet-active) {
+  :deep(.swiper-pagination-bullet-active) {
     background-color: #fff;
   }
-  ::v-deep(.swiper-button-prev),
-  ::v-deep(.swiper-button-next) {
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
     position: absolute;
     top: 50%;
     width: 40px;
@@ -222,8 +222,8 @@ export default {
     display: flex;
     align-items: center;
   }
-  ::v-deep(.swiper-button-prev)::after,
-  ::v-deep(.swiper-button-next)::after {
+  :deep(.swiper-button-prev)::after,
+  :deep(.swiper-button-next)::after {
     font-size: 18px;
     color: #fff;
   }

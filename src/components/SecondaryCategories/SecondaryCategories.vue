@@ -115,10 +115,10 @@ export default {
   height: 75px;
   line-height: 75px;
 }
-::v-deep(.is-link) {
+:deep(.is-link) {
   font-weight: normal;
 }
-::v-deep(.el-breadcrumb__inner) {
+:deep(.el-breadcrumb__inner) {
   color: #999999;
 }
 

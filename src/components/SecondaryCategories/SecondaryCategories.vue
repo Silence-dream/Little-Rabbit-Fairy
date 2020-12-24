@@ -19,7 +19,9 @@
         <ul>
           <li>分类:</li>
           <li class="active">全部</li>
-          <li v-for="item in getBrandsData" :key="item.id">{{ item.name }}</li>
+          <li v-for="item in getBrandsData" :key="item.id">
+            {{ item.name }}
+          </li>
           <!-- <li>二手手机</li> -->
         </ul>
         <!-- 品牌 -->
@@ -47,7 +49,35 @@
   <div class="commodity">
     <div class="container commodity-bgc">
       <!-- tab栏切换部分 start -->
-
+      <div class="commodity-top">
+        <div class="top-left">
+          <span class="active">最新商品</span>
+          <span>最高人气</span>
+          <span>评论最多</span>
+          <span>价格排序</span>
+        </div>
+        <div class="top-right">
+          <el-checkbox-group>
+            <el-checkbox label="仅显示有货商品"></el-checkbox>
+            <el-checkbox label="仅显示优惠商品"></el-checkbox>
+          </el-checkbox-group>
+        </div>
+      </div>
+      <!-- 内容部分 -->
+      <div class="commodidy-content">
+        <ul>
+          <li>
+            <img src="./img/1.webp" alt="" />
+            <div class="discount">享 9折</div>
+            <router-view to="#">
+              <h1>红米Note 5A 高配版</h1>
+              <p>1600万像素柔和光自拍</p>
+              <span>￥1899</span>
+            </router-view>
+          </li>
+          <li></li>
+        </ul>
+      </div>
       <!-- tab栏切换部分 end -->
     </div>
   </div>
@@ -87,14 +117,36 @@ export default {
       });
     //#endregion
 
+    //#region 2. 点击文字进行样式修改
+
+    //#endregion
+
+    //#region 3.获取商品数据
+    const classifyGoodsData = ref([]);
+    let getPrimaryGoods = httpGet("/category")
+      .then(res => {
+        console.log(res);
+        let { result } = res;
+        result.children.forEach(element => {
+          console.log(element);
+          classifyGoodsData.value.push(element);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //#endregion
     onMounted(() => {
       getTotalData;
+      getPrimaryGoods;
     });
 
     return {
       getBrandsData,
       getCategories,
-      getSalePropertiesData
+      getSalePropertiesData,
+      classifyGoodsData
     };
   }
 };
@@ -121,7 +173,6 @@ export default {
   background-color: #fff;
   height: auto;
 }
-
 .filter-cover {
   padding: 32px 0px 0px 23px;
   font-size: 14px;
@@ -157,8 +208,75 @@ export default {
 // 分类筛选商品展示
 .commodity {
   height: auto;
+  margin-bottom: 67px;
 }
 .commodity-bgc {
   background-color: #fff;
+
+  .commodity-top {
+    height: auto;
+    padding: 22px 45px 40px 22px;
+  }
+}
+.top-left {
+  float: left;
+
+  span {
+    margin-right: 18px;
+    border: 1px solid #e4e4e4;
+    padding: 5px 12px 5px 13px;
+    font-size: 14px;
+    color: #999999;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: #5eb69c;
+    border-color: #5eb69c;
+    color: #ffffff;
+  }
+}
+.top-right {
+  float: right;
+}
+
+.commodidy-content {
+  height: auto;
+
+  ul {
+    float: left;
+    margin: 0px 25px;
+  }
+
+  li {
+    float: left;
+    position: relative;
+    width: 278px;
+    height: 370px;
+
+    img {
+      width: 192px;
+      height: 156px;
+      margin-top: 40px;
+      margin-left: 45px;
+    }
+
+    .discount {
+      position: absolute;
+      left: 11px;
+      top: 16px;
+      width: 28px;
+      height: 80px;
+      margin: 0 auto;
+      line-height: 24px;
+      font-size: 18px;
+      padding-top: 5px;
+      text-align: center;
+      border: 1px solid #5eb69c;
+      border-radius: 5px;
+      color: #5eb69c;
+      word-wrap: break-word;
+    }
+  }
 }
 </style>

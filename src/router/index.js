@@ -22,11 +22,11 @@ const routes = [
       },
       // 商品一级分类路由
       {
-        path: "Primary",
+        path: "primary",
         name: "Primary",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */
+            /* webpackChunkName: "Primary" */
             "@/components/PrimaryCategories/Primary.vue"
           ),
         children: [
@@ -36,13 +36,13 @@ const routes = [
             name: "PrimaryCategories",
             component: () =>
               import(
-                /* webpackChunkName: "PrimaryGoods" */
+                /* webpackChunkName: "PrimaryCategories" */
                 "@/components/PrimaryCategories/Categories.vue"
               )
           },
           // 商品二级分类路由
           {
-            path: "Secondary",
+            path: "secondary",
             name: "Secondary",
             component: () =>
               import(
@@ -101,6 +101,16 @@ const routes = [
           import(
             /* webpackChunkName: "MemberCenter" */
             "@/views/MemberCenter/MemberCenter.vue"
+          )
+      },
+      // 商品详情路由
+      {
+        path: "/details",
+        name: "Details",
+        component: () =>
+          import(
+            /* webpackChunkName: "Details" */
+            "@/components/Details/SecondaryDetails.vue"
           )
       }
     ]

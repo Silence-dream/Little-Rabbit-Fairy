@@ -3,7 +3,7 @@
   <el-breadcrumb separator=">">
     <div class="container">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/Primary' }"
+      <el-breadcrumb-item :to="{ path: '/primary' }"
         >电子产品</el-breadcrumb-item
       >
       <el-breadcrumb-item>手机</el-breadcrumb-item>
@@ -22,9 +22,12 @@
       <div class="commodity-top">
         <div class="top-left">
           <span class="active" @click="change($event)">最新商品</span>
-          <span>最高人气</span>
-          <span>评论最多</span>
-          <span>价格排序</span>
+          <span @click="change($event)">最高人气</span>
+          <span @click="change($event)">评论最多</span>
+          <span @click="change($event)"
+            >价格排序 <i class="iconfont icon-shang"></i
+            ><i class="iconfont icon-xia"></i>
+          </span>
         </div>
         <div class="top-right">
           <el-checkbox-group>
@@ -39,7 +42,7 @@
           <li v-for="item in getSecondaryData" :key="item.id">
             <img :src="item.picture" alt="" />
             <!-- <div class="discount">享 9折</div> -->
-            <router-link to="#">
+            <router-link to="/details">
               <h1>{{ item.name }}</h1>
               <p>{{ item.tag }}</p>
               <span>￥{{ Math.round(item.price) }}</span>
@@ -63,10 +66,12 @@ export default {
   setup() {
     //#region 1.获取商品列表
     const getSecondaryData = ref([]);
-    let getSecondaryGoods = httpPost(`/category/goods`, { onlyDiscount: true })
+    const total = ref();
+    let getSecondaryGoods = httpPost(`/category/goods`)
       .then(res => {
         console.log(res);
         let { items } = res;
+        total.value = res.pages;
         getSecondaryData.value = items;
       })
       .catch(error => {
@@ -76,9 +81,9 @@ export default {
 
     //#region 2.点击切换
     let change = function(event) {
-      console.log(event);
+      // console.log(event);
       let arr = Array.from(event.target.parentNode.children);
-      console.log(arr);
+      // console.log(arr);
       arr.forEach(element => {
         element.classList.remove("active");
       });
@@ -100,7 +105,8 @@ export default {
 
     return {
       getSecondaryData,
-      change
+      change,
+      total
     };
   },
   components: {
@@ -125,7 +131,7 @@ export default {
 // 分类筛选商品展示
 .commodity {
   height: auto;
-  margin-bottom: 67px;
+  margin-bottom: 20px;
 }
 .commodity-bgc {
   background-color: #fff;
@@ -175,7 +181,7 @@ export default {
     transition: all 0.5s;
 
     &:hover {
-      box-shadow: 10px 10px 5px #f5f5f5;
+      box-shadow: 0px 1px 8px 4px rgba(216, 215, 215, 0.33);
       // transform: scale(1.1);
     }
 
@@ -235,5 +241,11 @@ export default {
       font-size: 18px;
     }
   }
+}
+
+// 字体图标设置
+.icon-xia,
+.icon-shang {
+  font-size: 6px;
 }
 </style>

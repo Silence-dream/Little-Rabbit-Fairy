@@ -37,13 +37,15 @@
           <!-- 上传图片 -->
           <el-row class="coupback">
             <el-col :span="4"> 相关图片： </el-col>
-            <el-col :span="20">
+            <el-col :span="20" style="height:100px">
               <el-upload
-                action="https://localhost:8000"
+                action="https://mock.boxuegu.com/mock/1175/"
                 list-type="picture-card"
                 class="phonce"
               >
-                <i class="el-icon-plus"></i>
+                <i class="el-icon-plus">
+                  <p>选择图片</p>
+                </i>
                 <!-- <span class="photo">选择图片</span> -->
               </el-upload>
               <span>共0张，还能上传3张</span>
@@ -174,5 +176,25 @@ export default {
 
 .heig {
   line-height: 36px;
+}
+
+// 修改相关图片的样式
+:deep(.el-upload--picture-card) {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+// 相关图片显示
+:deep(.is-success) {
+  width: 100px;
+  height: 100px;
+}
+
+.el-icon-plus {
+  p {
+    font-size: 12px;
+    color: #cccccc;
+  }
 }
 </style>

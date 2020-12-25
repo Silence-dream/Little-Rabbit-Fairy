@@ -43,16 +43,16 @@
             <div>
               <div class="customer-service">
                 <h2>下载App</h2>
-                <p class="download-app">
+                <div class="download-app">
                   <span class="QRcode">
                     <img src="./img/QRcode.png" />
                   </span>
-                  <b class="download">
+                  <div class="download">
                     <p>扫描二维码</p>
                     <p>立马下载App</p>
                     <el-button plain>下载页面</el-button>
-                  </b>
-                </p>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- 服务热线 -->
@@ -149,7 +149,7 @@ export default {
   height: 100%;
   overflow: hidden;
 
-  div {
+  > div {
     float: left;
     display: flex;
     width: 300px;

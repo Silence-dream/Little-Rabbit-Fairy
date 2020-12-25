@@ -238,7 +238,7 @@ export default {
     color: #ffffff;
     background-color: #27ba9b;
   }
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner) {
     &:focus {
       border-color: #17bb9b;
     }
@@ -247,11 +247,11 @@ export default {
     width: 300px;
     height: 50px;
   }
-  ::v-deep .el-checkbox__inner {
+  :deep(.el-checkbox__inner) {
     border-radius: 50%;
     background-color: #5eb69c;
   }
-  ::v-deep .el-checkbox__label {
+  :deep(.el-checkbox__label) {
     color: #999999;
   }
 }

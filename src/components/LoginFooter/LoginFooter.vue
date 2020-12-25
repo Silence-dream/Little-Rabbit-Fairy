@@ -14,6 +14,9 @@
       <!-- 版权 -->
       <div class="copyright" ref="copyrightRef">
         CopyRight @ 小兔鲜儿
+        <a href="http://beian.miit.gov.cn/" target="_blank">
+          桂ICP备2020008164号-1</a
+        >
       </div>
     </div>
   </footer>

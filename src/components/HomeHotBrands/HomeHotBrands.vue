@@ -7,10 +7,18 @@
     </div>
 
     <!-- 热门品牌轮播图 -->
-    <div class="hot-brands-banner" v-if="GetHotBrands.length > 0">
-      <div class="banner-picture" v-for="item in GetHotBrands" :key="item.id">
-        <img :src="item.picture" />
-      </div>
+    <div class="hot-brands-banner">
+      <swiper :slides-per-view="1" :space-between="0" navigation>
+        <swiper-slide v-for="ele in HotBrandsNum" :key="ele">
+          <div
+            class="banner-picture"
+            v-for="item in GetHotBrands"
+            :key="item.id"
+          >
+            <img :src="item.picture" />
+          </div>
+        </swiper-slide>
+      </swiper>
     </div>
   </div>
 </template>
@@ -20,15 +28,20 @@ import { httpGet } from "@/utils/http.js";
 import { ref, onMounted } from "vue";
 import { home } from "@/api";
 
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+import "swiper/swiper-bundle.min.css";
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
 export default {
-  name: "HomeFreshGood",
+  name: "HomeHotBrands",
   setup() {
     // 存储热门品牌数据
     const GetHotBrands = ref([]);
     // 计算热门品牌数据能放置多少页
     const HotBrandsNum = ref(0);
-    // 判断是否循环
-    const HotBrandsJudge = ref(true);
 
     // 获取热门品牌数据
     let getBrands = httpGet(home.GetHotBrands)
@@ -38,11 +51,6 @@ export default {
 
         GetHotBrands.value = result;
         HotBrandsNum.value = Math.ceil(GetHotBrands.value.length / 5);
-
-        if (HotBrandsNum.value === 1) {
-          return HotBrandsJudge.value;
-        }
-        return (HotBrandsJudge.value = false);
       })
       .catch(err => {
         console.log(err);
@@ -54,9 +62,12 @@ export default {
 
     return {
       GetHotBrands,
-      HotBrandsNum,
-      HotBrandsJudge
+      HotBrandsNum
     };
+  },
+  components: {
+    Swiper,
+    SwiperSlide
   }
 };
 </script>
@@ -66,7 +77,6 @@ export default {
 .hot-brands-title {
   font-size: 16px;
   padding-top: 42px;
-  margin-bottom: 9px;
   vertical-align: baseline;
 
   span {
@@ -83,59 +93,76 @@ export default {
 
 // 热门品牌轮播图
 .hot-brands-banner {
+  position: relative;
   width: 100%;
-  height: 342px;
+  height: 351px;
+  overflow: hidden;
+  padding-top: 45px;
   margin-bottom: 45px;
 
-  .el-carousel {
-    position: relative;
+  :deep(.swiper-container) {
+    overflow: visible;
+  }
+
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    background-color: #00be9a;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  :deep(.swiper-button-next) {
+    top: -10px;
+  }
+
+  :deep(.swiper-button-prev) {
+    top: -10px;
+    left: 1190px;
+  }
+
+  :deep(.swiper-button-prev)::after,
+  :deep(.swiper-button-next)::after {
+    width: 19px;
+    height: 19px;
+    color: #f6f6f6;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 19px;
+  }
+
+  .hot-brandsBtn-prev {
+    top: -36px;
+    right: 38px;
+  }
+
+  .hot-brandsBtn-next {
+    top: -36px;
+  }
+
+  .active {
+    background-color: #27ba9b;
+  }
+}
+
+.banner-picture {
+  float: left;
+  width: 244px !important;
+  height: 306px;
+  margin-right: 5px;
+
+  img {
+    width: 100%;
     height: 100%;
   }
 
-  ::v-deep(.el-carousel__container) {
-    height: 306px;
-    margin-top: 36px;
-  }
-
-  ::v-deep(.el-carousel__arrow) {
-    position: absolute;
-    width: 19px;
-    height: 19px;
-    border-radius: 0px;
-
-    &:hover {
-      background-color: #27ba9b;
-    }
-  }
-
-  ::v-deep(.el-carousel__arrow--left) {
-    top: -17px;
-    left: 1189px;
-  }
-
-  ::v-deep(.el-carousel__arrow--right) {
-    top: -17px;
-    right: 0;
-  }
-
-  ::v-deep(.el-carousel__indicators) {
-    display: none;
-  }
-
-  .banner-picture {
-    float: left;
-    width: 244px;
-    height: 306px;
-    margin-right: 5px;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 }
 </style>

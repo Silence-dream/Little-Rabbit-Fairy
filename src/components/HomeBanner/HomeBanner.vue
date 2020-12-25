@@ -111,44 +111,44 @@ export default {
     background-color: #fff;
   }
 
-  ::v-deep(.swiper-container) {
+  :deep(.swiper-container) {
     position: relative;
     height: 100%;
   }
 
-  ::v-deep(.swiper-pagination) {
+  :deep(.swiper-pagination) {
     width: 990px;
     left: 250px;
   }
 
-  ::v-deep(.swiper-pagination-bullets) {
+  :deep(.swiper-pagination-bullets) {
     position: absolute;
     bottom: 20px;
   }
 
-  ::v-deep(.swiper-pagination-bullet-active),
-  ::v-deep(.swiper-pagination-bullet) {
+  :deep(.swiper-pagination-bullet-active),
+  :deep(.swiper-pagination-bullet) {
     width: 10px;
     height: 10px;
   }
-  ::v-deep(.swiper-pagination-bullet-active) {
+  :deep(.swiper-pagination-bullet-active) {
     background-color: #fff;
   }
 
-  ::v-deep(.swiper-button-prev) {
+  :deep(.swiper-button-prev) {
     left: 260px;
   }
 
-  ::v-deep(.swiper-button-prev),
-  ::v-deep(.swiper-button-next) {
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
     width: 40px;
     height: 40px;
     border-radius: 40px;
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  ::v-deep(.swiper-button-prev)::after,
-  ::v-deep(.swiper-button-next)::after {
+  :deep(.swiper-button-prev)::after,
+  :deep(.swiper-button-next)::after {
     font-size: 18px;
     color: #fff;
   }

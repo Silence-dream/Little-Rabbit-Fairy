@@ -10,7 +10,22 @@
               <div class="link">
                 <div>
                   <p>
-                    <router-link to="/login" class="sign">请先登录</router-link>
+                    <router-link to="/login" class="sign" v-if="!GetToken">
+                      请先登录
+                    </router-link>
+                    <router-link
+                      to="#"
+                      class="sign"
+                      v-if="GetToken"
+                      style="cursor: default;"
+                    >
+                      <span class="username">{{ GetToken.nickname }}</span>
+                      <el-avatar :src="GetToken.avatar">
+                        <img
+                          src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
+                        />
+                      </el-avatar>
+                    </router-link>
                     <span>|</span>
                     <router-link to="/register" title="免费注册"
                       >免费注册</router-link
@@ -55,9 +70,25 @@
 </template>
 
 <script>
+import { ref } from "vue";
+// import { useStore } from "vuex";
+
 export default {
   name: "HomeHeader",
-  setup() {}
+  setup() {
+    // const Store = useStore();
+    // 判断是否存储着token
+    const GetToken = ref(JSON.parse(window.localStorage.getItem("userData")));
+    console.log(GetToken.value);
+
+    // if (LoginData.value.id === undefined) {
+    //   LoginErr.value = undefined;
+    // }
+
+    return {
+      GetToken
+    };
+  }
 };
 </script>
 
@@ -100,13 +131,38 @@ export default {
             }
           }
 
-          span {
+          > span {
             color: #7b7b7b;
             margin: 0 8px;
           }
         }
       }
     }
+  }
+
+  .sign {
+    position: relative;
+
+    .el-avatar {
+      position: absolute;
+      top: -9px;
+      left: 52px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .username {
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 59px;
+    color: #e7e7e7 !important;
+    margin-right: 22px;
+    vertical-align: bottom;
   }
 }
 </style>

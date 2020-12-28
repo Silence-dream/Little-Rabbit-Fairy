@@ -47,13 +47,44 @@
         </div>
       </el-col>
     </div>
+
+    <!-- 随滚动出现 -->
+    <div class="navBarFixed" :class="navBarFixed == true ? 'nav' : ''">
+      <div class="container">
+        <ul>
+          <li>
+            <router-link to="/">
+              首页
+            </router-link>
+          </li>
+          <li v-for="item in oulData" :key="item.id">
+            <router-link to="/Primary">
+              {{ item.name }}
+            </router-link>
+          </li>
+        </ul>
+        <i class="iconfont icon-double-arro-right arrow"></i>
+        <div class="nav-search">
+          <div style="border-bottom:1px solid #27bb9a">
+            <el-input
+              placeholder="搜一搜"
+              v-model="searchInput"
+              style="display: inline-block;border:none;height:100%"
+            >
+            </el-input>
+          </div>
+        </div>
+        <i class="iconfont icon-sousuo1 sousuo"></i>
+        <i class="iconfont icon-gouwuche gouwuche"></i>
+      </div>
+    </div>
   </el-row>
 </template>
 
 <script>
 import { httpGet } from "@/utils/http.js";
 import { useStore } from "vuex";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { home } from "@/api";
 
 export default {
@@ -64,6 +95,8 @@ export default {
     const searchInput = ref("");
     // 搜索框样式
     let searchActive = ref(false);
+    // 导航栏吸顶
+    let navBarFixed = ref(false);
 
     // 头部导航栏数据
     let oulData = ref([]);
@@ -81,8 +114,27 @@ export default {
         console.log(err);
       });
 
+    // 随着鼠标滚动显示顶部第二种导航栏
+    let handleScroll = () => {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      if (scrollTop > 182) {
+        navBarFixed.value = true;
+      } else {
+        navBarFixed.value = false;
+      }
+    };
+
     onMounted(() => {
       getoLiData;
+      window.addEventListener("scroll", handleScroll);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", handleScroll);
     });
 
     // 点击搜索框边框效果
@@ -92,10 +144,10 @@ export default {
 
     return {
       searchActive,
-
       searchInput,
       focusSearchBorder,
-      oulData
+      oulData,
+      navBarFixed
     };
   }
 };
@@ -142,6 +194,7 @@ export default {
 
       a {
         display: inline-block;
+        border-bottom: 2px solid transparent;
         padding: 20px 14px;
       }
 
@@ -193,6 +246,96 @@ export default {
 
       .icon-gouwuchekong {
         font-size: 22px;
+      }
+    }
+  }
+}
+
+// 随滚动出现
+.navBarFixed {
+  display: none;
+}
+
+.nav {
+  display: block;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
+  background-color: #fff;
+  text-align: center;
+  z-index: 999;
+  border-bottom: 1px solid #e4e4e4;
+  @include clearfix();
+
+  ul {
+    float: left;
+    line-height: 70px;
+    @include clearfix();
+
+    li {
+      float: left;
+      color: #333333;
+      font-size: 16px;
+      margin-right: 66px;
+
+      a {
+        &:hover {
+          color: #27ba9b;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  i {
+    float: left;
+    line-height: 70px;
+  }
+
+  .arrow {
+    margin-left: 6px;
+  }
+
+  .sousuo {
+    color: #2dbd9d;
+    margin-left: -26px;
+  }
+
+  .gouwuche {
+    color: #2dbd9d;
+  }
+
+  .nav-search {
+    float: left;
+    width: 209px;
+    height: 100%;
+
+    > div {
+      height: 24px;
+    }
+  }
+
+  .nav-search {
+    float: left;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-left: 4px;
+
+    > div {
+      position: relative;
+      border-bottom: 1px solid #e7e7e7;
+      padding-left: 10px;
+
+      .el-input {
+        :deep(.el-input__inner) {
+          padding: 0;
+        }
       }
     }
   }

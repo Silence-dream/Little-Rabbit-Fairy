@@ -25,6 +25,10 @@
         <!-- 左侧大图 -->
         <div class="content-big-picture">
           <img :src="item.picture" />
+          <div class="text-location">
+            <span class="left">{{ item.name }}馆</span>
+            <span class="right">{{ item.saleInfo }}</span>
+          </div>
         </div>
 
         <!-- 右侧八小图 -->
@@ -71,7 +75,7 @@ export default {
     // 获取产品区块数据
     let getProduct = httpGet(home.GetProductBlock)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         let { result } = res;
 
         GetProductBlock.value = result;
@@ -132,9 +136,11 @@ export default {
 .HomeProductBlock-content {
   width: 100%;
   height: 610px;
+  margin-bottom: 53px;
   @include clearfix();
 
   .content-big-picture {
+    position: relative;
     float: left;
     width: 240px;
     height: 100%;
@@ -143,6 +149,14 @@ export default {
     img {
       width: 100%;
       height: 100%;
+    }
+
+    .text-location {
+      position: absolute;
+      bottom: 200px;
+      left: 0;
+      width: 187px;
+      height: 66px;
     }
   }
 
@@ -154,6 +168,28 @@ export default {
     ul {
       height: 100%;
     }
+  }
+}
+
+.text-location {
+  span {
+    display: inline-block;
+    height: 100%;
+    font-size: 16px;
+    text-align: center;
+    line-height: 66px;
+    color: #ffffff;
+    background-color: #000;
+  }
+
+  .left {
+    width: 75px;
+    opacity: 1;
+  }
+
+  .right {
+    width: 112px;
+    opacity: 0.8;
   }
 }
 

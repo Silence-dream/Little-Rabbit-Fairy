@@ -180,6 +180,10 @@ export default {
     font-weight: 400;
   }
 
+  b {
+    display: block;
+  }
+
   span {
     display: inline-block;
     width: 80px;

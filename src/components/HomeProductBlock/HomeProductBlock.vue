@@ -136,6 +136,7 @@ export default {
 .HomeProductBlock-content {
   width: 100%;
   height: 610px;
+  margin-bottom: 53px;
   @include clearfix();
 
   .content-big-picture {

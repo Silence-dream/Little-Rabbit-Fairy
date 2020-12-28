@@ -4,7 +4,8 @@ export const home = {
   GetFreshGood: "home/new", // 新鲜好物
   GetPopularityRecommend: "home/hot", // 人气推荐
   GetHotBrands: "home/brand", // 热门品牌
-  GetProductBlock: "home/goods" // 产品区块
+  GetProductBlock: "home/goods", // 产品区块
+  GetLatestTopics: "home/special" // 最新专题
 };
 
 // 公共分类

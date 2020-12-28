@@ -16,7 +16,7 @@ const routes = [
         name: "HomeMain",
         component: () =>
           import(
-            /* webpackChunkName: "PrimaryGoods" */
+            /* webpackChunkName: "HomeMain" */
             "@/components/HomeMain/HomeMain.vue"
           )
       },
@@ -73,7 +73,7 @@ const routes = [
               )
           },
           {
-            path: "Success",
+            path: "success",
             name: "RegisterSuccess",
             component: () =>
               import(
@@ -85,7 +85,7 @@ const routes = [
       },
       // 任务中心路由
       {
-        path: "TaskCenter",
+        path: "task-center",
         name: "TaskCenter",
         component: () =>
           import(
@@ -95,7 +95,7 @@ const routes = [
       },
       // 会员中心路由
       {
-        path: "MemberCenter",
+        path: "member-center",
         name: "MemberCenter",
         component: () =>
           import(
@@ -116,19 +116,13 @@ const routes = [
     ]
   },
   {
-    path: "/demo",
-    name: "Demo",
-    component: () =>
-      import(/* webpackChunkName: "Demo" */ "@/components/Demo/Demo.vue")
-  },
-  {
     path: "/login",
     name: "Login",
     component: () =>
       import(/* webpackChunkName: "Login" */ "@/views/Login/Login.vue")
   },
   {
-    path: "/OnlineServer",
+    path: "/online-server",
     name: "OnlineServer",
     component: () =>
       import(
@@ -138,7 +132,7 @@ const routes = [
   },
   // 问题反馈
   {
-    path: "/FeedBack",
+    path: "/feed-back",
     name: "FeedBack",
     component: () =>
       import(
@@ -158,7 +152,7 @@ const routes = [
       },
       // 问题反馈》提交成功
       {
-        path: "Success",
+        path: "success",
         name: "ProblemBackSuccess",
         component: () =>
           import(

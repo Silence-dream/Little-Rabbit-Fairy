@@ -24,8 +24,10 @@ instance.interceptors.request.use(
   config => {
     // 在headers头上添加参数
     config.headers["Content-Type"] = "application/json;charset=UTF-8";
-    const token = JSON.parse(window.localStorage.getItem("userData")).token;
-    // const token = '';
+    var token = JSON.parse(window.localStorage.getItem("userData") || null);
+    // console.log(token);
+    // console.log(11);
+    // const token = "";
     // 判断是否有token令牌
     if (token) {
       config.headers["Authorization"] = token;

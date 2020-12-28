@@ -26,6 +26,11 @@
     <el-row style="background-color: #fff;">
       <HomeProductBlock />
     </el-row>
+
+    <!-- 首页最新专题组件 -->
+    <el-row>
+      <HomeLatestTopics />
+    </el-row>
   </div>
 </template>
 
@@ -35,6 +40,7 @@ import HomeFreshGood from "@/components/HomeFreshGood/HomeFreshGood.vue";
 import HomePopularityRecommend from "@/components/HomePopularityRecommend/HomePopularityRecommend.vue";
 import HomeHotBrands from "@/components/HomeHotBrands/HomeHotBrands.vue";
 import HomeProductBlock from "@/components/HomeProductBlock/HomeProductBlock.vue";
+import HomeLatestTopics from "@/components/HomeLatestTopics/HomeLatestTopics.vue";
 
 export default {
   name: "HomeMain",
@@ -43,7 +49,8 @@ export default {
     HomeFreshGood,
     HomePopularityRecommend,
     HomeHotBrands,
-    HomeProductBlock
+    HomeProductBlock,
+    HomeLatestTopics
   }
 };
 </script>

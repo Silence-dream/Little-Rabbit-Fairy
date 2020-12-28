@@ -79,11 +79,7 @@ export default {
     // const Store = useStore();
     // 判断是否存储着token
     const GetToken = ref(JSON.parse(window.localStorage.getItem("userData")));
-    console.log(GetToken.value);
-
-    // if (LoginData.value.id === undefined) {
-    //   LoginErr.value = undefined;
-    // }
+    // console.log(GetToken.value);
 
     return {
       GetToken

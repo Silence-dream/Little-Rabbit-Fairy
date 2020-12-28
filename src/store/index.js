@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import HomeLogo from "@/components/HomeLogo/HomeLogoStore.js";
+import LoginBannerStore from "@/components/LoginBanner/LoginBannerStore.js";
 
 export default createStore({
   state() {
@@ -8,6 +9,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    HomeLogo: HomeLogo
+    HomeLogo: HomeLogo,
+    LoginBannerStore
   }
 });

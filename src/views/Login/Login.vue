@@ -18,7 +18,7 @@ export let validateMobile = (rule, value, callback) => {
   if (value.trim() === "") {
     callback(new Error("请输入手机号"));
   } else if (!patternRegular.test(value)) {
-    callback(new Error("请输入正确的手机号"));
+    callback(new Error("手机号码格式不正确"));
   } else {
     callback();
   }

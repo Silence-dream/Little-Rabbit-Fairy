@@ -128,6 +128,7 @@ export default {
   right: 10px;
   bottom: 0;
   padding: 4px;
+  z-index: 100;
 
   span {
     display: flex;

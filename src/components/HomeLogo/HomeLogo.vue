@@ -49,7 +49,7 @@
     </div>
 
     <!-- 随滚动出现 -->
-    <div class="navBarFixed" :class="navBarFixed == true ? 'nav' : ''">
+    <div :class="navBarFixed == true ? 'nav' : 'navBarFixed'">
       <div class="container">
         <ul>
           <li>
@@ -154,6 +154,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// @keyframes reback {
+//   0% {
+//     opacity: 0;
+//   }
+
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
 // 顶部logo行
 .logo-nav {
   height: 100%;
@@ -253,11 +263,10 @@ export default {
 
 // 随滚动出现
 .navBarFixed {
-  display: none;
+  opacity: 0;
 }
 
 .nav {
-  display: block;
   position: fixed;
   top: 0;
   width: 100%;
@@ -267,6 +276,8 @@ export default {
   text-align: center;
   z-index: 999;
   border-bottom: 1px solid #e4e4e4;
+  opacity: 1;
+  transition: all 0.5s;
   @include clearfix();
 
   ul {

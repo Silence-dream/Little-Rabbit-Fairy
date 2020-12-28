@@ -244,7 +244,7 @@ export default {
             .then(result => {
               // 获取返回值
               let { result: returnData } = result;
-              localStorage.setItem("token", returnData.token);
+              localStorage.setItem("userData", JSON.stringify(returnData));
               console.log(returnData);
               /* 登录成功弹框 */
               Message({ type: "success", message: result.msg });

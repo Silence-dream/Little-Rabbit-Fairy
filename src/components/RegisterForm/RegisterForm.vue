@@ -106,7 +106,8 @@ export default {
     };
     let validateAccount = (rule, value, callback) => {
       // 用户名正则
-      let accountReg = /^[a-zA-Z][0-9]/;
+      let accountReg = /^[a-zA-Z][a-zA-Z\d]/;
+      console.log(accountReg.test(value));
       if (!accountReg.test(value)) {
         callback(new Error("用户名首位必须为字母"));
       }

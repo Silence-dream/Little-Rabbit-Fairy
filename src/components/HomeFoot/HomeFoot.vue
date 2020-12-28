@@ -14,7 +14,7 @@
                     <i class="iconfont icon-zaixiankefu"></i>
                     <b>在线客服</b>
                   </span>
-                  <router-link to="/FeedBack">
+                  <router-link to="/feed-back">
                     <span>
                       <i class="iconfont icon-wentifankui"></i>
                       <b>问题反馈</b>

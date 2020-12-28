@@ -104,11 +104,30 @@ export default {
         callback();
       }
     };
+    let validateAccount = (rule, value, callback) => {
+      // 用户名正则
+      let accountReg = /^[a-zA-Z][0-9]/;
+      if (!accountReg.test(value)) {
+        callback(new Error("用户名首位必须为字母"));
+      }
+      callback();
+    };
+
     /* 校验规则 */
     let registerRules = reactive({
       account: [
-        { required: true, message: "请输入用户名", trigger: "blur" },
-        { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        {
+          required: true,
+          message: "请输入用户名",
+          trigger: "blur"
+        },
+        {
+          min: 6,
+          max: 20,
+          message: "用户名必须为6至20位字母或字母和数字组合",
+          trigger: "blur"
+        },
+        { validator: validateAccount }
       ],
       mobile: [
         { required: true, validator: validateMobile, trigger: "blur" },
@@ -120,7 +139,7 @@ export default {
       ],
       password: [
         { required: true, message: "请输入密码", trigger: "blur" },
-        { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
+        { min: 6, max: 20, message: "长度在 6 到 16 个字符", trigger: "blur" }
       ],
       checkPassword: [
         {
@@ -128,7 +147,7 @@ export default {
           validator: validateCheckPassword,
           trigger: "blur"
         },
-        { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
+        { min: 6, max: 20, message: "长度在 6 到 16 个字符", trigger: "blur" }
       ],
       isTerms: [
         {

@@ -146,6 +146,7 @@
 
 <script>
 import { ref, reactive, getCurrentInstance } from "vue";
+import { useStore } from "vuex";
 import { common } from "@/api/index.js";
 import { httpPost } from "@/utils/http.js";
 import { Message } from "element3";
@@ -153,12 +154,14 @@ import { Message } from "element3";
 import { validateMobile } from "@/views/Login/Login.vue";
 export default {
   name: "LoginBanner",
-  setup() {
+  setup: function() {
     const self = getCurrentInstance().ctx;
+    const Store = useStore();
     /* 账号登录和二维码登录切换  */
     let isLoginChooseFlag = ref(false);
     /* 账号登录和验证码登录切换 */
     let isAccountChooseFlag = ref(false);
+
     /* 切换账号登录和二维码登录 */
     /**
      *
@@ -171,6 +174,7 @@ export default {
         isLoginChooseFlag.value = flag;
       }
     }
+
     /* 切换账号登录和验证码登录 */
     /**
      *
@@ -196,12 +200,12 @@ export default {
     /* 校验规则 */
     let rules = reactive({
       account: [
-        { required: true, message: "请输入用户名称/手机号码", trigger: "blur" },
-        { min: 3, max: 16, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        { required: true, message: "用户名/手机号格式不正确", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 3 到 5 个字符", trigger: "blur" }
       ],
       password: [
-        { required: true, message: "请输入密码", trigger: "blur" },
-        { min: 6, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
+        { required: true, message: "密码格式不正确", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 3 到 16 个字符", trigger: "blur" }
       ],
       isTerms: [
         {
@@ -240,10 +244,13 @@ export default {
             .then(result => {
               // 获取返回值
               let { result: returnData } = result;
-              sessionStorage.setItem("token", returnData.token);
+              localStorage.setItem("token", returnData.token);
               console.log(returnData);
               /* 登录成功弹框 */
-              Message({ type: "success", message: "登录成功" });
+              Message({ type: "success", message: result.msg });
+              Store.state.LoginBannerStore.LoginInfo = returnData;
+              // TODO 需要处理登录成功的状态
+              self.$router.push("/");
             })
             .catch(error => console.log(error));
         } else {
@@ -252,6 +259,7 @@ export default {
         }
       });
     }
+
     //#endregion
 
     //#region 验证码登录
@@ -263,6 +271,7 @@ export default {
     let getCodeText = ref(`发送验证码`);
     // 是否禁用按钮
     let isCode = ref(false);
+
     /* 发送验证码 重发验证码 60秒后重发 */
     function getCode() {
       clearInterval(timer);
@@ -279,6 +288,7 @@ export default {
         }
       }, 1000);
     }
+
     /**
      * 校验 验证码登录
      * @param {string} formName
@@ -307,6 +317,7 @@ export default {
         }
       });
     }
+
     //#endregion
 
     //#region 二维码登录

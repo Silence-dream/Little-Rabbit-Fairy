@@ -112,6 +112,16 @@ const routes = [
             /* webpackChunkName: "Details" */
             "@/components/Details/SecondaryDetails.vue"
           )
+      },
+      // 找回密码
+      {
+        path: "reset-password",
+        name: "ResetPassword",
+        component: () =>
+          import(
+            /* webpackChunkName: "reset-password" */
+            "@/components/ResetPassword/ResetPassword.vue"
+          )
       }
     ]
   },

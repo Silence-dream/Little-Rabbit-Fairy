@@ -7,8 +7,8 @@
       </div>
       <!-- 跳转到网站首页 -->
       <div class="goto-home">
-        <router-link class="goto-home-btn" to="/">
-          进入网站首页
+        <router-link class="goto-home-btn" :to="{ path: router }">
+          {{ text }}
         </router-link>
       </div>
     </div>
@@ -16,8 +16,22 @@
 </template>
 
 <script>
+/**
+ * @param {string} text   头部文字设置
+ * @param {string} router 头部路由设置
+ */
 export default {
-  name: "LoginHeader"
+  name: "LoginHeader",
+  props: {
+    text: {
+      type: String,
+      default: "进入网站首页"
+    },
+    router: {
+      type: String,
+      default: "/"
+    }
+  }
 };
 </script>
 

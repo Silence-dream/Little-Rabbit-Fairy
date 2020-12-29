@@ -14,3 +14,8 @@ export const common = {
   LoginCode: "login/code", // 手机验证码登录
   Regiser: "regiser" // 注册功能
 };
+
+// 购物车
+export const shop = {
+  wares: "member/cart" // 购物车列表
+};

@@ -46,9 +46,14 @@
                 v-for="(item, index) in getMainImg"
                 :key="item"
                 :class="index == 0 ? 'active' : ''"
-                @click="showPic($event)"
               >
-                <img ref="imgSrc" :data-index="index" :src="item" alt="" />
+                <img
+                  @click="showPic($event)"
+                  ref="imgSrc"
+                  :data-index="index"
+                  :src="item"
+                  alt=""
+                />
               </li>
             </ul>
           </div>
@@ -146,6 +151,7 @@ export default {
     const mainImg = ref(null);
     const plotPlay = ref(null);
     function showPic(event) {
+      console.log(event);
       // console.log(event.target.getAttribute("data-index"));
       if (event.target.getAttribute("data-index") == 0) {
         plotPlay.value.style.display = "block";

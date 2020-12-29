@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="pageare"> -->
   <!-- 中间表单 starte -->
   <div class="contain main">
     <p class="top">问题反馈</p>
@@ -15,19 +14,31 @@
           <el-row class="coupback">
             <el-col :span="4" class="heig"> 反馈类型： </el-col>
             <el-col :span="20">
-              <el-select placeholder="请选择">
-                <el-option> </el-option>
-              </el-select>
+              <el-form-item prop="FeedBackType">
+                <el-select
+                  placeholder="请选择"
+                  v-model="FeedBackForm.FeedBackType"
+                >
+                  <el-option
+                    v-for="(item, index) in FeedBackForm.Content"
+                    :key="index"
+                    :value="index"
+                    :label="item"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
             </el-col>
           </el-row>
           <!-- 反馈内容 -->
           <el-row class="coupback">
             <el-col :span="4"> 反馈内容： </el-col>
             <el-col :span="20">
-              <el-form-item>
+              <el-form-item prop="FeedBackcContent">
                 <el-input
                   type="textarea"
                   :rows="4"
+                  v-model="FeedBackForm.FeedBackcContent"
                   placeholder="对我们网站、商品、服务，您有什么建议吗？你还希望我们为您提供哪些商品？请告诉我们..."
                 >
                 </el-input>
@@ -55,17 +66,26 @@
           <el-row class="coupback">
             <el-col :span="4" class="heig"> 手机号码： </el-col>
             <el-col :span="20">
-              <el-input
-                size="medium"
-                placeholder="方便我们与您进行联系"
-              ></el-input>
+              <el-form-item prop="mobil">
+                <el-input
+                  size="medium"
+                  v-model="FeedBackForm.mobil"
+                  placeholder="方便我们与您进行联系"
+                ></el-input>
+              </el-form-item>
             </el-col>
           </el-row>
           <!-- 图片验证码 -->
           <el-row class="coupback">
             <el-col :span="4" class="heig"> 验证码： </el-col>
             <el-col :span="20">
-              <el-input size="medium" placeholder="请输入图形验证码"></el-input>
+              <el-form-item prop="VerificationCode">
+                <el-input
+                  size="medium"
+                  v-model="FeedBackForm.VerificationCode"
+                  placeholder="请输入图形验证码"
+                ></el-input>
+              </el-form-item>
             </el-col>
           </el-row>
         </el-col>
@@ -79,13 +99,10 @@
     </div>
     <!-- 提交反馈按钮 -->
     <div class="buttongo">
-      <router-link to="#">
-        <el-button>提交反馈</el-button>
-      </router-link>
+      <el-button @click="verification">提交反馈</el-button>
     </div>
   </div>
   <!-- 中间表单 end -->
-  <!-- </div> -->
 </template>
 
 <script>
@@ -95,12 +112,13 @@ import { FeedBackRules, AddFeedBack } from "./rules.js";
 export default {
   name: "ProblemBack",
   setup() {
-    let { FeedBackForm, FeedBackRefs } = AddFeedBack();
+    let { FeedBackForm, FeedBackRefs, verification } = AddFeedBack();
 
     return {
       FeedBackRules,
       FeedBackForm,
-      FeedBackRefs
+      FeedBackRefs,
+      verification
     };
   }
 };
@@ -125,6 +143,10 @@ export default {
 
   .coupback {
     margin: 20px 0;
+
+    .phonce {
+      display: inline-flex;
+    }
   }
 }
 // 中间表单 end
@@ -186,9 +208,14 @@ export default {
 }
 
 // 相关图片显示
-:deep(.is-success) {
+:deep(.el-upload-list__item) {
   width: 100px;
   height: 100px;
+}
+
+:deep(.is-required) {
+  margin: 0;
+  width: 430px;
 }
 
 .el-icon-plus {

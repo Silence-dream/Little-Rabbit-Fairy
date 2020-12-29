@@ -24,9 +24,8 @@
           <span class="active" @click="change($event)">最新商品</span>
           <span @click="change($event)">最高人气</span>
           <span @click="change($event)">评论最多</span>
-          <span @click="change($event)"
-            >价格排序 <i class="iconfont icon-shang"></i
-            ><i class="iconfont icon-xia"></i>
+          <span class="click"
+            >价格排序 <i class="top"></i><i class="bottom"></i>
           </span>
         </div>
         <div class="top-right">
@@ -153,6 +152,34 @@ export default {
     cursor: pointer;
   }
 
+  // 字体图标设置
+  .click {
+    position: relative;
+    padding-right: 20px;
+
+    .top {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 6px 5px;
+      border-color: transparent transparent #999999;
+      position: absolute;
+      bottom: 15px;
+      right: 4px;
+    }
+    .bottom {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 6px 5px;
+      border-color: transparent transparent #999999;
+      position: absolute;
+      transform: rotate(180deg);
+      bottom: 7px;
+      right: 4px;
+    }
+  }
+
   .active {
     background-color: #5eb69c;
     border-color: #5eb69c;
@@ -179,6 +206,7 @@ export default {
     height: 370px;
     margin-right: 26px;
     transition: all 0.5s;
+    cursor: pointer;
 
     &:hover {
       box-shadow: 0px 1px 8px 4px rgba(216, 215, 215, 0.33);
@@ -188,6 +216,7 @@ export default {
     &:nth-child(4),
     &:nth-child(8),
     &:nth-child(12),
+    &:nth-child(16),
     &:last-child {
       margin-right: 0px;
     }
@@ -241,11 +270,5 @@ export default {
       font-size: 18px;
     }
   }
-}
-
-// 字体图标设置
-.icon-xia,
-.icon-shang {
-  font-size: 6px;
 }
 </style>

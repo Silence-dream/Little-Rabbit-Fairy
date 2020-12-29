@@ -1,5 +1,5 @@
 <template>
-  <div id="Home" style="height: 100%;">
+  <div id="Home">
     <el-container>
       <!-- 首页头部 -->
       <el-header height="182px">

@@ -40,9 +40,56 @@
 
           <!-- 购物车 -->
           <div class="shopping-cart">
-            <el-badge :value="12" class="item">
+            <el-badge :value="wareNum" class="item" style="cursor: pointer;">
               <i class="iconfont icon-gouwuchekong"></i>
             </el-badge>
+
+            <!-- 购物车单 -->
+            <div class="tag">
+              <!-- 三角形 -->
+              <div class="arrow">
+                <em></em>
+              </div>
+
+              <!-- 内容 -->
+              <div class="tag-content">
+                <!-- 购物商品 -->
+                <div class="content-wares">
+                  <ul>
+                    <li v-for="item in shopWares" :key="item.id">
+                      <router-link to="#" style="float:left; height: 100%;">
+                        <img :src="item.picture" />
+                        <div>
+                          <p class="wares-message">
+                            小米电视4A 32英寸
+                          </p>
+                          <p class="wares-number">
+                            {{ item.attrsText.color }}
+                            {{ item.attrsText.size }}
+                            &nbsp;&nbsp;&nbsp; x
+                            {{ item.count }}
+                          </p>
+                        </div>
+                        <span>¥{{ item.warePrice }}</span>
+                      </router-link>
+                      <i class="el-icon-close"></i>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- 底部价格 -->
+                <div class="content-price">
+                  <!-- 总共 -->
+                  <div>
+                    <em>共{{ wareNum }}件商品</em>
+                    <span>¥{{ settlement }}</span>
+                  </div>
+
+                  <!-- 去购物车结算 -->
+                  <router-link to="#">去购物车结算</router-link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </el-col>
@@ -85,7 +132,7 @@
 import { httpGet } from "@/utils/http.js";
 import { useStore } from "vuex";
 import { ref, onMounted, onUnmounted } from "vue";
-import { home } from "@/api";
+import { home, shop } from "@/api";
 
 export default {
   name: "HomeLogo",
@@ -97,6 +144,12 @@ export default {
     let searchActive = ref(false);
     // 导航栏吸顶
     let navBarFixed = ref(false);
+    // 购物商品
+    let shopWares = ref([]);
+    // 商品结算金额
+    let settlement = ref(0);
+    // 总共商品
+    let wareNum = ref(0);
 
     // 头部导航栏数据
     let oulData = ref([]);
@@ -109,6 +162,44 @@ export default {
         // 存入vuex中
         Store.commit("liveCategory", oLiData);
         oulData.value = oLiData;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // 获取购物车单数据
+    let getWares = httpGet(shop.wares)
+      .then(res => {
+        // console.log(res);
+        let { result } = res;
+        res.settlement = 0;
+
+        shopWares.value = result;
+
+        shopWares.value.forEach(ele => {
+          // 商品金额
+          ele.warePrice = ele.price * ele.count;
+          // 结算金额
+          res.settlement += ele.warePrice;
+
+          // 商品简文本
+          ele.attrsText = ele.attrsText.replace(/：/g, ":").split(" ");
+
+          let arr = ref([]);
+
+          ele.attrsText.forEach(key => {
+            arr.value.push(key.split(":"));
+          });
+
+          ele.attrsText = {
+            color: arr.value[0][1],
+            size: parseInt(arr.value[1][1]),
+            place: arr.value[2][1]
+          };
+        });
+
+        settlement.value = res.settlement.toFixed(2);
+        wareNum.value = shopWares.value.length;
       })
       .catch(err => {
         console.log(err);
@@ -131,6 +222,7 @@ export default {
     onMounted(() => {
       getoLiData;
       window.addEventListener("scroll", handleScroll);
+      getWares;
     });
 
     onUnmounted(() => {
@@ -147,22 +239,23 @@ export default {
       searchInput,
       focusSearchBorder,
       oulData,
-      navBarFixed
+      navBarFixed,
+      shopWares,
+      settlement,
+      wareNum
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-// @keyframes reback {
-//   0% {
-//     opacity: 0;
-//   }
-
-//   100% {
-//     opacity: 1;
-//   }
-// }
+@mixin text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 // 顶部logo行
 .logo-nav {
@@ -184,7 +277,7 @@ export default {
   }
 
   // 头部导航栏
-  ul {
+  > ul {
     display: flex;
     float: left;
     height: 100%;
@@ -247,17 +340,166 @@ export default {
   // 购物车
   .shopping-cart {
     float: left;
-    display: flex;
-    height: 100%;
-    align-items: center;
+    margin-top: 58px;
+    margin-left: 24px;
 
     .item {
-      margin-left: 24px;
-
       .icon-gouwuchekong {
         font-size: 22px;
       }
     }
+
+    &:hover {
+      .tag {
+        display: block;
+        transition: all 1s;
+      }
+    }
+  }
+
+  // 购物车单
+  .tag {
+    display: none;
+    position: absolute;
+    top: 98px;
+    right: 0;
+    width: 409px;
+    border: 1px solid#27b99b;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px 0px rgba(221, 216, 216, 0.5),
+      0px 2px 4px 0px rgba(221, 216, 216, 0.5);
+    z-index: 100;
+
+    .arrow {
+      position: absolute;
+      top: -19px;
+      right: 78px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 18px solid#27b99b;
+
+      em {
+        position: absolute;
+        top: 2px;
+        left: -9px;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 17px solid #fff;
+      }
+    }
+
+    .tag-content {
+      height: 100%;
+    }
+  }
+}
+
+// 购物车单之购物商品
+.content-wares {
+  width: 100%;
+
+  ul {
+    margin-left: 18px;
+  }
+
+  li {
+    height: 86px;
+    text-align: left;
+    margin-top: 25px;
+    @include clearfix();
+
+    > a {
+      img {
+        float: left;
+        width: 86px;
+        height: 86px;
+      }
+
+      > div {
+        float: left;
+        width: 165px;
+        height: 100%;
+        margin-left: 10px;
+      }
+
+      .wares-message {
+        font-size: 16px;
+        color: #575757;
+        margin-bottom: 6px;
+        @include text();
+      }
+
+      .wares-number {
+        font-size: 14px;
+        color: #9b9b9b;
+        @include text();
+      }
+
+      > span {
+        float: left;
+        width: 58px;
+        font-size: 16px;
+        color: #cf4444;
+        line-height: 30px;
+        margin-right: 14px;
+        @include text();
+      }
+    }
+
+    i {
+      float: right;
+      color: #e4e4e4;
+      font-size: 22px;
+      cursor: pointer;
+      margin-top: 5px;
+      margin-right: 34px;
+    }
+  }
+}
+
+// 购物车单之底部价格
+.content-price {
+  width: 100%;
+  height: 67px;
+  border-radius: 0px 0px 4px 4px;
+  background-color: #e3f9f4;
+  margin-top: 37px;
+
+  > div {
+    display: flex;
+    float: left;
+    height: 100%;
+    font-size: 16px;
+    flex-direction: column;
+    line-height: 23px;
+
+    em {
+      font-weight: 400;
+      color: #333333;
+      margin-top: 11px;
+      margin-left: 24px;
+    }
+
+    span {
+      color: #cf4444;
+      margin-left: 20px;
+    }
+  }
+
+  a {
+    float: right;
+    width: 150px;
+    height: 46px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 46px;
+    background-color: #27ba9b;
+    border-radius: 4px;
+    margin-top: 11px;
+    margin-right: 14px;
   }
 }
 

@@ -130,7 +130,7 @@
           </el-form>
           <!-- 忘记密码 免费注册 -->
           <div class="user-other">
-            <a href="javascript:;">忘记密码?</a>
+            <router-link :to="{ name: 'ResetPassword' }">忘记密码?</router-link>
             <router-link to="/register">免费注册</router-link>
           </div>
         </div>

@@ -24,7 +24,7 @@
             <el-row>
               <!-- 积分栏左侧 -->
               <el-col :span="9">
-                <img src="./assets/Task.svg" />
+                <img src="./img/Task.svg" />
                 <p class="left-tip">做任务 领福利</p>
               </el-col>
               <!-- 积分栏右侧 -->
@@ -32,12 +32,12 @@
                 <div class="score-display-container">
                   <div>
                     <p>我的积分</p>
-                    <p class="score-count">1000</p>
+                    <p class="score-count">{{ score.myScore }}</p>
                   </div>
                   <!-- // -->
                   <div>
-                    <p>我的积分</p>
-                    <p class="score-count">1000</p>
+                    <p>邀请好友</p>
+                    <p class="score-count">{{ score.invite }}</p>
                   </div>
                 </div>
               </el-col>
@@ -47,12 +47,12 @@
 
           <!-- 新手任务 组件 起始 -->
           <div class="chunk-title">新手任务</div>
-          <TaskList />
+          <TaskList :Task="Tasks" />
           <!-- 新手任务 组件 结束 -->
 
           <!-- 日常任务 组件 起始 -->
           <div class="chunk-title">日常任务</div>
-          <TaskList />
+          <TaskList :Task="Tasks" />
           <!-- 日常任务 组件 结束 -->
         </el-main>
       </el-container>
@@ -62,7 +62,42 @@
 
 <script>
 import TaskList from "@/components/TaskList/TaskList.vue";
+import { reactive } from "vue";
 export default {
+  setup() {
+    const score = reactive({
+      myScore: 1000,
+      invite: 1000
+    });
+    const Tasks = reactive([
+      {
+        taskTitle: "新手欢迎奖励",
+        taskScore: 5,
+        isTaskComplete: true
+      },
+      {
+        taskTitle: "设置头像",
+        taskScore: 10,
+        isTaskComplete: false
+      },
+      {
+        taskTitle: "完善个人信息",
+        taskScore: 10,
+        isTaskComplete: false
+      },
+      {
+        taskTitle: "设置兴趣分类",
+        taskScore: 10,
+        isTaskComplete: false
+      }
+    ]);
+
+    return {
+      score,
+      Tasks
+    };
+  },
+  // ---
   components: {
     TaskList: TaskList
   }

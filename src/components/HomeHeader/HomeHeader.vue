@@ -60,7 +60,9 @@
                     <span v-if="!GetToken">|</span>
                     <router-link to="#" title="我的订单">我的订单</router-link>
                     <span>|</span>
-                    <router-link to="#" title="会员中心">会员中心</router-link>
+                    <router-link to="/member-center" title="会员中心">
+                      会员中心
+                    </router-link>
                     <span>|</span>
                     <router-link to="#" title="帮助中心">帮助中心</router-link>
                     <span>|</span>

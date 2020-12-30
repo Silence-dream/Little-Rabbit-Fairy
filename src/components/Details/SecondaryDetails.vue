@@ -17,7 +17,9 @@
   <!-- 商品展示部分 start -->
   <div class="exhibition">
     <div class="container exhibition-bgc">
+      <!-- 左侧栏 start -->
       <div class="exhibition-left">
+        <!-- 左侧顶部的商品图片切换 -->
         <div class="show-top">
           <!-- 视频+图片展示 -->
           <div class="product-video" v-for="item in getMainVideo" :key="item">
@@ -39,21 +41,64 @@
           </div>
           <!-- 列表展示 -->
           <div class="product-list">
-            <ul style="width:68px">
+            <ul>
               <li
                 v-for="(item, index) in getMainImg"
                 :key="item"
                 :class="index == 0 ? 'active' : ''"
-                @click="showPic($event)"
               >
-                <img ref="imgSrc" :data-index="index" :src="item" alt="" />
+                <img
+                  @click="showPic($event)"
+                  ref="imgSrc"
+                  :data-index="index"
+                  :src="item"
+                  alt=""
+                />
               </li>
             </ul>
           </div>
         </div>
-        <div class="show-bottom"></div>
+        <!-- 左侧底部的商品导航栏 -->
+        <div class="show-bottom">
+          <div>
+            <p>销量人气</p>
+            <span>1999+</span>
+            <router-link to="#">销量人气</router-link>
+          </div>
+          <i></i>
+          <div>
+            <p>商品评价</p>
+            <span>999+</span>
+            <router-link to="#">查看评价</router-link>
+          </div>
+          <i></i>
+          <div>
+            <p>收藏人气</p>
+            <span>1888+</span>
+            <router-link to="#">收藏商品</router-link>
+          </div>
+          <i></i>
+          <div>
+            <p>商品信息</p>
+            <span>小米</span>
+            <router-link to="#">品牌主页</router-link>
+          </div>
+        </div>
       </div>
-      <div class="exhibition-right"></div>
+      <!-- 左侧栏 end -->
+
+      <!-- 右侧栏 start -->
+      <div class="exhibition-right">
+        <h1>小米电视4A 32英寸</h1>
+        <p>全面屏设计 / 高清分辨率 / 海量内容 / 1G+4G大内存 / 多核处理器</p>
+        <div class="price"><span>￥1899</span> <s>￥2999</s></div>
+        <div class="place">
+          <div class="promotion"></div>
+          <div class="address"></div>
+          <div class="servies"></div>
+        </div>
+      </div>
+      <!-- 右侧栏 end -->
     </div>
   </div>
   <!-- 商品展示部分 end -->
@@ -83,7 +128,9 @@ export default {
         console.log(error);
       });
     //#endregion
+
     getCurrentInstance().ctx.$refs;
+
     //#region 2.点击后隐藏
     const cover = ref(null);
     const getVideo = ref(null);
@@ -104,22 +151,26 @@ export default {
     const mainImg = ref(null);
     const plotPlay = ref(null);
     function showPic(event) {
+      console.log(event);
       // console.log(event.target.getAttribute("data-index"));
       if (event.target.getAttribute("data-index") == 0) {
         plotPlay.value.style.display = "block";
       } else {
         plotPlay.value.style.display = "none";
       }
-      mainImg.value.src = event.target.src;
-      // console.log(event.target.parentNode.children);
-      let arr = Array.from(event.currentTarget.parentNode.children);
+      // console.log(event.target.parentNode.parentNode.children);
+      let arr = Array.from(event.target.parentNode.parentNode.children);
+      // console.log(arr);
       // 循环遍历li
       arr.forEach(element => {
         // 删除这一个ul里面li 的 类名`
+        // element.classList.remove("active");
         element.classList.remove("active");
       });
       // 给点击的那个li添加类名
-      event.currentTarget.classList.add("active");
+      event.stopPropagation();
+      event.target.parentNode.classList.add("active");
+      mainImg.value.src = event.target.src;
     }
     //#endregion
 
@@ -170,6 +221,7 @@ export default {
     float: left;
     margin-top: 30px;
     margin-left: 50px;
+    margin-right: 45px;
   }
   .show-top {
     height: auto;
@@ -195,7 +247,7 @@ export default {
   .cover {
     position: absolute;
     height: auto;
-    z-index: 10;
+    z-index: 1000;
 
     img {
       width: 400px;
@@ -233,19 +285,117 @@ export default {
     height: 400px;
   }
 
-  li {
+  ul {
+    width: 108px;
+    height: 400px;
+
+    li {
+      width: 68px;
+      height: 68px;
+      float: left;
+      margin: 8px 18px 0px 20px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      padding: 9px;
+    }
+
+    .active {
+      box-sizing: border-box;
+      border: 2px solid #5eb69c;
+    }
+  }
+}
+// 左侧视频下方文字部分
+.show-bottom {
+  float: left;
+  margin-top: 3px;
+  height: auto;
+  width: 400px;
+
+  div {
     float: left;
-    width: 68px;
-    height: 68px;
-    margin: 10px 20px 0px 20px;
-    cursor: pointer;
-    box-sizing: border-box;
+    height: 80px;
+    width: 98px;
+    @include clearfix();
+
+    p,
+    span,
+    a {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      color: #9a2e1f;
+      margin: 10px 0px;
+    }
+    p {
+      color: #999999;
+      margin-top: 10px;
+    }
+    a {
+      color: #333333;
+      margin: 0px;
+    }
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    padding: 7px;
+  i {
+    display: block;
+    float: left;
+    margin-top: 14px;
+    width: 1px;
+    height: 60px;
+    border: 1px solid #e4e4e4;
+  }
+}
+
+// 右侧详情栏
+.exhibition-right {
+  float: left;
+  margin-top: 45px;
+  height: 470px;
+
+  h1,
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    color: #999999;
+    line-height: 20px;
+  }
+  h1 {
+    font-size: 22px;
+    text-align: left;
+    color: #333333;
+    line-height: 30px;
+  }
+  p {
+    margin: 10px 0px;
+  }
+  .price {
+    margin-bottom: 15px;
+
+    span {
+      font-size: 22px;
+      text-align: left;
+      color: #9a2e1f;
+      line-height: 30px;
+    }
+    s {
+      font-size: 18px;
+      text-align: left;
+      color: #999999;
+      line-height: 25px;
+      text-decoration: line-through;
+    }
+  }
+  .place {
+    width: 510px;
+    height: 128px;
+    background: #f9f9f9;
   }
 
   .active {

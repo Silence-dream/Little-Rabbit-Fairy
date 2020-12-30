@@ -48,8 +48,7 @@
                 :class="index == 0 ? 'active' : ''"
               >
                 <img
-                  @click="showPic($event)"
-                  ref="imgSrc"
+                  @mouseover="showPic($event)"
                   :data-index="index"
                   :src="item"
                   alt=""
@@ -93,10 +92,51 @@
         <p>全面屏设计 / 高清分辨率 / 海量内容 / 1G+4G大内存 / 多核处理器</p>
         <div class="price"><span>￥1899</span> <s>￥2999</s></div>
         <div class="place">
-          <div class="promotion"></div>
-          <div class="address"></div>
-          <div class="servies"></div>
+          <div class="promotion">
+            <span>促销</span><span>12月好物放送，App领券购买直降120元</span>
+          </div>
+          <div class="address">
+            <span>配送</span>至
+            <el-cascader v-model="value" :options="options"></el-cascader>
+          </div>
+          <div class="servies">
+            <span>服务</span>
+            <ul>
+              <li><i>·</i>无忧退货</li>
+              <li><i>·</i>快速退款</li>
+              <li><i>·</i>免费包邮</li>
+            </ul>
+            <router-link to="#">了解详情</router-link>
+          </div>
         </div>
+        <!-- 颜色/尺寸 -->
+        <div
+          v-for="(item, index) in goodsdata.specs"
+          :key="index"
+          class="color clearfix"
+        >
+          <p v-if="item.name == '颜色' || item.name == '尺寸'">
+            {{ item.name }}
+          </p>
+          <ul>
+            <li v-for="(item1, index1) in item.values" :key="index1">
+              <img v-if="item.name == '颜色'" :src="item1.picture" alt="" />
+              <p v-if="item.name == '尺寸'">{{ item1.name }}</p>
+            </li>
+          </ul>
+        </div>
+        <!-- 数量  -->
+        <div class="num">
+          <p>数量</p>
+          <el-input-number
+            v-model="num"
+            :min="1"
+            :max="10"
+            label="描述文字"
+          ></el-input-number>
+        </div>
+        <!-- 购买按钮 -->
+        <el-button type="success">立即购买</el-button>
       </div>
       <!-- 右侧栏 end -->
     </div>
@@ -107,21 +147,26 @@
 <script>
 import { httpGet } from "@/utils/http.js";
 import { onMounted, ref, getCurrentInstance } from "vue";
+// 引入城市接口
+import cityData from "@/api/cityData";
 export default {
   name: "SecondaryDetails",
   setup() {
     //#region 1.获取goods中所有数据
     // 获取图片数据
     const getMainImg = ref([]);
+    const num = ref(1);
     // 获取时评数据
     const getMainVideo = ref([]);
+    const goodsdata = ref([]);
     const getGoods = httpGet("/goods")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         let { result } = res;
         // 传入主要图片内容
         getMainImg.value = result.mainPictures;
         getMainVideo.value = result.mainVideos;
+        goodsdata.value = result;
         // console.log(getMainImg.value);
       })
       .catch(error => {
@@ -151,7 +196,7 @@ export default {
     const mainImg = ref(null);
     const plotPlay = ref(null);
     function showPic(event) {
-      console.log(event);
+      // console.log(event);
       // console.log(event.target.getAttribute("data-index"));
       if (event.target.getAttribute("data-index") == 0) {
         plotPlay.value.style.display = "block";
@@ -174,6 +219,13 @@ export default {
     }
     //#endregion
 
+    //#region 4.获取城市数据
+    const value = ref();
+    let options = ref([]);
+    options = cityData;
+    // console.log(options);
+    //#endregion
+
     onMounted(() => {
       getGoods;
     });
@@ -189,7 +241,12 @@ export default {
       // 切换图片处理部分
       imgSrc,
       mainImg,
-      plotPlay
+      plotPlay,
+      // 右侧地址栏
+      value,
+      options,
+      goodsdata,
+      num
     };
   },
   components: {}
@@ -214,7 +271,7 @@ export default {
   margin-bottom: 20px;
 }
 .exhibition-bgc {
-  height: 580px;
+  height: auto;
   background-color: #fff;
 
   .exhibition-left {
@@ -356,7 +413,8 @@ export default {
 .exhibition-right {
   float: left;
   margin-top: 45px;
-  height: 470px;
+  margin-bottom: 35px;
+  height: auto;
 
   h1,
   p {
@@ -396,13 +454,137 @@ export default {
     width: 510px;
     height: 128px;
     background: #f9f9f9;
-  }
 
+    .promotion,
+    .address,
+    .servies {
+      font-size: 14px;
+      font-weight: 400;
+      color: #999999;
+      line-height: 20px;
+      // margin: 20px 0px 0px 15px;
+      padding-top: 15px;
+      padding-left: 15px;
+
+      span {
+        &:last-child {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .address {
+      padding-top: 10px;
+
+      span {
+        &:first-child {
+          margin-right: 15px;
+        }
+      }
+    }
+
+    .servies {
+      padding-top: 10px;
+      span {
+        float: left;
+      }
+    }
+
+    ul {
+      float: left;
+    }
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+    i {
+      margin-right: 3px;
+      font-weight: 900;
+    }
+    a {
+      margin-left: 30px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #5eb69c;
+      line-height: 20px;
+    }
+  }
   .active {
     border: 2px solid #5eb69c;
   }
-}
-// 左侧视频下方文字部分
-.show-bottom {
+  :deep(.el-input__inner) {
+    margin-left: 3px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+  }
+  // 颜色 尺寸
+  .color {
+    margin-top: 16px;
+    margin-left: 15px;
+    @include clearfix();
+
+    p {
+      float: left;
+      font-size: 14px;
+      text-align: left;
+      line-height: 53px;
+      color: #999999;
+    }
+    ul {
+      li {
+        float: left;
+        background-color: #fff;
+        margin-left: 10px;
+        p {
+          margin-top: 12px;
+          // margin-left: 10px;
+          width: 100px;
+          height: 28px;
+          background: #ffffff;
+          border: 1px solid #e4e4e4;
+          border-radius: 1px;
+          text-align: center;
+          line-height: 28px;
+          &:hover {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  // 数量
+  .num {
+    margin-left: 15px;
+
+    p {
+      float: left;
+      font-size: 14px;
+      text-align: left;
+      line-height: 40px;
+      color: #999999;
+    }
+    .el-input-number {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+    :deep(.el-input__inner) {
+      height: 40px;
+    }
+
+    :deep(.el-input-number__decrease) {
+      left: 8px;
+    }
+  }
+  // 立即购买按钮
+  .el-button {
+    width: 220px;
+    height: 50px;
+    margin: 0;
+    margin-top: 26px;
+    margin-left: -28px;
+    background-color: #5eb69c;
+    border-color: #5eb69c;
+  }
 }
 </style>

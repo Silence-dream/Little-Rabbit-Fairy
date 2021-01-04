@@ -16,10 +16,10 @@
 
 <script>
 // 头部 logo和跳转
-import LoginHeader from "../../components/LoginHeader/LoginHeader.vue";
+import LoginHeader from "@/components/LoginHeader/LoginHeader.vue";
 
 // 底部
-import LoginFooter from "../../components/LoginFooter/LoginFooter.vue";
+import LoginFooter from "@/components/LoginFooter/LoginFooter.vue";
 
 export default {
   name: "FeedBack",

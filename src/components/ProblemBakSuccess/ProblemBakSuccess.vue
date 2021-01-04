@@ -8,11 +8,11 @@
       <p class="yes">反馈提交成功</p>
       <p class="thank">感谢您对小兔鲜儿的支持</p>
       <p>
-        <el-button>
-          <router-link to="/">
+        <router-link to="/">
+          <el-button>
             <span>进入首页</span>
-          </router-link>
-        </el-button>
+          </el-button>
+        </router-link>
       </p>
     </div>
   </div>

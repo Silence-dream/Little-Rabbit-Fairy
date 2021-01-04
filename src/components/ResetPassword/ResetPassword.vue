@@ -14,7 +14,7 @@
           <!-- 表单 start -->
           <el-form
             class="reset-form"
-            ref="resetRef"
+            ref="resetFormRef"
             label-position="left"
             :model="ResetForm"
             :rules="rules"
@@ -93,19 +93,20 @@
 </template>
 
 <script>
-import { getCurrentInstance, reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs } from "vue";
 import { validateMobile } from "@/views/Login/Login.vue";
 
 export default {
   name: "ResetPassword",
   setup() {
-    let self = getCurrentInstance().ctx;
     //#region 选中控制
+    // 获取表单实例
+    let resetFormRef = ref(null);
     // 步骤条
     let active = ref(0);
     /* 点击前往下一个选项 */
     function next() {
-      self.$refs["resetRef"].validate(valid => {
+      resetFormRef.value.validate(valid => {
         console.log(valid);
         // 表单填写完整就下一步
         if (valid) {
@@ -153,7 +154,7 @@ export default {
     let validateCheckPassword = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== self.ResetForm.password) {
+      } else if (value !== ResetForm.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -207,7 +208,8 @@ export default {
       next,
       rules,
       ResetForm,
-      ...toRefs(ResetForm)
+      ...toRefs(ResetForm),
+      resetFormRef
     };
   }
 };

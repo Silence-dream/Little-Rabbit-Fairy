@@ -5,7 +5,7 @@
     :model="RegisterForm"
     status-icon
     :rules="registerRules"
-    ref="registerForm"
+    ref="registerFormRef"
   >
     <el-form-item prop="account">
       <el-input
@@ -63,14 +63,15 @@
         </el-checkbox>
       </el-checkbox-group>
     </el-form-item>
-    <el-form-item @click="submitRegisterForm('registerForm')">
+    <el-form-item @click="submitRegisterForm()">
       <el-button class="next-to">下一步</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-import { reactive, getCurrentInstance, ref } from "vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 import { validateMobile } from "@/views/Login/Login.vue";
 import { httpPost } from "@/utils/http.js";
 import { common } from "@/api/index.js";
@@ -79,11 +80,10 @@ import { Message } from "element3";
 export default {
   name: "RegisterForm",
   setup() {
-    /* 获取当前当前组件的实例 */
-    let self = getCurrentInstance().ctx;
-
+    const Router = useRouter();
     //#region 校验注册数据验证
-
+    // 获取表单实例
+    let registerFormRef = ref(null);
     // 注册数据
     const RegisterForm = reactive({
       account: "",
@@ -98,7 +98,7 @@ export default {
     let validateCheckPassword = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== self.RegisterForm.password) {
+      } else if (value !== RegisterForm.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -164,9 +164,8 @@ export default {
      *
      * @param {string} formName 传入ref值
      */
-    function submitRegisterForm(formName) {
-      console.log(self.$refs[formName].model);
-      self.$refs[formName].validate(valid => {
+    function submitRegisterForm() {
+      registerFormRef.value.validate(valid => {
         if (valid) {
           /* 发送注册请求 */
           httpPost(common.Regiser, {
@@ -180,7 +179,7 @@ export default {
             /* 注册成功 */
             Message({ type: "success", message: result.msg });
             /* 跳转路由 */
-            self.$router.push("/register/success");
+            Router.push("/register/success");
           });
         } else {
           console.log("error submit!!");
@@ -217,7 +216,8 @@ export default {
       submitRegisterForm,
       isCode,
       getCodeText,
-      getCode
+      getCode,
+      registerFormRef
     };
   }
 };

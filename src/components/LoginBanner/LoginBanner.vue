@@ -26,7 +26,7 @@
           <el-form
             status-icon
             id="login-form"
-            ref="accountLogin"
+            ref="accountFormRef"
             :rules="rules"
             :model="accountForm"
             v-if="!isAccountChooseFlag"
@@ -66,16 +66,14 @@
             </el-form-item>
             <!-- 登录按钮 -->
             <el-form-item class="user-login-btn">
-              <el-button @click="accountSubmitForm('accountLogin')"
-                >登录</el-button
-              >
+              <el-button @click="accountSubmitForm()">登录</el-button>
             </el-form-item>
           </el-form>
           <!-- 验证码登录表单 -->
           <el-form
             status-icon
             id="mobile-form"
-            ref="mobileLogin"
+            ref="mobileFormRef"
             :rules="rules"
             :model="mobileForm"
             v-if="isAccountChooseFlag"
@@ -123,9 +121,7 @@
             </el-form-item>
             <!-- 登录按钮 -->
             <el-form-item class="user-login-btn">
-              <el-button @click="mobileSubmitForm('mobileLogin')"
-                >登录</el-button
-              >
+              <el-button @click="mobileSubmitForm()">登录</el-button>
             </el-form-item>
           </el-form>
           <!-- 忘记密码 免费注册 -->
@@ -145,7 +141,8 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance } from "vue";
+import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { common } from "@/api/index.js";
 import { httpPost } from "@/utils/http.js";
@@ -155,8 +152,8 @@ import { validateMobile } from "@/views/Login/Login.vue";
 export default {
   name: "LoginBanner",
   setup: function() {
-    const self = getCurrentInstance().ctx;
     const Store = useStore();
+    const Router = useRouter();
     /* 账号登录和二维码登录切换  */
     let isLoginChooseFlag = ref(false);
     /* 账号登录和验证码登录切换 */
@@ -201,11 +198,11 @@ export default {
     let rules = reactive({
       account: [
         { required: true, message: "用户名/手机号格式不正确", trigger: "blur" },
-        { min: 6, max: 20, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" }
       ],
       password: [
         { required: true, message: "密码格式不正确", trigger: "blur" },
-        { min: 6, max: 20, message: "长度在 3 到 16 个字符", trigger: "blur" }
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" }
       ],
       isTerms: [
         {
@@ -221,11 +218,11 @@ export default {
           trigger: "blur",
           validator: validateMobile
         },
-        { min: 3, max: 16, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        { min: 3, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
       ],
       code: [
         { required: true, message: "请输入验证码", trigger: "blur" },
-        { min: 3, max: 16, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
       ]
     });
 
@@ -233,8 +230,10 @@ export default {
      * 校验 账号登录
      * @param {string} formName
      */
-    function accountSubmitForm(formName) {
-      self.$refs[formName].validate(valid => {
+    // 获取ref实例
+    let accountFormRef = ref(null);
+    function accountSubmitForm() {
+      accountFormRef.value.validate(valid => {
         if (valid) {
           /* 发送登录请求 */
           httpPost(common.Login, {
@@ -250,7 +249,7 @@ export default {
               Message({ type: "success", message: result.msg });
               Store.state.LoginBannerStore.LoginInfo = returnData;
               // TODO 需要处理登录成功的状态
-              self.$router.push("/");
+              Router.push("/");
             })
             .catch(error => console.log(error));
         } else {
@@ -293,8 +292,10 @@ export default {
      * 校验 验证码登录
      * @param {string} formName
      */
-    function mobileSubmitForm(formName) {
-      self.$refs[formName].validate(valid => {
+    // 获取ref实例
+    let mobileFormRef = ref(null);
+    function mobileSubmitForm() {
+      mobileFormRef.value.validate(valid => {
         if (valid) {
           alert("验证码登录验证通过!");
           /* 发送登录请求 */
@@ -309,6 +310,7 @@ export default {
               console.log(returnData);
               /* 登录成功弹框 */
               Message({ type: "success", message: "登录成功" });
+              // TODO 验证登录成功处理
             })
             .catch(error => console.log(error));
         } else {
@@ -339,7 +341,9 @@ export default {
       QRcodeUrl,
       getCode,
       getCodeText,
-      isCode
+      isCode,
+      accountFormRef,
+      mobileFormRef
     };
   }
 };
